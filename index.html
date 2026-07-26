@@ -456,6 +456,11 @@ const CONFIG = {
   business_phone: '+91 XXXXXXXXXX',               // ← Your WhatsApp number
   seller_name:    'Your Name',                    // ← Your name (for licence records)
 
+  // ── APP DOWNLOAD (the file customers download after paying) ──────
+  // Upload Lineage-Customer-Package.zip to your GitHub repository,
+  // then this link works automatically:
+  download_url:   'https://anilksinha.github.io/Lineage-Customer-Package.zip',
+
   // ── RAZORPAY (fill in when account is ready, leave as-is for now) ─
   razorpay_key_id: '',                            // ← Add rzp_live_XXXX when ready
   razorpay_ready:  false,                         // ← Change to true when Razorpay is active
@@ -927,6 +932,38 @@ function buildSuccessScreen(keys, plan, expiryLabel, paymentId) {
         <div class="success-sub">Your payment is confirmed. Here is your licence key — copy it now and keep it safe. You will need it to activate the app.</div>
       </div>
       ${keysHtml}
+
+      <!-- STEP-BY-STEP NEXT ACTIONS -->
+      <div style="background:rgba(26,96,32,.07);border:1.5px solid rgba(26,96,32,.25);
+        border-radius:12px;padding:16px;margin:16px 0">
+        <div style="font-size:13px;font-weight:700;color:var(--green);margin-bottom:12px">
+          📦 Your next steps:
+        </div>
+
+        <!-- Step 1: Download app -->
+        <a href="${CONFIG.download_url}" download
+          style="display:block;text-decoration:none;margin-bottom:10px">
+          <div style="background:var(--green);border-radius:10px;padding:14px 16px;
+            display:flex;align-items:center;gap:12px;transition:opacity .2s"
+            onmouseover="this.style.opacity='.88'" onmouseout="this.style.opacity='1'">
+            <div style="font-size:26px">⬇️</div>
+            <div style="flex:1">
+              <div style="font-size:14px;font-weight:700;color:#fff">1. Download the Lineage App</div>
+              <div style="font-size:11px;color:rgba(255,255,255,.75);margin-top:2px">
+                One ZIP file — contains the app + full user manual
+              </div>
+            </div>
+            <div style="font-size:18px;color:#fff">→</div>
+          </div>
+        </a>
+
+        <!-- Step 2 & 3 instructions -->
+        <div style="font-size:12px;color:var(--ink2);line-height:1.8;padding:4px 6px">
+          <b>2.</b> Unzip the downloaded file and open <b>Lineage-App.html</b> in your browser<br/>
+          <b>3.</b> Enter your licence key above when asked — done! ⚘
+        </div>
+      </div>
+
       <div class="key-meta">
         <div class="km"><div class="km-l">Plan</div><div class="km-v">${plan.name}</div></div>
         <div class="km"><div class="km-l">Validity</div><div class="km-v">${expiryLabel}</div></div>
@@ -934,10 +971,10 @@ function buildSuccessScreen(keys, plan, expiryLabel, paymentId) {
         <div class="km"><div class="km-l">Support</div><div class="km-v" style="font-size:11px">${CONFIG.business_email}</div></div>
       </div>
       <button class="download-btn" onclick="downloadActivationCard('${keys[0]}', '${plan.name}', '${expiryLabel}')">
-        ↓ Download Activation Card (keep this safe)
+        ↓ Save Activation Card (your key record)
       </button>
       <div style="font-size:12px;color:var(--muted);text-align:center;margin-top:12px;line-height:1.5">
-        Screenshot or save your key before closing this window.<br/>
+        Copy your key before closing this window.<br/>
         ${keys.length > 1 ? 'Distribute one key to each family member.' : ''}
       </div>
     </div>`;
