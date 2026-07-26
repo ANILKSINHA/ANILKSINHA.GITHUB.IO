@@ -252,6 +252,21 @@ footer{background:var(--ink);padding:40px 24px;text-align:center}
 </head>
 <body>
 
+<!-- In-app browser top banner (shows only inside WhatsApp/Instagram/FB) -->
+<div id="inapp-banner" style="display:none;background:#e0a800;color:#1a1006;
+  padding:12px 16px;text-align:center;font-size:13px;font-weight:700;line-height:1.5;position:relative;z-index:200">
+  ⚠️ For payment to work, tap the ⋮ menu (top-right) and choose "Open in Chrome"
+</div>
+<script>
+  (function(){
+    var ua = navigator.userAgent || '';
+    if (/WhatsApp|FBAN|FBAV|Instagram|Line|Messenger/i.test(ua)) {
+      var b = document.getElementById('inapp-banner');
+      if (b) b.style.display = 'block';
+    }
+  })();
+</script>
+
 <!-- NAV -->
 <nav>
   <div class="nav-inner">
@@ -432,14 +447,14 @@ footer{background:var(--ink);padding:40px 24px;text-align:center}
 // ═══════════════════════════════════════════════════════════════════
 const CONFIG = {
   // ── YOUR UPI DETAILS — fill these in ─────────────────────────────
-  upi_id:         '8283816539@ptsbi',             // ← YOUR UPI ID (from Google Pay/PhonePe/Paytm)
-  upi_name:       'Anil-Lineage App',                  // ← Your name as shown in UPI apps
+  upi_id:         'yourname@okicici',             // ← YOUR UPI ID (from Google Pay/PhonePe/Paytm)
+  upi_name:       'Lineage App',                  // ← Your name as shown in UPI apps
 
   // ── YOUR DETAILS ─────────────────────────────────────────────────
   business_name:  'Lineage Family Heritage',      // ← Your name or business name
-  business_email: 'llineage.aks@gmail.com',               // ← Your email (shown on receipt)
-  business_phone: '+91 8283816539',               // ← Your WhatsApp number
-  seller_name:    'Anil Kumar Sinha',                    // ← Your name (for licence records)
+  business_email: 'your@email.com',               // ← Your email (shown on receipt)
+  business_phone: '+91 XXXXXXXXXX',               // ← Your WhatsApp number
+  seller_name:    'Your Name',                    // ← Your name (for licence records)
 
   // ── RAZORPAY (fill in when account is ready, leave as-is for now) ─
   razorpay_key_id: '',                            // ← Add rzp_live_XXXX when ready
@@ -688,9 +703,30 @@ function startRazorpay() {
   document.head.appendChild(script);
 }
 
+// Detect if page is open inside an in-app browser (WhatsApp, Instagram, FB)
+function isInAppBrowser() {
+  const ua = navigator.userAgent || navigator.vendor || window.opera || '';
+  return /WhatsApp|FBAN|FBAV|Instagram|Line|Messenger/i.test(ua);
+}
+
 function buildStep2(plan, amount) {
   const link = upiLink(amount);
   const qr   = qrUrl(amount);
+
+  // Warning banner if inside WhatsApp/Instagram/FB browser
+  const inAppWarning = isInAppBrowser()
+    ? `<div style="background:#fff3cd;border:2px solid #e0a800;border-radius:10px;
+        padding:13px 15px;margin-bottom:16px">
+        <div style="font-size:13px;font-weight:700;color:#7a5000;margin-bottom:6px">
+          ⚠️ Please open in Chrome to pay
+        </div>
+        <div style="font-size:12px;color:#8a6000;line-height:1.6">
+          UPI apps don't open inside WhatsApp. Tap the <strong>three dots (⋮)</strong> at the
+          top-right of this screen, then choose <strong>"Open in Chrome"</strong> or
+          <strong>"Open in browser"</strong>. Then come back and pay. Your UPI apps will work there.
+        </div>
+      </div>`
+    : '';
 
   const backBtn = (CONFIG.razorpay_ready && CONFIG.razorpay_key_id)
     ? `<button onclick="showMethodChooser()" style="background:none;border:none;color:var(--muted);
@@ -716,6 +752,8 @@ function buildStep2(plan, amount) {
           font-size:11px;font-weight:700;color:var(--muted)">3. Get Key</div>
       </div>
 
+      ${inAppWarning}
+
       <!-- UPI Options -->
       <div style="text-align:center;margin-bottom:16px">
         <div style="font-size:13px;font-weight:700;color:var(--ink);margin-bottom:4px">
@@ -733,7 +771,7 @@ function buildStep2(plan, amount) {
           <div>
             <div style="font-size:14px;font-weight:700;color:#faf0d8">Tap to Pay — Open UPI App</div>
             <div style="font-size:11px;color:rgba(250,240,216,.6);margin-top:2px">
-              Opens Google Pay, PhonePe, Paytm automatically
+              Opens GPay / PhonePe / Paytm (works in Chrome browser)
             </div>
           </div>
           <div style="margin-left:auto;font-size:20px;color:var(--gold3)">→</div>
