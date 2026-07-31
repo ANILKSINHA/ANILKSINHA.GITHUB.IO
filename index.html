@@ -447,19 +447,19 @@ footer{background:var(--ink);padding:40px 24px;text-align:center}
 // ═══════════════════════════════════════════════════════════════════
 const CONFIG = {
   // ── YOUR UPI DETAILS — fill these in ─────────────────────────────
-  upi_id:         'yourname@okicici',             // ← YOUR UPI ID (from Google Pay/PhonePe/Paytm)
-  upi_name:       'Lineage App',                  // ← Your name as shown in UPI apps
+  upi_id:         '8283816539@ptsbi',             // Your UPI ID
+  upi_name:       'Anil Kumar Sinha',             // Your name in UPI apps
 
   // ── YOUR DETAILS ─────────────────────────────────────────────────
-  business_name:  'Lineage Family Heritage',      // ← Your name or business name
-  business_email: 'your@email.com',               // ← Your email (shown on receipt)
-  business_phone: '+91 XXXXXXXXXX',               // ← Your WhatsApp number
-  seller_name:    'Your Name',                    // ← Your name (for licence records)
+  business_name:  'Lineage Family Heritage',      // Business name
+  business_email: 'lineage.aks@gmail.com',        // Your email
+  business_phone: '+91 8283816539',               // Your WhatsApp number
+  seller_name:    'Anil Kumar Sinha',             // Your name
 
   // ── APP DOWNLOAD (the file customers download after paying) ──────
   // Upload Lineage-Customer-Package.zip to your GitHub repository,
   // then this link works automatically:
-  download_url:   'https://anilksinha.github.io/Lineage-Customer-Package.zip',
+  download_url:   'https://lineage-download.llineage-aks.workers.dev/',
 
   // ── RAZORPAY (fill in when account is ready, leave as-is for now) ─
   razorpay_key_id: '',                            // ← Add rzp_live_XXXX when ready
@@ -940,27 +940,28 @@ function buildSuccessScreen(keys, plan, expiryLabel, paymentId) {
           📦 Your next steps:
         </div>
 
-        <!-- Step 1: Download app -->
-        <a href="${CONFIG.download_url}" download
+        <!-- Step 1: Go to secure download page -->
+        <a href="${CONFIG.download_url}" target="_blank" rel="noopener"
           style="display:block;text-decoration:none;margin-bottom:10px">
           <div style="background:var(--green);border-radius:10px;padding:14px 16px;
             display:flex;align-items:center;gap:12px;transition:opacity .2s"
             onmouseover="this.style.opacity='.88'" onmouseout="this.style.opacity='1'">
             <div style="font-size:26px">⬇️</div>
             <div style="flex:1">
-              <div style="font-size:14px;font-weight:700;color:#fff">1. Download the Lineage App</div>
+              <div style="font-size:14px;font-weight:700;color:#fff">1. Go to the Download Page</div>
               <div style="font-size:11px;color:rgba(255,255,255,.75);margin-top:2px">
-                One ZIP file — contains the app + full user manual
+                Enter your download code there to get the app
               </div>
             </div>
             <div style="font-size:18px;color:#fff">→</div>
           </div>
         </a>
 
-        <!-- Step 2 & 3 instructions -->
+        <!-- Steps 2-4 instructions -->
         <div style="font-size:12px;color:var(--ink2);line-height:1.8;padding:4px 6px">
-          <b>2.</b> Unzip the downloaded file and open <b>Lineage-App.html</b> in your browser<br/>
-          <b>3.</b> Enter your licence key above when asked — done! ⚘
+          <b>2.</b> On the download page, enter the <b>download code</b> we send you<br/>
+          <b>3.</b> Unzip the file and open <b>Lineage-App.html</b> in your browser<br/>
+          <b>4.</b> Enter your licence key (above) when asked — done! ⚘
         </div>
       </div>
 
