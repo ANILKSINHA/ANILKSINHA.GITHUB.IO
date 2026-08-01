@@ -1,0 +1,1095 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Lineage — Family Heritage App | Buy Now</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+
+<!-- Razorpay SDK — loads only when payment is triggered -->
+<!-- <script src="https://checkout.razorpay.com/v1/checkout.js"></script> -->
+
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --ink:#1a1006;
+  --ink2:#3a2810;
+  --paper:#faf6ee;
+  --paper2:#f2ebe0;
+  --paper3:#e8dfd0;
+  --gold:#a07020;
+  --gold2:#c89830;
+  --gold3:#e8c060;
+  --gold-pale:#f8f0d8;
+  --border:#d8c8a0;
+  --muted:#7a6040;
+  --muted2:#a89060;
+  --red:#8a1810;
+  --green:#1a6020;
+  --serif:'Cormorant Garamond',Georgia,serif;
+  --sans:'DM Sans','Segoe UI',sans-serif;
+  --shadow:0 2px 16px rgba(100,70,10,.10);
+  --shadow-lg:0 8px 48px rgba(100,70,10,.18);
+}
+
+html{scroll-behavior:smooth}
+body{font-family:var(--sans);background:var(--paper);color:var(--ink);min-height:100vh;
+  background-image:url("data:image/svg+xml,%3Csvg width='60' height='60' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='30' cy='30' r='.8' fill='%23c8a860' opacity='.18'/%3E%3C/svg%3E")}
+
+/* ── HERO ── */
+.hero{background:var(--ink);position:relative;overflow:hidden;padding:64px 24px 56px}
+.hero::before{content:'';position:absolute;inset:0;
+  background:radial-gradient(ellipse 80% 60% at 60% 40%, rgba(160,112,32,.35) 0%, transparent 70%)}
+.hero::after{content:'⚘';font-family:var(--serif);font-size:320px;color:rgba(255,255,255,.025);
+  position:absolute;right:-40px;top:-60px;line-height:1;pointer-events:none;user-select:none}
+.hero-inner{max-width:960px;margin:0 auto;position:relative;z-index:1}
+.hero-badge{display:inline-flex;align-items:center;gap:6px;background:rgba(200,152,48,.18);
+  border:1px solid rgba(200,152,48,.35);border-radius:20px;padding:5px 14px;
+  font-size:11px;font-weight:600;color:var(--gold3);letter-spacing:1.5px;
+  text-transform:uppercase;margin-bottom:20px}
+.hero-title{font-family:var(--serif);font-size:clamp(42px,7vw,80px);color:#faf0d8;
+  font-weight:600;line-height:1.05;margin-bottom:14px;letter-spacing:-.5px}
+.hero-title em{color:var(--gold3);font-style:italic}
+.hero-sub{font-size:clamp(15px,2vw,18px);color:rgba(250,240,216,.65);line-height:1.7;
+  max-width:540px;font-weight:300;margin-bottom:32px}
+.hero-pills{display:flex;gap:10px;flex-wrap:wrap}
+.hpill{display:flex;align-items:center;gap:6px;background:rgba(255,255,255,.06);
+  border:1px solid rgba(255,255,255,.1);border-radius:6px;padding:6px 12px;
+  font-size:12px;color:rgba(250,240,216,.75);font-weight:500}
+.hpill svg{width:13px;height:13px;opacity:.7;flex-shrink:0}
+
+/* ── NAV ── */
+nav{background:var(--ink);border-bottom:1px solid rgba(200,152,48,.2);
+  padding:0 24px;position:sticky;top:0;z-index:100;
+  box-shadow:0 2px 20px rgba(0,0,0,.3)}
+.nav-inner{max-width:960px;margin:0 auto;display:flex;align-items:center;
+  height:52px;gap:20px}
+.nav-logo{font-family:var(--serif);font-size:20px;color:var(--gold3);margin-right:auto}
+.nav-logo span{font-size:10px;color:rgba(200,152,48,.6);display:block;
+  letter-spacing:2px;text-transform:uppercase;line-height:1;font-family:var(--sans)}
+.nav-link{font-size:13px;color:rgba(250,240,216,.6);text-decoration:none;
+  font-weight:500;transition:color .2s}
+.nav-link:hover{color:var(--gold3)}
+.nav-cta{background:var(--gold2);color:var(--ink);padding:7px 18px;border-radius:6px;
+  font-size:12px;font-weight:700;text-decoration:none;transition:all .18s;
+  border:none;cursor:pointer;font-family:var(--sans)}
+.nav-cta:hover{background:var(--gold3)}
+
+/* ── SECTION ── */
+section{padding:64px 24px}
+.sec-inner{max-width:960px;margin:0 auto}
+.sec-label{font-size:10px;text-transform:uppercase;letter-spacing:3px;
+  color:var(--muted2);font-weight:600;margin-bottom:8px}
+.sec-title{font-family:var(--serif);font-size:clamp(28px,4vw,42px);color:var(--ink);
+  font-weight:600;margin-bottom:6px;line-height:1.2}
+.sec-sub{font-size:15px;color:var(--muted);line-height:1.7;max-width:520px;margin-bottom:36px}
+
+/* ── FEATURES ── */
+#features{background:var(--paper)}
+.feat-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:18px}
+.feat-card{background:var(--paper2);border:1.5px solid var(--border);border-radius:12px;
+  padding:22px 20px;transition:all .22s}
+.feat-card:hover{border-color:var(--gold2);transform:translateY(-3px);box-shadow:var(--shadow)}
+.feat-icon{width:40px;height:40px;border-radius:10px;background:var(--gold-pale);
+  border:1.5px solid rgba(160,112,32,.2);display:flex;align-items:center;
+  justify-content:center;font-size:18px;margin-bottom:14px}
+.feat-title{font-size:14px;font-weight:700;color:var(--ink);margin-bottom:6px}
+.feat-desc{font-size:13px;color:var(--muted);line-height:1.6}
+
+/* ── PRICING ── */
+#pricing{background:var(--paper2);border-top:1.5px solid var(--border);
+  border-bottom:1.5px solid var(--border)}
+.price-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;
+  max-width:860px;margin:0 auto}
+.price-card{background:var(--paper);border:1.5px solid var(--border);border-radius:14px;
+  padding:28px 24px;position:relative;transition:all .22s}
+.price-card.featured{border-color:var(--gold2);border-width:2px;
+  box-shadow:0 4px 32px rgba(160,112,32,.18)}
+.price-badge{position:absolute;top:-12px;left:50%;transform:translateX(-50%);
+  background:var(--gold2);color:var(--ink);padding:3px 14px;border-radius:20px;
+  font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;
+  white-space:nowrap}
+.price-name{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:2px;
+  color:var(--muted2);margin-bottom:12px}
+.price-amount{font-family:var(--serif);font-size:52px;color:var(--ink);font-weight:700;
+  line-height:1;margin-bottom:4px}
+.price-amount sup{font-size:20px;vertical-align:super;font-family:var(--sans);font-weight:600}
+.price-period{font-size:12px;color:var(--muted);margin-bottom:20px}
+.price-features{list-style:none;margin-bottom:24px}
+.price-features li{font-size:13px;color:var(--ink2);padding:6px 0;
+  border-bottom:1px solid var(--paper3);display:flex;align-items:center;gap:8px}
+.price-features li:last-child{border-bottom:none}
+.price-features li::before{content:'✓';color:var(--green);font-weight:700;font-size:13px;flex-shrink:0}
+.price-features li.no::before{content:'✕';color:var(--muted2)}
+.price-features li.no{color:var(--muted2)}
+.pay-btn{width:100%;padding:13px;border-radius:9px;border:none;font-size:14px;
+  font-weight:700;cursor:pointer;font-family:var(--sans);transition:all .2s;letter-spacing:.3px}
+.pay-btn.primary{background:var(--gold2);color:var(--ink)}
+.pay-btn.primary:hover{background:var(--gold3);transform:translateY(-1px);
+  box-shadow:0 4px 20px rgba(160,112,32,.3)}
+.pay-btn.secondary{background:transparent;color:var(--gold);
+  border:1.5px solid var(--gold2)}
+.pay-btn.secondary:hover{background:var(--gold-pale)}
+
+/* ── PAYMENT MODAL ── */
+.modal-bg{position:fixed;inset:0;background:rgba(26,16,6,.6);z-index:9000;
+  display:none;align-items:center;justify-content:center;padding:16px;
+  backdrop-filter:blur(4px)}
+.modal-bg.open{display:flex}
+.modal{background:var(--paper);border:1.5px solid var(--border);border-radius:18px;
+  width:100%;max-width:480px;max-height:92vh;overflow-y:auto;
+  box-shadow:var(--shadow-lg)}
+.modal-hdr{padding:22px 24px 16px;border-bottom:1.5px solid var(--border);
+  display:flex;align-items:center;justify-content:space-between}
+.modal-title{font-family:var(--serif);font-size:24px;color:var(--gold);font-weight:600}
+.modal-close{background:none;border:none;font-size:22px;color:var(--muted);
+  cursor:pointer;padding:4px;transition:color .15s;line-height:1}
+.modal-close:hover{color:var(--ink)}
+.modal-body{padding:22px 24px}
+.order-summary{background:var(--gold-pale);border:1.5px solid rgba(160,112,32,.2);
+  border-radius:10px;padding:16px;margin-bottom:20px}
+.os-row{display:flex;justify-content:space-between;align-items:center;
+  padding:4px 0;font-size:13px}
+.os-row.total{border-top:1.5px solid rgba(160,112,32,.25);margin-top:8px;
+  padding-top:10px;font-weight:700;font-size:15px}
+.os-label{color:var(--muted)}
+.os-value{color:var(--ink);font-weight:600}
+.form-group{margin-bottom:14px}
+.form-group label{display:block;font-size:10px;font-weight:700;text-transform:uppercase;
+  letter-spacing:1.5px;color:var(--muted);margin-bottom:5px}
+.form-group input,.form-group select{width:100%;background:var(--paper2);
+  border:1.5px solid var(--border);border-radius:8px;padding:10px 12px;
+  color:var(--ink);font-size:13px;font-weight:600;outline:none;font-family:var(--sans)}
+.form-group input:focus,.form-group select:focus{border-color:var(--gold2);
+  box-shadow:0 0 0 3px rgba(160,112,32,.1)}
+.form-group input::placeholder{color:var(--muted2);font-weight:400}
+.fg2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.razorpay-note{display:flex;align-items:center;gap:8px;background:var(--paper2);
+  border:1px solid var(--border);border-radius:8px;padding:10px 13px;
+  font-size:11px;color:var(--muted);margin-bottom:16px;line-height:1.4}
+.razorpay-note svg{flex-shrink:0;color:var(--gold)}
+.proceed-btn{width:100%;padding:14px;background:var(--gold2);color:var(--ink);
+  border:none;border-radius:10px;font-size:15px;font-weight:700;cursor:pointer;
+  font-family:var(--sans);transition:all .2s;display:flex;align-items:center;
+  justify-content:center;gap:8px}
+.proceed-btn:hover{background:var(--gold3);transform:translateY(-1px);
+  box-shadow:0 4px 24px rgba(160,112,32,.3)}
+.proceed-btn:disabled{opacity:.5;cursor:not-allowed;transform:none}
+.modal-footer-note{text-align:center;font-size:11px;color:var(--muted2);margin-top:12px;line-height:1.5}
+
+/* ── SUCCESS SCREEN ── */
+.success-screen{text-align:center;padding:10px 0 20px}
+.success-icon{font-size:60px;margin-bottom:12px}
+.success-title{font-family:var(--serif);font-size:28px;color:var(--green);
+  font-weight:600;margin-bottom:6px}
+.success-sub{font-size:13px;color:var(--muted);margin-bottom:20px;line-height:1.6}
+.key-box{background:var(--ink);border-radius:10px;padding:16px;
+  margin:16px 0;cursor:pointer;transition:background .2s}
+.key-box:hover{background:#2a2010}
+.key-box-label{font-size:9px;color:rgba(200,152,48,.6);letter-spacing:2px;
+  text-transform:uppercase;margin-bottom:8px}
+.key-value{font-family:'Courier New',monospace;font-size:18px;letter-spacing:3px;
+  color:#a0e060;word-break:break-all;line-height:1.4}
+.key-copy-hint{font-size:11px;color:rgba(200,152,48,.5);margin-top:6px}
+.key-meta{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}
+.km{background:var(--paper2);border:1px solid var(--border);border-radius:7px;
+  padding:9px 12px;text-align:left}
+.km-l{font-size:9px;text-transform:uppercase;letter-spacing:1.5px;
+  color:var(--muted2);margin-bottom:2px;font-weight:700}
+.km-v{font-size:12px;color:var(--ink);font-weight:700}
+.download-btn{width:100%;padding:12px;background:var(--gold2);color:var(--ink);
+  border:none;border-radius:9px;font-size:14px;font-weight:700;cursor:pointer;
+  font-family:var(--sans);margin-top:10px;transition:all .2s}
+.download-btn:hover{background:var(--gold3)}
+
+/* ── FAQ ── */
+#faq{background:var(--paper)}
+.faq-list{max-width:680px}
+.faq-item{border-bottom:1.5px solid var(--border);overflow:hidden}
+.faq-q{width:100%;background:none;border:none;text-align:left;padding:16px 0;
+  font-family:var(--sans);font-size:14px;font-weight:700;color:var(--ink);
+  cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:12px}
+.faq-q .chevron{color:var(--gold);font-size:16px;transition:transform .25s;flex-shrink:0}
+.faq-q.open .chevron{transform:rotate(180deg)}
+.faq-a{max-height:0;overflow:hidden;transition:max-height .3s ease}
+.faq-a.open{max-height:300px}
+.faq-a-inner{padding:0 0 16px;font-size:13px;color:var(--muted);line-height:1.7}
+
+/* ── FOOTER ── */
+footer{background:var(--ink);padding:40px 24px;text-align:center}
+.footer-logo{font-family:var(--serif);font-size:26px;color:var(--gold3);margin-bottom:6px}
+.footer-sub{font-size:12px;color:rgba(200,152,48,.5);letter-spacing:1.5px;
+  text-transform:uppercase;margin-bottom:16px}
+.footer-note{font-size:12px;color:rgba(250,240,216,.35);line-height:1.6}
+
+/* ── SETUP GUIDE ── */
+#setup{background:var(--paper3);border-top:1.5px solid var(--border)}
+.setup-steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:0}
+.step{padding:24px 20px;border-right:1.5px solid var(--border);position:relative}
+.step:last-child{border-right:none}
+.step-num{font-family:var(--serif);font-size:48px;color:rgba(160,112,32,.15);
+  font-weight:700;line-height:1;margin-bottom:8px}
+.step-title{font-size:13px;font-weight:700;color:var(--ink);margin-bottom:5px}
+.step-desc{font-size:12px;color:var(--muted);line-height:1.6}
+
+/* RESPONSIVE */
+@media(max-width:600px){
+  .fg2{grid-template-columns:1fr}
+  .price-grid{grid-template-columns:repeat(auto-fit,minmax(200px,1fr))}
+  .setup-steps{grid-template-columns:1fr}
+  .step{border-right:none;border-bottom:1.5px solid var(--border)}
+  .step:last-child{border-bottom:none}
+}
+
+/* ── ANIMATIONS ── */
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+.hero-inner>*{animation:fadeUp .6s ease both}
+.hero-inner>*:nth-child(2){animation-delay:.1s}
+.hero-inner>*:nth-child(3){animation-delay:.2s}
+.hero-inner>*:nth-child(4){animation-delay:.3s}
+</style>
+</head>
+<body>
+
+<!-- In-app browser top banner (shows only inside WhatsApp/Instagram/FB) -->
+<div id="inapp-banner" style="display:none;background:#e0a800;color:#1a1006;
+  padding:12px 16px;text-align:center;font-size:13px;font-weight:700;line-height:1.5;position:relative;z-index:200">
+  ⚠️ For payment to work, tap the ⋮ menu (top-right) and choose "Open in Chrome"
+</div>
+<script>
+  (function(){
+    var ua = navigator.userAgent || '';
+    if (/WhatsApp|FBAN|FBAV|Instagram|Line|Messenger/i.test(ua)) {
+      var b = document.getElementById('inapp-banner');
+      if (b) b.style.display = 'block';
+    }
+  })();
+</script>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <div class="nav-logo">⚘ Lineage<span>Family Heritage</span></div>
+    <a href="#features" class="nav-link">Features</a>
+    <a href="#pricing" class="nav-link">Pricing</a>
+    <a href="#faq" class="nav-link">FAQ</a>
+    <button class="nav-cta" onclick="openPayModal('lifetime')">Buy Now</button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-inner">
+    <div class="hero-badge">
+      <svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+      New Release — Version 2.0
+    </div>
+    <h1 class="hero-title">Preserve Your Family's<br/><em>Story Forever</em></h1>
+    <p class="hero-sub">A beautiful, offline family tree app that records 10 generations of your heritage — names, photos, stories, professions, and connections — all in one file on your device.</p>
+    <div class="hero-pills">
+      <div class="hpill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>No internet required</div>
+      <div class="hpill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Works on any device</div>
+      <div class="hpill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>One-time payment</div>
+      <div class="hpill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>One licence, up to 3 devices</div>
+      <div class="hpill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Pay via UPI instantly</div>
+    </div>
+  </div>
+</div>
+
+<!-- FEATURES -->
+<section id="features">
+  <div class="sec-inner">
+    <div class="sec-label">What you get</div>
+    <h2 class="sec-title">Everything your family needs</h2>
+    <p class="sec-sub">Record every generation — from your oldest ancestors to your grandchildren — with rich detail and beautiful presentation.</p>
+    <div class="feat-grid">
+      <div class="feat-card"><div class="feat-icon">🌳</div><div class="feat-title">10-Generation Tree</div><div class="feat-desc">Visual colour-coded family tree from great-great-grandparents down to grandchildren and beyond.</div></div>
+      <div class="feat-card"><div class="feat-icon">📸</div><div class="feat-title">Photo Portraits</div><div class="feat-desc">Upload a photograph for each family member. Displayed beautifully in the tree, cards, and detail view.</div></div>
+      <div class="feat-card"><div class="feat-icon">📋</div><div class="feat-title">25+ Fields Per Person</div><div class="feat-desc">Name, birth, death, birthplace, religion, profession, education, achievements, hobbies, spouse, children, and personal story.</div></div>
+      <div class="feat-card"><div class="feat-icon">🔍</div><div class="feat-title">Search & Filter</div><div class="feat-desc">Instantly find any family member by name, profession, or generation. Filter to see just one era at a time.</div></div>
+      <div class="feat-card"><div class="feat-icon">🔗</div><div class="feat-title">Smart Family Merge</div><div class="feat-desc">Your nephew prepares his own copy? The Smart Merge Wizard combines both trees, detecting duplicates automatically.</div></div>
+      <div class="feat-card"><div class="feat-icon">👨‍👩‍👧‍👦</div><div class="feat-title">One Licence, 3 Devices</div><div class="feat-desc">A single licence activates on up to 3 devices — perfect for sharing across your family. Your phone, your laptop, and a relative's device, all from one purchase.</div></div>
+      <div class="feat-card"><div class="feat-icon">💾</div><div class="feat-title">Backup & Restore</div><div class="feat-desc">Export all your data as a portable file. Share it with family or restore it on any device at any time.</div></div>
+      <div class="feat-card"><div class="feat-icon">📱</div><div class="feat-title">Works Everywhere</div><div class="feat-desc">Open the file in any browser — Chrome, Safari, Firefox, Edge. Works on phones, tablets, and computers.</div></div>
+      <div class="feat-card"><div class="feat-icon">🔒</div><div class="feat-title">Fully Private</div><div class="feat-desc">All data stays on your device. Nothing is uploaded to any server. Your family's history is yours alone.</div></div>
+      <div class="feat-card"><div class="feat-icon">📖</div><div class="feat-title">Full User Manual</div><div class="feat-desc">Detailed PDF manual included with every purchase — covers every feature from first use to advanced sharing.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section id="pricing">
+  <div class="sec-inner">
+    <div style="text-align:center;margin-bottom:36px">
+      <div class="sec-label" style="justify-content:center;display:flex">Pricing</div>
+      <h2 class="sec-title" style="text-align:center">Simple, honest pricing</h2>
+      <p class="sec-sub" style="margin:0 auto;text-align:center">Start with a ₹51 trial. Upgrade anytime. Lifetime plan available.</p>
+    </div>
+    <div class="price-grid">
+
+      <div class="price-card" style="border-color:#5a8a5a">
+        <div class="price-badge" style="background:#2a7a3a">✦ Try First</div>
+        <div class="price-name">1-Month Trial</div>
+        <div class="price-amount"><sup>₹</sup>51</div>
+        <div class="price-period">try for 30 days — then upgrade</div>
+        <ul class="price-features">
+          <li>Complete family tree app</li>
+          <li><strong>One licence — up to 3 devices</strong></li>
+          <li>10 generations support</li>
+          <li>Photo upload per member</li>
+          <li>Backup &amp; restore</li>
+          <li>User manual (PDF)</li>
+          <li class="no">Smart Merge Wizard</li>
+          <li class="no">Priority support</li>
+          <li class="no">Free future updates</li>
+        </ul>
+        <button class="pay-btn secondary" style="border-color:#2a7a3a;color:#2a7a3a" onclick="openPayModal('trial')">Start Trial — ₹51</button>
+      </div>
+
+      <div class="price-card">
+        <div class="price-name">Annual Plan</div>
+        <div class="price-amount"><sup>₹</sup>199</div>
+        <div class="price-period">per year — renew to continue</div>
+        <ul class="price-features">
+          <li>Complete family tree app</li>
+          <li><strong>One licence — up to 3 devices</strong></li>
+          <li>10 generations support</li>
+          <li>Photo upload per member</li>
+          <li>Backup &amp; restore</li>
+          <li>User manual (PDF)</li>
+          <li>Email support</li>
+          <li class="no">Smart Merge Wizard</li>
+          <li class="no">Free future updates</li>
+        </ul>
+        <button class="pay-btn secondary" onclick="openPayModal('annual')">Buy Annual Plan</button>
+      </div>
+
+      <div class="price-card featured">
+        <div class="price-badge">⚘ Most Popular</div>
+        <div class="price-name">Lifetime Licence</div>
+        <div class="price-amount"><sup>₹</sup>499</div>
+        <div class="price-period">one-time payment — never pay again</div>
+        <ul class="price-features">
+          <li>Complete family tree app</li>
+          <li><strong>One licence — up to 3 devices</strong></li>
+          <li>10 generations support</li>
+          <li>Photo upload per member</li>
+          <li>Backup &amp; restore</li>
+          <li>User manual (PDF)</li>
+          <li>Priority email support</li>
+          <li>Smart Merge Wizard</li>
+          <li>Free future updates</li>
+        </ul>
+        <button class="pay-btn primary" onclick="openPayModal('lifetime')">Buy Lifetime Licence</button>
+      </div>
+
+      <div class="price-card">
+        <div class="price-name">Family Bundle</div>
+        <div class="price-amount"><sup>₹</sup>999</div>
+        <div class="price-period">5 lifetime licences — share with family</div>
+        <ul class="price-features">
+          <li><strong>5 separate licence keys</strong></li>
+          <li>Each key works on up to 3 devices</li>
+          <li>All Lifetime features</li>
+          <li>Smart Merge Wizard</li>
+          <li>Share trees via backup/restore</li>
+          <li>User manual for each</li>
+          <li>Priority support</li>
+          <li>Best value for large families</li>
+        </ul>
+        <button class="pay-btn secondary" onclick="openPayModal('bundle')">Buy Family Bundle</button>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section id="setup">
+  <div class="sec-inner">
+    <div class="sec-label">After purchase</div>
+    <h2 class="sec-title" style="margin-bottom:24px">Up and running in 2 minutes</h2>
+    <div class="setup-steps">
+      <div class="step"><div class="step-num">01</div><div class="step-title">Pay securely</div><div class="step-desc">UPI, debit/credit card, or net banking via Razorpay — India's most trusted payment gateway.</div></div>
+      <div class="step"><div class="step-num">02</div><div class="step-title">Get your key instantly</div><div class="step-desc">Your licence key appears on screen immediately after payment. No waiting, no email delays.</div></div>
+      <div class="step"><div class="step-num">03</div><div class="step-title">Download the app</div><div class="step-desc">Download the single HTML file. Save it anywhere on your computer or phone.</div></div>
+      <div class="step"><div class="step-num">04</div><div class="step-title">Enter your key</div><div class="step-desc">Open the file in any browser. Enter your licence key once. The app unlocks permanently.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq">
+  <div class="sec-inner">
+    <div class="sec-label">Questions</div>
+    <h2 class="sec-title" style="margin-bottom:28px">Frequently asked questions</h2>
+    <div class="faq-list" id="faq-list"></div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">⚘ Lineage</div>
+  <div class="footer-sub">Family Heritage App</div>
+  <div class="footer-note">
+    Secure UPI payments &nbsp;·&nbsp; All data stays on your device &nbsp;·&nbsp; No subscription, no tracking<br/>
+    Questions? Contact: <span id="seller-email" style="color:rgba(200,152,48,.7)">your@email.com</span>
+  </div>
+</footer>
+
+<!-- PAYMENT MODAL -->
+<div class="modal-bg" id="pay-modal" onclick="modalBgClick(event)">
+  <div class="modal" id="modal-inner">
+    <!-- content injected by JS -->
+  </div>
+</div>
+
+<script>
+// ═══════════════════════════════════════════════════════════════════
+//  SELLER CONFIGURATION — Edit these values before going live
+// ═══════════════════════════════════════════════════════════════════
+const CONFIG = {
+  // ── YOUR UPI DETAILS — fill these in ─────────────────────────────
+  upi_id:         '8283816539@ptsbi',             // Your UPI ID
+  upi_name:       'Anil Kumar Sinha',             // Your name in UPI apps
+
+  // ── YOUR DETAILS ─────────────────────────────────────────────────
+  business_name:  'Lineage Family Heritage',      // Business name
+  business_email: 'lineage.aks@gmail.com',        // Your email
+  business_phone: '+91 8283816539',               // Your WhatsApp number
+  seller_name:    'Anil Kumar Sinha',             // Your name
+
+  // ── APP DOWNLOAD (the file customers download after paying) ──────
+  // Upload Lineage-Customer-Package.zip to your GitHub repository,
+  // then this link works automatically:
+  download_url:   'https://lineage-download.llineage-aks.workers.dev/',
+
+  // ── RAZORPAY (fill in when account is ready, leave as-is for now) ─
+  razorpay_key_id: '',                            // ← Add rzp_live_XXXX when ready
+  razorpay_ready:  false,                         // ← Change to true when Razorpay is active
+
+  // ── LICENCE SECRET ───────────────────────────────────────────────
+  // THIS MUST EXACTLY MATCH the secret in lineage-protected.html
+  licence_secret: 'LNG-2026-XPRT-SEED-77F3A9B2',
+
+  // ── PLANS ────────────────────────────────────────────────────────
+  plans: {
+    trial:    { name: '1-Month Trial',     price:  5100, display: '₹51',  months: 1,         keys: 1 },
+    annual:   { name: 'Annual Plan',       price: 19900, display: '₹199', months: 12,        keys: 1 },
+    lifetime: { name: 'Lifetime Licence',  price: 49900, display: '₹499', months: 'lifetime', keys: 1 },
+    bundle:   { name: 'Family Bundle (5)', price: 99900, display: '₹999', months: 'lifetime', keys: 5 },
+  },
+  // Prices are in PAISE (1 rupee = 100 paise): ₹51 = 5100, ₹199 = 19900, ₹499 = 49900 paise
+};
+// ═══════════════════════════════════════════════════════════════════
+
+// ── SELLER CONTACT ────────────────────────────────────────────────
+document.getElementById('seller-email').textContent = CONFIG.business_email;
+
+// ── LICENCE KEY GENERATOR ─────────────────────────────────────────
+function djb2(str){
+  let h=5381;
+  for(let i=0;i<str.length;i++){h=((h<<5)+h)+str.charCodeAt(i);h=h&0xFFFFFFFF;}
+  return Math.abs(h);
+}
+
+function generateLicenceKey(customerName, customerEmail, planKey) {
+  const plan = CONFIG.plans[planKey];
+  const expiryCode = plan.months === 'lifetime' ? 'ZZZZ'
+    : plan.months.toString(16).toUpperCase().padStart(4,'0');  // hex months
+
+  // Wait — use base36 to match the app's validation
+  const expiryCodeB36 = plan.months === 'lifetime' ? 'ZZZZ'
+    : plan.months.toString(36).toUpperCase().padStart(4,'0');
+
+  const custHash = djb2(customerName + customerEmail).toString(36).toUpperCase().padStart(8,'0').substring(0,8);
+  const fpCode   = 'FREE';  // no device binding on web purchase
+  const toCheck  = CONFIG.licence_secret + expiryCodeB36 + custHash + fpCode;
+  const cs       = djb2(toCheck).toString(36).toUpperCase().padStart(4,'0').substring(0,4);
+
+  const payload  = expiryCodeB36 + custHash + fpCode + cs;
+  return 'LNG-' + payload.substring(0,5)+'-'+payload.substring(5,10)+'-'+payload.substring(10,15)+'-'+payload.substring(15,20);
+}
+
+function generateKeys(name, email, planKey, count) {
+  const keys = [];
+  for (let i = 0; i < count; i++) {
+    // For bundles, vary the customer code slightly per key
+    keys.push(generateLicenceKey(name + (i > 0 ? '_'+i : ''), email, planKey));
+  }
+  return keys;
+}
+
+// ── UPI PAYMENT FLOW ──────────────────────────────────────────────
+let currentPlan = 'lifetime';
+let customerData = {};
+let paymentCheckInterval = null;
+
+// Build UPI deep link for any amount
+function upiLink(amount) {
+  const uid  = encodeURIComponent(CONFIG.upi_id);
+  const name = encodeURIComponent(CONFIG.upi_name);
+  const note = encodeURIComponent('Lineage App Licence');
+  return `upi://pay?pa=${uid}&pn=${name}&am=${amount}&cu=INR&tn=${note}`;
+}
+
+// Generate a simple QR code URL using Google Charts API (free, no key needed)
+function qrUrl(amount) {
+  const link = upiLink(amount);
+  // Uses api.qrserver.com (free, reliable, currently active)
+  return `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(link)}`;
+}
+
+function openPayModal(planKey) {
+  currentPlan = planKey;
+  const plan = CONFIG.plans[planKey];
+  document.getElementById('modal-inner').innerHTML = buildStep1(plan);
+  document.getElementById('pay-modal').classList.add('open');
+  setTimeout(() => document.getElementById('buyer-name').focus(), 100);
+}
+
+// STEP 1 — Collect customer details
+function buildStep1(plan) {
+  return `
+    <div class="modal-hdr">
+      <span class="modal-title">Buy — ${plan.name}</span>
+      <button class="modal-close" onclick="closePayModal()">×</button>
+    </div>
+    <div class="modal-body">
+      <div class="order-summary">
+        <div class="os-row"><span class="os-label">Product</span><span class="os-value">Lineage — ${plan.name}</span></div>
+        <div class="os-row"><span class="os-label">Validity</span><span class="os-value">${plan.months === 'lifetime' ? 'Lifetime (never expires)' : plan.months + ' month(s)'}</span></div>
+        ${plan.keys > 1 ? `<div class="os-row"><span class="os-label">Keys included</span><span class="os-value">${plan.keys} licence keys</span></div>` : ''}
+        <div class="os-row total"><span class="os-label">Amount to pay</span><span class="os-value" style="color:var(--gold);font-size:20px;font-family:var(--serif)">${plan.display}</span></div>
+      </div>
+      <div class="form-group">
+        <label>Your full name *</label>
+        <input id="buyer-name" type="text" placeholder="e.g. Ramesh Kumar Sharma" autocomplete="name"/>
+      </div>
+      <div class="fg2">
+        <div class="form-group">
+          <label>WhatsApp number *</label>
+          <input id="buyer-phone" type="tel" placeholder="98765 43210" autocomplete="tel"/>
+        </div>
+        <div class="form-group">
+          <label>Email (optional)</label>
+          <input id="buyer-email" type="email" placeholder="your@email.com" autocomplete="email"/>
+        </div>
+      </div>
+      <div style="background:var(--gold-pale);border:1px solid rgba(160,112,32,.25);border-radius:8px;
+        padding:10px 13px;font-size:12px;color:var(--muted);margin-bottom:14px;line-height:1.6">
+        <strong style="color:var(--gold2)">🔒 Secure UPI Payment</strong><br/>
+        Pay safely using Google Pay, PhonePe, Paytm, or any UPI app.
+        Your licence key is delivered on screen immediately after you confirm payment.
+      </div>
+      <button class="proceed-btn" onclick="goToStep2()">
+        Continue to Payment →
+      </button>
+      <div class="modal-footer-note">
+        No refunds on digital products once the licence key is delivered.
+      </div>
+    </div>`;
+}
+
+// STEP 2 — Show UPI payment screen
+function goToStep2() {
+  const name  = document.getElementById('buyer-name').value.trim();
+  const phone = document.getElementById('buyer-phone').value.trim();
+  const email = document.getElementById('buyer-email').value.trim();
+
+  if (!name)  { alert('Please enter your full name.'); document.getElementById('buyer-name').focus(); return; }
+  if (!phone) { alert('Please enter your WhatsApp number.'); document.getElementById('buyer-phone').focus(); return; }
+
+  customerData = {name, phone, email};
+  const plan = CONFIG.plans[currentPlan];
+  const upiAmount = plan.price / 100; // convert paise to rupees
+
+  // If Razorpay is active, show payment method chooser; otherwise go straight to UPI
+  if (CONFIG.razorpay_ready && CONFIG.razorpay_key_id) {
+    document.getElementById('modal-inner').innerHTML = buildMethodChooser(plan, upiAmount);
+  } else {
+    document.getElementById('modal-inner').innerHTML = buildStep2(plan, upiAmount);
+  }
+}
+
+// ── PAYMENT METHOD CHOOSER (shown when both UPI and Razorpay are available) ──
+function buildMethodChooser(plan, amount) {
+  return `
+    <div class="modal-hdr">
+      <span class="modal-title">Choose Payment Method</span>
+      <button class="modal-close" onclick="closePayModal()">×</button>
+    </div>
+    <div class="modal-body">
+      <div class="order-summary" style="margin-bottom:18px">
+        <div class="os-row"><span class="os-label">Product</span><span class="os-value">Lineage — ${plan.name}</span></div>
+        <div class="os-row total"><span class="os-label">Amount</span><span class="os-value" style="color:var(--gold);font-size:18px">₹${amount}</span></div>
+      </div>
+
+      <div style="font-size:13px;font-weight:700;color:var(--ink);text-align:center;margin-bottom:14px">
+        How would you like to pay?
+      </div>
+
+      <!-- Option 1: Direct UPI -->
+      <div onclick="showUpiPayment()" style="border:2px solid var(--border);border-radius:12px;
+        padding:16px;margin-bottom:12px;cursor:pointer;transition:all .2s;background:var(--paper2)"
+        onmouseover="this.style.borderColor='var(--gold2)';this.style.background='var(--gold-pale)'"
+        onmouseout="this.style.borderColor='var(--border)';this.style.background='var(--paper2)'">
+        <div style="display:flex;align-items:center;gap:12px">
+          <div style="font-size:30px">📱</div>
+          <div style="flex:1">
+            <div style="font-size:14px;font-weight:700;color:var(--ink)">Direct UPI Payment</div>
+            <div style="font-size:11px;color:var(--muted);margin-top:2px">
+              Google Pay · PhonePe · Paytm · QR code — no extra charges
+            </div>
+          </div>
+          <div style="font-size:18px;color:var(--gold2)">→</div>
+        </div>
+      </div>
+
+      <!-- Option 2: Razorpay -->
+      <div onclick="startRazorpay()" style="border:2px solid var(--border);border-radius:12px;
+        padding:16px;cursor:pointer;transition:all .2s;background:var(--paper2)"
+        onmouseover="this.style.borderColor='var(--gold2)';this.style.background='var(--gold-pale)'"
+        onmouseout="this.style.borderColor='var(--border)';this.style.background='var(--paper2)'">
+        <div style="display:flex;align-items:center;gap:12px">
+          <div style="font-size:30px">💳</div>
+          <div style="flex:1">
+            <div style="font-size:14px;font-weight:700;color:var(--ink)">Card / Netbanking / Wallet</div>
+            <div style="font-size:11px;color:var(--muted);margin-top:2px">
+              Debit &amp; credit cards, netbanking, wallets — via Razorpay
+            </div>
+          </div>
+          <div style="font-size:18px;color:var(--gold2)">→</div>
+        </div>
+      </div>
+
+      <div style="font-size:11px;color:var(--muted2);text-align:center;margin-top:14px;line-height:1.5">
+        Both methods deliver your licence key instantly on screen.
+      </div>
+    </div>`;
+}
+
+function showUpiPayment() {
+  const plan = CONFIG.plans[currentPlan];
+  const upiAmount = plan.price / 100;
+  document.getElementById('modal-inner').innerHTML = buildStep2(plan, upiAmount);
+}
+
+function showMethodChooser() {
+  const plan = CONFIG.plans[currentPlan];
+  const upiAmount = plan.price / 100;
+  document.getElementById('modal-inner').innerHTML = buildMethodChooser(plan, upiAmount);
+}
+
+function startRazorpay() {
+  const plan = CONFIG.plans[currentPlan];
+  const {name, email, phone} = customerData;
+
+  // Load Razorpay SDK dynamically
+  const script = document.createElement('script');
+  script.src = 'https://checkout.razorpay.com/v1/checkout.js';
+  script.onload = () => {
+    const options = {
+      key:         CONFIG.razorpay_key_id,
+      amount:      plan.price,
+      currency:    'INR',
+      name:        CONFIG.business_name,
+      description: plan.name,
+      prefill:     { name: name, email: email||'', contact: phone },
+      theme:       { color: '#c89830' },
+      handler:     function(response) { onPaymentSuccess(response, plan); },
+    };
+    const rzp = new Razorpay(options);
+    rzp.on('payment.failed', function(response) {
+      alert('Payment failed: ' + response.error.description + '\nPlease try again or use Direct UPI.');
+    });
+    rzp.open();
+  };
+  script.onerror = () => {
+    alert('Could not load card payment. Please use Direct UPI instead.');
+    showUpiPayment();
+  };
+  document.head.appendChild(script);
+}
+
+// Detect if page is open inside an in-app browser (WhatsApp, Instagram, FB)
+function isInAppBrowser() {
+  const ua = navigator.userAgent || navigator.vendor || window.opera || '';
+  return /WhatsApp|FBAN|FBAV|Instagram|Line|Messenger/i.test(ua);
+}
+
+function buildStep2(plan, amount) {
+  const link = upiLink(amount);
+  const qr   = qrUrl(amount);
+
+  // Warning banner if inside WhatsApp/Instagram/FB browser
+  const inAppWarning = isInAppBrowser()
+    ? `<div style="background:#fff3cd;border:2px solid #e0a800;border-radius:10px;
+        padding:13px 15px;margin-bottom:16px">
+        <div style="font-size:13px;font-weight:700;color:#7a5000;margin-bottom:6px">
+          ⚠️ Please open in Chrome to pay
+        </div>
+        <div style="font-size:12px;color:#8a6000;line-height:1.6">
+          UPI apps don't open inside WhatsApp. Tap the <strong>three dots (⋮)</strong> at the
+          top-right of this screen, then choose <strong>"Open in Chrome"</strong> or
+          <strong>"Open in browser"</strong>. Then come back and pay. Your UPI apps will work there.
+        </div>
+      </div>`
+    : '';
+
+  const backBtn = (CONFIG.razorpay_ready && CONFIG.razorpay_key_id)
+    ? `<button onclick="showMethodChooser()" style="background:none;border:none;color:var(--muted);
+        cursor:pointer;font-size:13px;font-family:var(--sans);padding:4px 8px">← Back</button>`
+    : '';
+  return `
+    <div class="modal-hdr">
+      <div style="display:flex;align-items:center;gap:8px">
+        ${backBtn}
+        <span class="modal-title">Pay ₹${amount} via UPI</span>
+      </div>
+      <button class="modal-close" onclick="closePayModal()">×</button>
+    </div>
+    <div class="modal-body">
+
+      <!-- Step indicator -->
+      <div style="display:flex;align-items:center;gap:0;margin-bottom:20px">
+        <div style="flex:1;text-align:center;padding:8px;background:var(--paper3);border-radius:6px 0 0 6px;
+          font-size:11px;font-weight:700;color:var(--muted)">✓ 1. Your Details</div>
+        <div style="flex:1;text-align:center;padding:8px;background:var(--gold2);
+          font-size:11px;font-weight:700;color:var(--ink)">2. Pay Now</div>
+        <div style="flex:1;text-align:center;padding:8px;background:var(--paper3);border-radius:0 6px 6px 0;
+          font-size:11px;font-weight:700;color:var(--muted)">3. Get Key</div>
+      </div>
+
+      ${inAppWarning}
+
+      <!-- UPI Options -->
+      <div style="text-align:center;margin-bottom:16px">
+        <div style="font-size:13px;font-weight:700;color:var(--ink);margin-bottom:4px">
+          Pay ₹${amount} to complete your purchase
+        </div>
+        <div style="font-size:12px;color:var(--muted)">Choose any method below</div>
+      </div>
+
+      <!-- Method 1: Click to Pay (mobile) -->
+      <a href="${link}" style="display:block;text-decoration:none;margin-bottom:10px">
+        <div style="background:var(--ink);border-radius:10px;padding:14px 16px;
+          display:flex;align-items:center;gap:12px;transition:opacity .2s"
+          onmouseover="this.style.opacity='.85'" onmouseout="this.style.opacity='1'">
+          <div style="font-size:28px">📱</div>
+          <div>
+            <div style="font-size:14px;font-weight:700;color:#faf0d8">Tap to Pay — Open UPI App</div>
+            <div style="font-size:11px;color:rgba(250,240,216,.6);margin-top:2px">
+              On your phone: opens GPay / PhonePe / Paytm
+            </div>
+          </div>
+          <div style="margin-left:auto;font-size:20px;color:var(--gold3)">→</div>
+        </div>
+      </a>
+
+      <!-- Method 2: QR Code (desktop) -->
+      <div style="border:1.5px solid var(--border);border-radius:10px;padding:14px;
+        display:flex;align-items:center;gap:14px;margin-bottom:10px;background:var(--paper2)">
+        <img src="${qr}" alt="UPI QR Code" width="80" height="80"
+          style="border-radius:6px;border:2px solid var(--border);flex-shrink:0"
+          onerror="this.style.display='none';document.getElementById('qr-fallback').style.display='block'"/>
+        <div id="qr-fallback" style="display:none;width:80px;height:80px;background:var(--paper3);
+          border-radius:6px;border:2px dashed var(--border);display:none;align-items:center;
+          justify-content:center;font-size:10px;color:var(--muted);text-align:center;padding:4px">
+          QR code
+        </div>
+        <div>
+          <div style="font-size:13px;font-weight:700;color:var(--ink);margin-bottom:4px">Scan QR Code</div>
+          <div style="font-size:11px;color:var(--muted);line-height:1.5">
+            Open any UPI app → Scan QR → Pay ₹${amount}
+          </div>
+          <div style="font-size:10px;color:var(--muted2);margin-top:4px">Scan with your phone's UPI app</div>
+        </div>
+      </div>
+
+      <!-- Method 3: Manual UPI ID -->
+      <div style="border:1.5px solid var(--border);border-radius:10px;padding:12px 14px;
+        margin-bottom:16px;background:var(--paper2)">
+        <div style="font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase;
+          letter-spacing:1.5px;margin-bottom:6px">Or pay manually to UPI ID</div>
+        <div style="display:flex;align-items:center;gap:8px">
+          <div id="upi-id-display" style="font-family:'Courier New',monospace;font-size:15px;
+            font-weight:700;color:var(--gold2);background:var(--paper);
+            border:1.5px solid var(--border);border-radius:6px;padding:8px 12px;flex:1">
+            ${CONFIG.upi_id}
+          </div>
+          <button onclick="copyUpiId()" style="padding:8px 12px;background:var(--gold2);
+            color:var(--ink);border:none;border-radius:6px;font-size:12px;font-weight:700;
+            cursor:pointer;font-family:var(--sans);transition:all .18s;white-space:nowrap"
+            onmouseover="this.style.background='var(--gold3)'"
+            onmouseout="this.style.background='var(--gold2)'"
+            id="copy-upi-btn">Copy ID</button>
+        </div>
+        <div style="font-size:11px;color:var(--muted);margin-top:6px">
+          Amount: <strong style="color:var(--ink)">₹${amount}</strong> &nbsp;·&nbsp;
+          Name: <strong style="color:var(--ink)">${CONFIG.upi_name}</strong>
+        </div>
+      </div>
+
+      <!-- Confirm payment button -->
+      <div style="background:rgba(26,96,32,.08);border:1.5px solid rgba(26,96,32,.2);
+        border-radius:10px;padding:14px;margin-bottom:14px">
+        <div style="font-size:12px;font-weight:700;color:var(--green);margin-bottom:8px">
+          ✅ After paying, click below to get your licence key instantly
+        </div>
+        <div style="font-size:11px;color:var(--muted);margin-bottom:10px;line-height:1.5">
+          Your key will appear on screen immediately. No waiting, no email needed.
+        </div>
+        <button class="proceed-btn" onclick="confirmPayment()" style="background:var(--green);padding:12px">
+          ✓ I Have Paid — Get My Licence Key
+        </button>
+      </div>
+
+      <div style="font-size:11px;color:var(--muted2);text-align:center;line-height:1.6">
+        Paid but key not working? Contact us on WhatsApp:<br/>
+        <strong style="color:var(--ink)">${CONFIG.business_phone}</strong>
+      </div>
+    </div>`;
+}
+
+function copyUpiId() {
+  navigator.clipboard.writeText(CONFIG.upi_id).then(() => {
+    const btn = document.getElementById('copy-upi-btn');
+    if (btn) { btn.textContent = '✓ Copied!'; setTimeout(() => btn.textContent='Copy ID', 2000); }
+  }).catch(() => { alert('UPI ID: ' + CONFIG.upi_id); });
+}
+
+// STEP 3 — Payment confirmation + key delivery
+function confirmPayment() {
+  const plan   = CONFIG.plans[currentPlan];
+  const {name, email, phone} = customerData;
+
+  // Show brief loading state
+  document.getElementById('modal-inner').innerHTML = buildStep3Loading();
+  setTimeout(() => {
+    const keys        = generateKeys(name, email||phone, currentPlan, plan.keys);
+    const expiryLabel = plan.months === 'lifetime' ? 'Lifetime — never expires'
+      : 'Valid for ' + plan.months + ' month(s) from today';
+    const order = {
+      ts: new Date().toISOString(),
+      paymentId: 'UPI-' + Date.now(),
+      name, phone, email, plan: plan.name, amount: plan.display, keys
+    };
+    logOrder(order);
+    document.getElementById('modal-inner').innerHTML = buildSuccessScreen(keys, plan, expiryLabel, null);
+  }, 1200);
+}
+
+function buildStep3Loading() {
+  return `
+    <div class="modal-hdr">
+      <span class="modal-title">Confirming Payment…</span>
+      <button class="modal-close" onclick="closePayModal()">×</button>
+    </div>
+    <div class="modal-body" style="text-align:center;padding:48px 24px">
+      <div style="font-size:48px;margin-bottom:16px;animation:spin 1s linear infinite;display:inline-block">⚘</div>
+      <div style="font-size:16px;font-weight:700;color:var(--ink);margin-bottom:8px">Generating your licence key…</div>
+      <div style="font-size:13px;color:var(--muted)">This will take just a moment</div>
+    </div>
+    <style>@keyframes spin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}</style>`;
+}
+
+function closePayModal() {
+  document.getElementById('pay-modal').classList.remove('open');
+}
+function modalBgClick(e) {
+  if (e.target === document.getElementById('pay-modal')) closePayModal();
+}
+
+// Legacy — kept for when Razorpay is activated later
+function onPaymentSuccess(response, plan) {
+  const {name, email, phone} = customerData;
+  const keys = generateKeys(name, email||phone, currentPlan, plan.keys);
+  const expiryLabel = plan.months === 'lifetime' ? 'Lifetime — never expires'
+    : 'Valid for ' + plan.months + ' months from today';
+  const order = {
+    ts: new Date().toISOString(),
+    paymentId: response.razorpay_payment_id || 'TEST-' + Date.now(),
+    name, email, plan: plan.name, amount: plan.display, keys
+  };
+  logOrder(order);
+  document.getElementById('modal-inner').innerHTML = buildSuccessScreen(keys, plan, expiryLabel, response.razorpay_payment_id);
+}
+
+function buildSuccessScreen(keys, plan, expiryLabel, paymentId) {
+  const keysHtml = keys.map((k, i) => `
+    <div class="key-box" onclick="copyToClipboard('${k}', this)">
+      <div class="key-box-label">${keys.length > 1 ? 'Licence Key ' + (i+1) + ' of ' + keys.length : 'Your Licence Key'} — click to copy</div>
+      <div class="key-value">${k}</div>
+      <div class="key-copy-hint">Click anywhere on this box to copy</div>
+    </div>`).join('');
+
+  return `
+    <div class="modal-hdr">
+      <span class="modal-title">Payment Successful</span>
+      <button class="modal-close" onclick="closePayModal()">×</button>
+    </div>
+    <div class="modal-body">
+      <div class="success-screen">
+        <div class="success-icon">🎉</div>
+        <div class="success-title">Thank you, ${customerData.name.split(' ')[0]}!</div>
+        <div class="success-sub">Your payment is confirmed. Here is your licence key — copy it now and keep it safe. You will need it to activate the app.</div>
+      </div>
+      ${keysHtml}
+
+      <!-- STEP-BY-STEP NEXT ACTIONS -->
+      <div style="background:rgba(26,96,32,.07);border:1.5px solid rgba(26,96,32,.25);
+        border-radius:12px;padding:16px;margin:16px 0">
+        <div style="font-size:13px;font-weight:700;color:var(--green);margin-bottom:12px">
+          📦 Your next steps:
+        </div>
+
+        <!-- Step 1: Go to secure download page -->
+        <a href="${CONFIG.download_url}" target="_blank" rel="noopener"
+          style="display:block;text-decoration:none;margin-bottom:10px">
+          <div style="background:var(--green);border-radius:10px;padding:14px 16px;
+            display:flex;align-items:center;gap:12px;transition:opacity .2s"
+            onmouseover="this.style.opacity='.88'" onmouseout="this.style.opacity='1'">
+            <div style="font-size:26px">⬇️</div>
+            <div style="flex:1">
+              <div style="font-size:14px;font-weight:700;color:#fff">1. Go to the Download Page</div>
+              <div style="font-size:11px;color:rgba(255,255,255,.75);margin-top:2px">
+                Enter your download code there to get the app
+              </div>
+            </div>
+            <div style="font-size:18px;color:#fff">→</div>
+          </div>
+        </a>
+
+        <!-- Steps 2-4 instructions -->
+        <div style="font-size:12px;color:var(--ink2);line-height:1.8;padding:4px 6px">
+          <b>2.</b> On the download page, enter the <b>download code</b> we send you<br/>
+          <b>3.</b> Unzip the file and open <b>Lineage-App.html</b> in your browser<br/>
+          <b>4.</b> Enter your licence key (above) when asked — done! ⚘
+        </div>
+      </div>
+
+      <div class="key-meta">
+        <div class="km"><div class="km-l">Plan</div><div class="km-v">${plan.name}</div></div>
+        <div class="km"><div class="km-l">Validity</div><div class="km-v">${expiryLabel}</div></div>
+        ${paymentId ? `<div class="km"><div class="km-l">Payment ID</div><div class="km-v" style="font-size:10px">${paymentId}</div></div>` : ''}
+        <div class="km"><div class="km-l">Support</div><div class="km-v" style="font-size:11px">${CONFIG.business_email}</div></div>
+      </div>
+      <button class="download-btn" onclick="downloadActivationCard('${keys[0]}', '${plan.name}', '${expiryLabel}')">
+        ↓ Save Activation Card (your key record)
+      </button>
+      <div style="font-size:12px;color:var(--muted);text-align:center;margin-top:12px;line-height:1.5">
+        Copy your key before closing this window.<br/>
+        ${keys.length > 1 ? 'Distribute one key to each family member.' : ''}
+      </div>
+    </div>`;
+}
+
+function copyToClipboard(text, el) {
+  navigator.clipboard.writeText(text).then(() => {
+    const hint = el.querySelector('.key-copy-hint');
+    const orig = hint.textContent;
+    hint.textContent = '✓ Copied to clipboard!';
+    hint.style.color = '#80e060';
+    el.style.background = '#142010';
+    setTimeout(() => { hint.textContent = orig; hint.style.color = ''; el.style.background = ''; }, 2000);
+  }).catch(() => { alert('Your key: ' + text + '\n\nCopy it manually.'); });
+}
+
+function downloadActivationCard(key, planName, expiry) {
+  const html = `<!DOCTYPE html><html><head><meta charset="UTF-8">
+<title>Lineage Activation Card</title>
+<style>
+body{font-family:Georgia,serif;background:#1a1006;color:#f0e6cc;display:flex;align-items:center;justify-content:center;min-height:100vh;margin:0}
+.card{background:#231e14;border:2px solid #c9a84c;border-radius:16px;padding:40px;max-width:460px;text-align:center;box-shadow:0 8px 48px rgba(0,0,0,.5)}
+.logo{font-size:48px;margin-bottom:8px}
+h1{font-size:28px;color:#e2c06a;margin-bottom:4px}
+.sub{font-size:13px;color:#a08860;letter-spacing:2px;text-transform:uppercase;margin-bottom:28px}
+.key-label{font-size:10px;text-transform:uppercase;letter-spacing:2px;color:#7a6040;margin-bottom:8px}
+.key{font-family:'Courier New',monospace;font-size:18px;letter-spacing:3px;color:#a0e060;
+  background:#0f1a08;padding:14px;border-radius:8px;margin-bottom:20px;border:1px solid rgba(100,180,60,.3)}
+.meta{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:20px}
+.m{background:#1a1610;border-radius:8px;padding:10px;text-align:left}
+.ml{font-size:9px;text-transform:uppercase;letter-spacing:1.5px;color:#7a6040;margin-bottom:2px}
+.mv{font-size:12px;color:#e2c06a;font-weight:700}
+.note{font-size:11px;color:#5a5040;line-height:1.6}
+</style></head><body>
+<div class="card">
+<div class="logo">⚘</div>
+<h1>Lineage</h1>
+<div class="sub">Family Heritage App — Activation Card</div>
+<div class="key-label">Your Licence Key</div>
+<div class="key">${key}</div>
+<div class="meta">
+<div class="m"><div class="ml">Plan</div><div class="mv">${planName}</div></div>
+<div class="m"><div class="ml">Validity</div><div class="mv">${expiry}</div></div>
+<div class="m"><div class="ml">Name</div><div class="mv">${customerData.name}</div></div>
+<div class="m"><div class="ml">Support</div><div class="mv" style="font-size:10px">${CONFIG.business_email}</div></div>
+</div>
+<div class="note">Keep this card safe. Enter the key above when you first open Lineage to activate the app. This key is personal to you — do not share it.</div>
+</div></body></html>`;
+  const blob = new Blob([html], {type:'text/html'});
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = 'lineage-activation-card.html';
+  a.click();
+}
+
+// ── ORDER LOG ─────────────────────────────────────────────────────
+function logOrder(order) {
+  try {
+    const log = JSON.parse(localStorage.getItem('_lng_orders') || '[]');
+    log.unshift(order);
+    localStorage.setItem('_lng_orders', JSON.stringify(log));
+  } catch(e) {}
+}
+
+// ── FAQ ───────────────────────────────────────────────────────────
+const FAQS = [
+  ['Is this a subscription? Do I pay every year?',
+   'Start with the 1-Month Trial for just ₹51 to explore all the features risk-free. If you love it, upgrade to the Annual Plan (₹199/year) or the Lifetime Licence (₹499, pay once, own forever). The Family Bundle (₹999) gives 5 separate lifetime keys — and since each key works on up to 3 devices, that covers a large extended family.'],
+  ['What happens to my family data if I lose the file?',
+   'Use the Backup button inside the app to export your data as a portable file. Store it in Google Drive, WhatsApp Saved Messages, or email it to yourself. Restore it with one click whenever needed.'],
+  ['Can I use this on my phone?',
+   'Yes. Save the file to your phone and open it in Chrome or Safari. The app works fully on mobile — including adding members and uploading photos.'],
+  ['My nephew also wants to use it. Can we share our data?',
+   'Yes — this is one of the best features. Each person buys their own copy. When you want to combine your records, use the Smart Merge Wizard (included in Lifetime and Bundle plans). It detects common ancestors automatically and merges the two trees without duplicates.'],
+  ['Is my family data private?',
+   'Completely. All data is stored on your own device only — nothing is sent to any server, cloud, or database. The app works without internet. Your family\'s history belongs to you alone.'],
+  ['What if I change my computer or phone?',
+   'Export a backup from your old device, then import it on the new one. Your entire family tree transfers in seconds.'],
+  ['I paid but did not copy my key — what do I do?',
+   'Contact us at the email below with your payment ID (from your bank SMS or Razorpay email receipt). We will re-issue your key within 24 hours.'],
+  ['Can I get a refund?',
+   'As this is a digital product and the licence key is delivered immediately, we are unable to offer refunds once the key has been issued. Please review the features carefully before purchasing. If you have any doubts, contact us first.'],
+];
+
+const faqList = document.getElementById('faq-list');
+FAQS.forEach(([q, a]) => {
+  const item = document.createElement('div');
+  item.className = 'faq-item';
+  item.innerHTML = `
+    <button class="faq-q" onclick="toggleFaq(this)">
+      ${q} <span class="chevron">▼</span>
+    </button>
+    <div class="faq-a">
+      <div class="faq-a-inner">${a}</div>
+    </div>`;
+  faqList.appendChild(item);
+});
+
+function toggleFaq(btn) {
+  const ans = btn.nextElementSibling;
+  const isOpen = ans.classList.contains('open');
+  // Close all
+  document.querySelectorAll('.faq-a').forEach(a => a.classList.remove('open'));
+  document.querySelectorAll('.faq-q').forEach(b => b.classList.remove('open'));
+  if (!isOpen) {
+    ans.classList.add('open');
+    btn.classList.add('open');
+  }
+}
+</script>
+</body>
+</html>
