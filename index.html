@@ -274,7 +274,7 @@ footer{background:var(--ink);padding:40px 24px;text-align:center}
     <a href="#features" class="nav-link">Features</a>
     <a href="#pricing" class="nav-link">Pricing</a>
     <a href="#faq" class="nav-link">FAQ</a>
-    <button class="nav-cta" onclick="openPayModal('lifetime')">Buy Now</button>
+    <a href="https://imjo.in/ZRNrJ4" target="_blank" class="nav-cta" style="text-decoration:none;display:inline-block">Buy Now</a>
   </div>
 </nav>
 
@@ -344,7 +344,7 @@ footer{background:var(--ink);padding:40px 24px;text-align:center}
           <li class="no">Priority support</li>
           <li class="no">Free future updates</li>
         </ul>
-        <button class="pay-btn secondary" style="border-color:#2a7a3a;color:#2a7a3a" onclick="openPayModal('trial')">Start Trial — ₹51</button>
+        <a href="https://imjo.in/eMY4tU" target="_blank" class="pay-btn secondary" style="border-color:#2a7a3a;color:#2a7a3a;display:block;text-align:center;text-decoration:none;line-height:1.4">Start Trial — ₹51</a>
       </div>
 
       <div class="price-card">
@@ -362,7 +362,7 @@ footer{background:var(--ink);padding:40px 24px;text-align:center}
           <li class="no">Smart Merge Wizard</li>
           <li class="no">Free future updates</li>
         </ul>
-        <button class="pay-btn secondary" onclick="openPayModal('annual')">Buy Annual Plan</button>
+        <a href="https://imjo.in/CHnNfh" target="_blank" class="pay-btn secondary" style="display:block;text-align:center;text-decoration:none;line-height:1.4">Buy Annual Plan</a>
       </div>
 
       <div class="price-card featured">
@@ -381,24 +381,7 @@ footer{background:var(--ink);padding:40px 24px;text-align:center}
           <li>Smart Merge Wizard</li>
           <li>Free future updates</li>
         </ul>
-        <button class="pay-btn primary" onclick="openPayModal('lifetime')">Buy Lifetime Licence</button>
-      </div>
-
-      <div class="price-card">
-        <div class="price-name">Family Bundle</div>
-        <div class="price-amount"><sup>₹</sup>999</div>
-        <div class="price-period">5 lifetime licences — share with family</div>
-        <ul class="price-features">
-          <li><strong>5 separate licence keys</strong></li>
-          <li>Each key works on up to 3 devices</li>
-          <li>All Lifetime features</li>
-          <li>Smart Merge Wizard</li>
-          <li>Share trees via backup/restore</li>
-          <li>User manual for each</li>
-          <li>Priority support</li>
-          <li>Best value for large families</li>
-        </ul>
-        <button class="pay-btn secondary" onclick="openPayModal('bundle')">Buy Family Bundle</button>
+        <a href="https://imjo.in/ZRNrJ4" target="_blank" class="pay-btn primary" style="display:block;text-align:center;text-decoration:none;line-height:1.4">Buy Lifetime Licence</a>
       </div>
 
     </div>
@@ -478,7 +461,6 @@ const CONFIG = {
     trial:    { name: '1-Month Trial',     price:  5100, display: '₹51',  months: 1,         keys: 1 },
     annual:   { name: 'Annual Plan',       price: 19900, display: '₹199', months: 12,        keys: 1 },
     lifetime: { name: 'Lifetime Licence',  price: 49900, display: '₹499', months: 'lifetime', keys: 1 },
-    bundle:   { name: 'Family Bundle (5)', price: 99900, display: '₹999', months: 'lifetime', keys: 5 },
   },
   // Prices are in PAISE (1 rupee = 100 paise): ₹51 = 5100, ₹199 = 19900, ₹499 = 49900 paise
 };
@@ -515,7 +497,7 @@ function generateLicenceKey(customerName, customerEmail, planKey) {
 function generateKeys(name, email, planKey, count) {
   const keys = [];
   for (let i = 0; i < count; i++) {
-    // For bundles, vary the customer code slightly per key
+    // Vary the customer code slightly per key if multiple
     keys.push(generateLicenceKey(name + (i > 0 ? '_'+i : ''), email, planKey));
   }
   return keys;
@@ -1048,13 +1030,13 @@ function logOrder(order) {
 // ── FAQ ───────────────────────────────────────────────────────────
 const FAQS = [
   ['Is this a subscription? Do I pay every year?',
-   'Start with the 1-Month Trial for just ₹51 to explore all the features risk-free. If you love it, upgrade to the Annual Plan (₹199/year) or the Lifetime Licence (₹499, pay once, own forever). The Family Bundle (₹999) gives 5 separate lifetime keys — and since each key works on up to 3 devices, that covers a large extended family.'],
+   'Start with the 1-Month Trial for just ₹51 to explore all the features risk-free. If you love it, upgrade to the Annual Plan (₹199/year) or the Lifetime Licence (₹499, pay once, own forever). Each licence works on up to 3 devices, so your whole family can share it.'],
   ['What happens to my family data if I lose the file?',
    'Use the Backup button inside the app to export your data as a portable file. Store it in Google Drive, WhatsApp Saved Messages, or email it to yourself. Restore it with one click whenever needed.'],
   ['Can I use this on my phone?',
    'Yes. Save the file to your phone and open it in Chrome or Safari. The app works fully on mobile — including adding members and uploading photos.'],
   ['My nephew also wants to use it. Can we share our data?',
-   'Yes — this is one of the best features. Each person buys their own copy. When you want to combine your records, use the Smart Merge Wizard (included in Lifetime and Bundle plans). It detects common ancestors automatically and merges the two trees without duplicates.'],
+   'Yes — this is one of the best features. Each person buys their own copy. When you want to combine your records, use the Smart Merge Wizard (included in the Lifetime plan). It detects common ancestors automatically and merges the two trees without duplicates.'],
   ['Is my family data private?',
    'Completely. All data is stored on your own device only — nothing is sent to any server, cloud, or database. The app works without internet. Your family\'s history belongs to you alone.'],
   ['What if I change my computer or phone?',
