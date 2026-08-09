@@ -1,5 +1,5 @@
 // Lineage service worker — caches the app shell so it works offline and is installable.
-const CACHE = 'lineage-v1';
+const CACHE = 'lineage-v2';
 const APP_FILES = [
   '.',
   'index.html'
