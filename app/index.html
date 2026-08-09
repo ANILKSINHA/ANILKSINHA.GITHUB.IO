@@ -330,7 +330,28 @@ input::placeholder,textarea::placeholder{color:var(--muted2);font-weight:400}
 .notif.error{border-color:var(--red);color:var(--red)}
 
 @media(max-width:940px){.sidebar{width:215px}.detail{width:255px}.hdr-stats{display:none}}
-@media(max-width:700px){.sidebar{width:0;overflow:hidden}.detail{display:none}.fg2{grid-template-columns:1fr}}
+@media(max-width:700px){
+  .sidebar{width:0;overflow:hidden}
+  .fg2{grid-template-columns:1fr}
+  /* On phones, the detail panel becomes a full-screen slide-up sheet */
+  .detail{
+    position:fixed; inset:0; width:100%; z-index:8500;
+    transform:translateY(100%); transition:transform .28s ease;
+    box-shadow:none; border-left:none;
+  }
+  .detail.mobile-open{ transform:translateY(0); }
+  /* A close bar at the top of the mobile detail sheet */
+  .d-mobile-close{
+    display:flex; align-items:center; gap:8px; padding:12px 14px;
+    background:var(--s2); border-bottom:1.5px solid var(--border);
+    font-weight:700; color:var(--gold2); font-size:14px; cursor:pointer;
+    flex-shrink:0; position:sticky; top:0; z-index:2;
+  }
+  /* Make sure the action buttons are always reachable (sticky at bottom) */
+  .d-actions{ position:sticky; bottom:0; }
+}
+/* The close bar is hidden on desktop */
+.d-mobile-close{ display:none; }
 
 /* Help guide styles */
 .help-section{margin-bottom:18px;padding-bottom:16px;border-bottom:1px solid var(--border)}
@@ -1271,6 +1292,7 @@ function renderDetail(id){
   const row=(k,v)=>v?`<div class="d-row"><span class="d-key">${k}</span><span class="d-val">${v}</span></div>`:'';
 
   panel.innerHTML=`
+    <div class="d-mobile-close" onclick="closeMobileDetail()">\u2039 Back to family tree</div>
     <div class="d-photo-wrap">
       ${photoHtml}
       <div class="d-gen-strip" style="background:${color}"></div>
@@ -1324,6 +1346,17 @@ function select(id){
   renderSidebar();
   if(curView==='tree')renderTree();else renderList();
   renderDetail(id);
+  // On phones, slide the detail sheet up into view
+  if(window.innerWidth<=700){
+    const panel=document.getElementById('detail');
+    if(panel){ panel.classList.add('mobile-open'); panel.scrollTop=0; }
+  }
+}
+
+// Close the mobile detail sheet (return to the tree)
+function closeMobileDetail(){
+  const panel=document.getElementById('detail');
+  if(panel) panel.classList.remove('mobile-open');
 }
 
 // ── VIEW SWITCH ───────────────────────────────────────────────────────────────
@@ -1538,6 +1571,7 @@ function deleteMember(id){
   save();renderAll();
   if(!selId)document.getElementById('detail').innerHTML=`<div class="d-empty"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg><p>Select a family member to view their full profile</p></div>`;
   notify('Member removed — all other generations intact');
+  closeMobileDetail();
 }
 
 // ── INIT ──────────────────────────────────────────────────────────────────────
