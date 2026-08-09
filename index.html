@@ -3,1643 +3,1074 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <meta name="theme-color" content="#6a4a08"/>
-  <meta name="apple-mobile-web-app-capable" content="yes"/>
-  <meta name="apple-mobile-web-app-status-bar-style" content="default"/>
-  <meta name="apple-mobile-web-app-title" content="Lineage"/>
-  <link rel="manifest" href="data:application/json;base64,eyJuYW1lIjogIkxpbmVhZ2UgXHUyMDE0IEZhbWlseSBIZXJpdGFnZSIsICJzaG9ydF9uYW1lIjogIkxpbmVhZ2UiLCAiZGVzY3JpcHRpb24iOiAiUHJlc2VydmUgeW91ciBmYW1pbHkncyBoaXN0b3J5IGFjcm9zcyAxMCBnZW5lcmF0aW9ucy4iLCAic3RhcnRfdXJsIjogIi4iLCAiZGlzcGxheSI6ICJzdGFuZGFsb25lIiwgImJhY2tncm91bmRfY29sb3IiOiAiI2VmZTlkZCIsICJ0aGVtZV9jb2xvciI6ICIjNmE0YTA4IiwgImljb25zIjogW119"/>
-
-<title>Lineage — Family Heritage App (10 Generations)</title>
+<title>Lineage — Family Heritage App | Buy Now</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+
+<!-- Razorpay SDK — loads only when payment is triggered -->
+<!-- <script src="https://checkout.razorpay.com/v1/checkout.js"></script> -->
+
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
-  --bg:#f4efe6;
-  --s1:#fdfaf4;
-  --s2:#ede8dc;
-  --s3:#e2dbd0;
-  --s4:#d2c8b8;
-  --gold:#8b6010;
-  --gold2:#6a4a08;
-  --gold3:#4a3205;
-  --accent:#a07820;
-  --text:#1e1408;
-  --text2:#3a2810;
-  --muted:#5c4828;
-  --muted2:#7a6448;
-  --border:#c4b490;
-  --red:#9a2010;
-  --green:#1a6830;
-  --blue:#1a3a6a;
-  --pink:#6a1848;
-  --shadow:0 2px 10px rgba(80,55,10,.10);
-  --shadow-md:0 4px 20px rgba(80,55,10,.15);
+  --ink:#1a1006;
+  --ink2:#3a2810;
+  --paper:#faf6ee;
+  --paper2:#f2ebe0;
+  --paper3:#e8dfd0;
+  --gold:#a07020;
+  --gold2:#c89830;
+  --gold3:#e8c060;
+  --gold-pale:#f8f0d8;
+  --border:#d8c8a0;
+  --muted:#7a6040;
+  --muted2:#a89060;
+  --red:#8a1810;
+  --green:#1a6020;
   --serif:'Cormorant Garamond',Georgia,serif;
-  --sans:'Nunito',sans-serif;
+  --sans:'DM Sans','Segoe UI',sans-serif;
+  --shadow:0 2px 16px rgba(100,70,10,.10);
+  --shadow-lg:0 8px 48px rgba(100,70,10,.18);
 }
 
-/* Generation colour bands — 10 distinct warm tones */
-.gc1{--gc:#7a2020;} .gc2{--gc:#7a4010;} .gc3{--gc:#6a5808;}
-.gc4{--gc:#2a5820;} .gc5{--gc:#185870;} .gc6{--gc:#281878;}
-.gc7{--gc:#580868;} .gc8{--gc:#680828;} .gc9{--gc:#206040;}
-.gc10{--gc:#404040;}
+html{scroll-behavior:smooth}
+body{font-family:var(--sans);background:var(--paper);color:var(--ink);min-height:100vh;
+  background-image:url("data:image/svg+xml,%3Csvg width='60' height='60' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='30' cy='30' r='.8' fill='%23c8a860' opacity='.18'/%3E%3C/svg%3E")}
 
-html,body{height:100%;font-family:var(--sans);background:var(--bg);color:var(--text);font-size:14px;overflow:hidden}
-#app{display:flex;flex-direction:column;height:100vh}
+/* ── HERO ── */
+.hero{background:var(--ink);position:relative;overflow:hidden;padding:64px 24px 56px}
+.hero::before{content:'';position:absolute;inset:0;
+  background:radial-gradient(ellipse 80% 60% at 60% 40%, rgba(160,112,32,.35) 0%, transparent 70%)}
+.hero::after{content:'⚘';font-family:var(--serif);font-size:320px;color:rgba(255,255,255,.025);
+  position:absolute;right:-40px;top:-60px;line-height:1;pointer-events:none;user-select:none}
+.hero-inner{max-width:960px;margin:0 auto;position:relative;z-index:1}
+.hero-badge{display:inline-flex;align-items:center;gap:6px;background:rgba(200,152,48,.18);
+  border:1px solid rgba(200,152,48,.35);border-radius:20px;padding:5px 14px;
+  font-size:11px;font-weight:600;color:var(--gold3);letter-spacing:1.5px;
+  text-transform:uppercase;margin-bottom:20px}
+.hero-title{font-family:var(--serif);font-size:clamp(42px,7vw,80px);color:#faf0d8;
+  font-weight:600;line-height:1.05;margin-bottom:14px;letter-spacing:-.5px}
+.hero-title em{color:var(--gold3);font-style:italic}
+.hero-sub{font-size:clamp(15px,2vw,18px);color:rgba(250,240,216,.65);line-height:1.7;
+  max-width:540px;font-weight:300;margin-bottom:32px}
+.hero-pills{display:flex;gap:10px;flex-wrap:wrap}
+.hpill{display:flex;align-items:center;gap:6px;background:rgba(255,255,255,.06);
+  border:1px solid rgba(255,255,255,.1);border-radius:6px;padding:6px 12px;
+  font-size:12px;color:rgba(250,240,216,.75);font-weight:500}
+.hpill svg{width:13px;height:13px;opacity:.7;flex-shrink:0}
 
-/* ── HEADER ── */
-.hdr{display:flex;align-items:center;gap:12px;padding:0 18px;height:56px;flex-shrink:0;
-  background:var(--gold2);box-shadow:0 2px 12px rgba(80,50,0,.25)}
-.logo{font-family:var(--serif);font-size:24px;color:#fdf5e0;letter-spacing:.3px;line-height:1}
-.logo small{display:block;font-size:9px;letter-spacing:3px;text-transform:uppercase;
-  color:rgba(253,245,224,.7);font-family:var(--sans);font-weight:700;margin-top:1px}
-.hdr-stats{display:flex;gap:20px;margin-left:16px;padding-left:16px;
-  border-left:1px solid rgba(253,245,224,.3)}
-.hst{text-align:center}
-.hst-n{font-family:var(--serif);font-size:20px;color:#fdf5e0;line-height:1;font-weight:600}
-.hst-l{font-size:9px;text-transform:uppercase;letter-spacing:1.5px;
-  color:rgba(253,245,224,.7);font-weight:700;margin-top:1px}
-.hdr-actions{margin-left:auto;display:flex;gap:8px;align-items:center}
+/* ── NAV ── */
+nav{background:var(--ink);border-bottom:1px solid rgba(200,152,48,.2);
+  padding:0 24px;position:sticky;top:0;z-index:100;
+  box-shadow:0 2px 20px rgba(0,0,0,.3)}
+.nav-inner{max-width:960px;margin:0 auto;display:flex;align-items:center;
+  height:52px;gap:20px}
+.nav-logo{font-family:var(--serif);font-size:20px;color:var(--gold3);margin-right:auto}
+.nav-logo span{font-size:10px;color:rgba(200,152,48,.6);display:block;
+  letter-spacing:2px;text-transform:uppercase;line-height:1;font-family:var(--sans)}
+.nav-link{font-size:13px;color:rgba(250,240,216,.6);text-decoration:none;
+  font-weight:500;transition:color .2s}
+.nav-link:hover{color:var(--gold3)}
+.nav-cta{background:var(--gold2);color:var(--ink);padding:7px 18px;border-radius:6px;
+  font-size:12px;font-weight:700;text-decoration:none;transition:all .18s;
+  border:none;cursor:pointer;font-family:var(--sans)}
+.nav-cta:hover{background:var(--gold3)}
 
-.btn{display:inline-flex;align-items:center;gap:6px;padding:7px 14px;border-radius:7px;
-  border:1.5px solid var(--border);background:var(--s1);color:var(--text2);
-  cursor:pointer;font-family:var(--sans);font-size:12px;font-weight:700;
-  transition:all .18s;white-space:nowrap;box-shadow:var(--shadow)}
-.btn:hover{background:var(--s2);border-color:var(--gold);color:var(--gold2)}
-.btn svg{width:14px;height:14px;flex-shrink:0}
-.btn-gold{background:rgba(253,245,224,.18);color:#fdf5e0;border-color:rgba(253,245,224,.4)}
-.btn-gold:hover{background:rgba(253,245,224,.3);border-color:rgba(253,245,224,.7);color:#fff}
-.btn-primary{background:var(--s1);color:var(--gold2);border-color:var(--s1);font-weight:700}
-.btn-primary:hover{background:#fff;color:var(--gold3)}
-.btn-danger{border-color:rgba(154,32,16,.3);color:var(--red);background:var(--s1)}
-.btn-danger:hover{background:rgba(154,32,16,.08);border-color:var(--red)}
-.btn-sm{padding:5px 10px;font-size:11px}
+/* ── SECTION ── */
+section{padding:64px 24px}
+.sec-inner{max-width:960px;margin:0 auto}
+.sec-label{font-size:10px;text-transform:uppercase;letter-spacing:3px;
+  color:var(--muted2);font-weight:600;margin-bottom:8px}
+.sec-title{font-family:var(--serif);font-size:clamp(28px,4vw,42px);color:var(--ink);
+  font-weight:600;margin-bottom:6px;line-height:1.2}
+.sec-sub{font-size:15px;color:var(--muted);line-height:1.7;max-width:520px;margin-bottom:36px}
 
-.view-toggle{display:flex;border:1.5px solid rgba(253,245,224,.4);border-radius:7px;overflow:hidden}
-.vtb{padding:6px 12px;cursor:pointer;font-size:12px;font-weight:700;
-  color:rgba(253,245,224,.7);background:transparent;border:none;
-  font-family:var(--sans);transition:all .18s;display:flex;align-items:center;gap:5px}
-.vtb svg{width:13px;height:13px}
-.vtb.active{background:rgba(253,245,224,.25);color:#fdf5e0}
-.vtb:hover:not(.active){color:#fdf5e0;background:rgba(253,245,224,.12)}
+/* ── FEATURES ── */
+#features{background:var(--paper)}
+.feat-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:18px}
+.feat-card{background:var(--paper2);border:1.5px solid var(--border);border-radius:12px;
+  padding:22px 20px;transition:all .22s}
+.feat-card:hover{border-color:var(--gold2);transform:translateY(-3px);box-shadow:var(--shadow)}
+.feat-icon{width:40px;height:40px;border-radius:10px;background:var(--gold-pale);
+  border:1.5px solid rgba(160,112,32,.2);display:flex;align-items:center;
+  justify-content:center;font-size:18px;margin-bottom:14px}
+.feat-title{font-size:14px;font-weight:700;color:var(--ink);margin-bottom:6px}
+.feat-desc{font-size:13px;color:var(--muted);line-height:1.6}
 
-/* ── BODY ── */
-.body{display:flex;flex:1;overflow:hidden}
+/* ── PRICING ── */
+#pricing{background:var(--paper2);border-top:1.5px solid var(--border);
+  border-bottom:1.5px solid var(--border)}
+.price-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;
+  max-width:860px;margin:0 auto}
+.price-card{background:var(--paper);border:1.5px solid var(--border);border-radius:14px;
+  padding:28px 24px;position:relative;transition:all .22s}
+.price-card.featured{border-color:var(--gold2);border-width:2px;
+  box-shadow:0 4px 32px rgba(160,112,32,.18)}
+.price-badge{position:absolute;top:-12px;left:50%;transform:translateX(-50%);
+  background:var(--gold2);color:var(--ink);padding:3px 14px;border-radius:20px;
+  font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;
+  white-space:nowrap}
+.price-name{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:2px;
+  color:var(--muted2);margin-bottom:12px}
+.price-amount{font-family:var(--serif);font-size:52px;color:var(--ink);font-weight:700;
+  line-height:1;margin-bottom:4px}
+.price-amount sup{font-size:20px;vertical-align:super;font-family:var(--sans);font-weight:600}
+.price-period{font-size:12px;color:var(--muted);margin-bottom:20px}
+.price-features{list-style:none;margin-bottom:24px}
+.price-features li{font-size:13px;color:var(--ink2);padding:6px 0;
+  border-bottom:1px solid var(--paper3);display:flex;align-items:center;gap:8px}
+.price-features li:last-child{border-bottom:none}
+.price-features li::before{content:'✓';color:var(--green);font-weight:700;font-size:13px;flex-shrink:0}
+.price-features li.no::before{content:'✕';color:var(--muted2)}
+.price-features li.no{color:var(--muted2)}
+.pay-btn{width:100%;padding:13px;border-radius:9px;border:none;font-size:14px;
+  font-weight:700;cursor:pointer;font-family:var(--sans);transition:all .2s;letter-spacing:.3px}
+.pay-btn.primary{background:var(--gold2);color:var(--ink)}
+.pay-btn.primary:hover{background:var(--gold3);transform:translateY(-1px);
+  box-shadow:0 4px 20px rgba(160,112,32,.3)}
+.pay-btn.secondary{background:transparent;color:var(--gold);
+  border:1.5px solid var(--gold2)}
+.pay-btn.secondary:hover{background:var(--gold-pale)}
 
-/* ── SIDEBAR ── */
-.sidebar{width:250px;flex-shrink:0;background:var(--s1);
-  border-right:1.5px solid var(--border);display:flex;flex-direction:column;
-  overflow:hidden;box-shadow:2px 0 8px rgba(80,55,10,.07)}
-.sb-top{padding:11px;border-bottom:1px solid var(--border);background:var(--s2)}
-.sb-label{font-size:9px;text-transform:uppercase;letter-spacing:2.5px;
-  color:var(--muted);margin-bottom:5px;font-weight:700}
-.sb-search{width:100%;background:var(--s1);border:1.5px solid var(--border);
-  border-radius:6px;padding:7px 9px;color:var(--text);font-size:12px;font-weight:600;
-  outline:none;font-family:var(--sans)}
-.sb-search:focus{border-color:var(--gold);box-shadow:0 0 0 2px rgba(139,96,16,.12)}
-.sb-search::placeholder{color:var(--muted2);font-weight:400}
-.sb-filter{width:100%;background:var(--s1);border:1.5px solid var(--border);
-  border-radius:6px;padding:6px 8px;color:var(--text);font-size:12px;font-weight:700;
-  outline:none;font-family:var(--sans);margin-top:6px;appearance:none;cursor:pointer}
-.sb-filter:focus{border-color:var(--gold)}
-
-/* Gen navigator */
-.gen-nav{flex-shrink:0;border-bottom:1px solid var(--border);
-  background:var(--s2);padding:8px 10px}
-.gen-nav-label{font-size:9px;text-transform:uppercase;letter-spacing:2px;
-  color:var(--muted);font-weight:700;margin-bottom:6px}
-.gen-dots{display:flex;gap:4px;flex-wrap:wrap}
-.gdot{width:22px;height:22px;border-radius:50%;display:flex;align-items:center;
-  justify-content:center;font-size:9px;font-weight:700;cursor:pointer;
-  border:1.5px solid transparent;transition:all .18s;color:#fff;
-  box-shadow:var(--shadow)}
-.gdot:hover{transform:scale(1.15)}
-.gdot.empty{background:var(--s3);color:var(--muted2);border-color:var(--border)}
-.gdot.empty:hover{border-color:var(--gold);color:var(--gold)}
-.gdot.has{border-color:transparent}
-.gdot.active-filter{box-shadow:0 0 0 2px #fff,0 0 0 4px var(--gold)}
-
-.member-list{flex:1;overflow-y:auto}
-.member-list::-webkit-scrollbar{width:3px}
-.member-list::-webkit-scrollbar-thumb{background:var(--s4);border-radius:4px}
-
-.mi{display:flex;align-items:center;gap:9px;padding:9px 11px;cursor:pointer;
-  border-bottom:1px solid rgba(0,0,0,.04);transition:background .15s;position:relative}
-.mi:hover{background:var(--s2)}
-.mi.active{background:rgba(139,96,16,.09);border-left:3px solid var(--gold2)}
-.mi.active .mi-name{color:var(--gold2)}
-.av{width:34px;height:34px;border-radius:50%;flex-shrink:0;display:flex;
-  align-items:center;justify-content:center;font-weight:700;font-size:11px;
-  overflow:hidden;border:2px solid var(--border)}
-.av.m{background:#dde8f8;color:var(--blue);border-color:#a8c0e8}
-.av.f{background:#fce8f4;color:var(--pink);border-color:#e0b8d8}
-.av img{width:100%;height:100%;object-fit:cover}
-.mi-info{flex:1;min-width:0}
-.mi-name{font-size:12px;font-weight:700;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.mi-sub{font-size:10px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-weight:600;margin-top:1px}
-.gb{font-size:9px;background:rgba(139,96,16,.12);color:var(--gold2);
-  border:1px solid rgba(139,96,16,.22);border-radius:3px;padding:2px 5px;flex-shrink:0;font-weight:700}
-.dec-mark{position:absolute;top:5px;right:8px;font-size:10px;color:var(--muted2);font-weight:700}
-
-/* ── MAIN ── */
-.main{flex:1;overflow:auto;background:var(--bg)}
-.main::-webkit-scrollbar{width:5px}
-.main::-webkit-scrollbar-thumb{background:var(--s4);border-radius:4px}
-
-/* TREE VIEW */
-#view-tree{padding:24px 20px;min-width:520px}
-
-.gen-section{margin-bottom:0}
-.gen-header{display:flex;align-items:center;gap:10px;margin-bottom:10px;
-  align-self:flex-start;padding:0 4px}
-.gen-color-bar{width:4px;height:20px;border-radius:2px;flex-shrink:0}
-.gen-header-text{font-size:10px;font-weight:700;text-transform:uppercase;
-  letter-spacing:2px;color:var(--muted)}
-.gen-header-count{font-size:10px;color:var(--muted2);font-weight:600}
-.gen-row{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;padding:0 4px}
-.gen-spacer{height:10px;display:flex;align-items:center;justify-content:center}
-.gen-connector{width:2px;height:100%;background:linear-gradient(var(--border),rgba(196,180,144,.2));margin:0 auto}
-
-.tnode{background:var(--s1);border:1.5px solid var(--border);border-radius:12px;
-  padding:11px 13px;cursor:pointer;transition:all .2s;width:138px;text-align:center;
-  position:relative;box-shadow:var(--shadow)}
-.tnode:hover{transform:translateY(-3px);box-shadow:var(--shadow-md)}
-.tnode.sel{border-width:2.5px;box-shadow:0 0 0 3px rgba(139,96,16,.18)}
-.tnode.dec{opacity:.68}
-.tnode.dec .tnode-name{text-decoration:line-through;text-decoration-color:var(--muted2)}
-.tnode-gen-strip{position:absolute;top:0;left:0;right:0;height:3px;border-radius:10px 10px 0 0}
-.tav{width:44px;height:44px;border-radius:50%;margin:6px auto 7px;display:flex;
-  align-items:center;justify-content:center;font-size:15px;font-weight:700;
-  border:2px solid var(--border);overflow:hidden}
-.tav.m{background:#dde8f8;color:var(--blue);border-color:#a8c0e8}
-.tav.f{background:#fce8f4;color:var(--pink);border-color:#e0b8d8}
-.tav img{width:100%;height:100%;object-fit:cover}
-.tnode-name{font-size:11px;font-weight:700;color:var(--text);margin-bottom:2px;line-height:1.3}
-.tnode-years{font-size:9px;color:var(--muted);font-weight:600}
-.tnode-role{font-size:9px;color:var(--gold);margin-top:3px;font-weight:700;
-  white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.tnode-dec-badge{position:absolute;top:7px;right:8px;font-size:10px;color:var(--muted2)}
-
-/* LIST VIEW */
-#view-list{padding:16px;display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:12px}
-.lcard{background:var(--s1);border:1.5px solid var(--border);border-radius:12px;
-  padding:14px;cursor:pointer;transition:all .2s;box-shadow:var(--shadow)}
-.lcard:hover{border-color:var(--gold);transform:translateY(-2px);box-shadow:var(--shadow-md)}
-.lcard.sel{border-color:var(--gold2);border-width:2px}
-.lcard-stripe{height:3px;border-radius:3px;margin:-14px -14px 12px;border-radius:10px 10px 0 0}
-.lcard-top{display:flex;align-items:center;gap:9px;margin-bottom:9px}
-.lcard-av{width:42px;height:42px;border-radius:50%;flex-shrink:0;display:flex;
-  align-items:center;justify-content:center;font-size:14px;font-weight:700;
-  border:2px solid var(--border);overflow:hidden}
-.lcard-av.m{background:#dde8f8;color:var(--blue);border-color:#a8c0e8}
-.lcard-av.f{background:#fce8f4;color:var(--pink);border-color:#e0b8d8}
-.lcard-av img{width:100%;height:100%;object-fit:cover}
-.lcard-name{font-weight:700;font-size:13px;color:var(--text)}
-.lcard-role{font-size:10px;color:var(--gold2);margin-top:2px;font-weight:700}
-.lcard-row{font-size:11px;color:var(--muted);margin-bottom:2px;display:flex;align-items:center;gap:4px;font-weight:600}
-.pill{display:inline-block;font-size:10px;padding:2px 8px;border-radius:20px;
-  margin-top:5px;font-weight:700;border:1px solid transparent}
-.pill.living{background:rgba(26,104,48,.1);color:var(--green);border-color:rgba(26,104,48,.2)}
-.pill.deceased{background:rgba(92,72,40,.1);color:var(--muted);border-color:rgba(92,72,40,.18)}
-
-.empty{display:flex;flex-direction:column;align-items:center;justify-content:center;
-  height:280px;gap:12px;color:var(--muted2)}
-.empty svg{width:48px;height:48px;opacity:.25}
-.empty p{font-size:14px;text-align:center;line-height:1.7;font-weight:600;color:var(--muted)}
-
-/* ── DETAIL PANEL ── */
-.detail{width:288px;flex-shrink:0;background:var(--s1);
-  border-left:1.5px solid var(--border);overflow-y:auto;
-  display:flex;flex-direction:column;box-shadow:-2px 0 8px rgba(80,55,10,.07)}
-.detail::-webkit-scrollbar{width:3px}
-.detail::-webkit-scrollbar-thumb{background:var(--s4);border-radius:4px}
-.d-empty{display:flex;flex-direction:column;align-items:center;justify-content:center;
-  flex:1;gap:12px;color:var(--muted);padding:24px;text-align:center}
-.d-empty svg{width:46px;height:46px;opacity:.2}
-.d-empty p{font-size:13px;line-height:1.7;font-weight:600;color:var(--muted)}
-.d-photo-wrap{position:relative;height:175px;overflow:hidden;background:var(--s3);flex-shrink:0}
-.d-photo-wrap img{width:100%;height:100%;object-fit:cover}
-.d-initials{width:100%;height:100%;display:flex;align-items:center;justify-content:center;
-  font-family:var(--serif);font-size:54px;font-weight:600}
-.d-initials.m{color:var(--blue);background:linear-gradient(135deg,#dde8f8,#b8d0f0)}
-.d-initials.f{color:var(--pink);background:linear-gradient(135deg,#fce8f4,#ecc0dc)}
-.d-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(30,20,8,.78) 0%,transparent 52%)}
-.d-gen-strip{position:absolute;top:0;left:0;right:0;height:4px}
-.d-info{position:absolute;bottom:0;left:0;right:0;padding:12px}
-.d-name{font-family:var(--serif);font-size:21px;color:#fff;line-height:1.2;margin-bottom:2px;
-  text-shadow:0 1px 4px rgba(0,0,0,.4)}
-.d-role-txt{font-size:10px;color:rgba(255,255,255,.85);letter-spacing:.5px;font-weight:700}
-.d-pills{display:flex;gap:5px;flex-wrap:wrap;margin-top:6px}
-.d-body{padding:12px 14px;flex:1}
-.d-sec{margin-bottom:13px}
-.d-sec-title{font-size:9px;text-transform:uppercase;letter-spacing:2.5px;
-  color:var(--muted);margin-bottom:7px;padding-bottom:4px;
-  border-bottom:1.5px solid var(--border);font-weight:700}
-.d-row{display:flex;justify-content:space-between;align-items:flex-start;
-  padding:4px 0;border-bottom:1px solid rgba(0,0,0,.04);gap:8px}
-.d-key{font-size:11px;color:var(--muted);flex-shrink:0;font-weight:700}
-.d-val{font-size:11px;color:var(--text2);text-align:right;word-break:break-word;font-weight:600}
-.tag{display:inline-block;background:rgba(139,96,16,.1);color:var(--gold2);
-  border:1px solid rgba(139,96,16,.2);border-radius:4px;padding:2px 7px;
-  font-size:10px;margin:2px;font-weight:700}
-.d-story{font-size:12px;color:var(--text2);line-height:1.8;font-style:italic;font-family:var(--serif)}
-.d-achieve{font-size:12px;color:var(--text2);line-height:1.7;font-weight:600}
-.d-actions{display:flex;gap:8px;padding:10px 12px;border-top:1.5px solid var(--border);
-  flex-shrink:0;background:var(--s2)}
-.d-actions .btn{flex:1;justify-content:center}
-
-/* ── MODAL ── */
-.overlay{position:fixed;inset:0;background:rgba(30,20,8,.55);display:none;
-  align-items:center;justify-content:center;z-index:9000;padding:16px;
-  backdrop-filter:blur(2px)}
-.overlay.open{display:flex}
-.modal{background:var(--s1);border:1.5px solid var(--border);border-radius:16px;
-  width:100%;max-width:580px;max-height:92vh;overflow:hidden;
-  display:flex;flex-direction:column;box-shadow:0 24px 80px rgba(30,20,8,.3)}
-.m-hdr{padding:15px 20px;border-bottom:1.5px solid var(--border);
-  display:flex;align-items:center;justify-content:space-between;
-  flex-shrink:0;background:var(--s2)}
-.m-title{font-family:var(--serif);font-size:22px;color:var(--gold2);font-weight:600}
-.m-close{background:none;border:none;color:var(--muted);cursor:pointer;
-  font-size:24px;line-height:1;padding:4px;transition:color .15s}
-.m-close:hover{color:var(--text)}
-.m-tabs{display:flex;border-bottom:1.5px solid var(--border);flex-shrink:0;background:var(--s2)}
-.mtab{padding:10px 17px;font-size:12px;font-weight:700;color:var(--muted2);cursor:pointer;
-  border-bottom:2px solid transparent;margin-bottom:-1px;transition:all .18s;
-  background:none;border-left:none;border-right:none;border-top:none;font-family:var(--sans)}
-.mtab.active{color:var(--gold2);border-bottom-color:var(--gold2);background:var(--s1)}
-.mtab:hover:not(.active){color:var(--text);background:var(--s3)}
-.m-body{flex:1;overflow-y:auto;padding:18px 20px;background:var(--s1)}
-.m-body::-webkit-scrollbar{width:4px}
-.m-body::-webkit-scrollbar-thumb{background:var(--s4);border-radius:4px}
-.m-footer{padding:12px 20px;border-top:1.5px solid var(--border);
-  display:flex;gap:10px;justify-content:flex-end;flex-shrink:0;background:var(--s2)}
-.tab-pane{display:none}
-.tab-pane.active{display:block}
-.fg{display:flex;flex-direction:column;gap:5px;margin-bottom:13px}
+/* ── PAYMENT MODAL ── */
+.modal-bg{position:fixed;inset:0;background:rgba(26,16,6,.6);z-index:9000;
+  display:none;align-items:center;justify-content:center;padding:16px;
+  backdrop-filter:blur(4px)}
+.modal-bg.open{display:flex}
+.modal{background:var(--paper);border:1.5px solid var(--border);border-radius:18px;
+  width:100%;max-width:480px;max-height:92vh;overflow-y:auto;
+  box-shadow:var(--shadow-lg)}
+.modal-hdr{padding:22px 24px 16px;border-bottom:1.5px solid var(--border);
+  display:flex;align-items:center;justify-content:space-between}
+.modal-title{font-family:var(--serif);font-size:24px;color:var(--gold);font-weight:600}
+.modal-close{background:none;border:none;font-size:22px;color:var(--muted);
+  cursor:pointer;padding:4px;transition:color .15s;line-height:1}
+.modal-close:hover{color:var(--ink)}
+.modal-body{padding:22px 24px}
+.order-summary{background:var(--gold-pale);border:1.5px solid rgba(160,112,32,.2);
+  border-radius:10px;padding:16px;margin-bottom:20px}
+.os-row{display:flex;justify-content:space-between;align-items:center;
+  padding:4px 0;font-size:13px}
+.os-row.total{border-top:1.5px solid rgba(160,112,32,.25);margin-top:8px;
+  padding-top:10px;font-weight:700;font-size:15px}
+.os-label{color:var(--muted)}
+.os-value{color:var(--ink);font-weight:600}
+.form-group{margin-bottom:14px}
+.form-group label{display:block;font-size:10px;font-weight:700;text-transform:uppercase;
+  letter-spacing:1.5px;color:var(--muted);margin-bottom:5px}
+.form-group input,.form-group select{width:100%;background:var(--paper2);
+  border:1.5px solid var(--border);border-radius:8px;padding:10px 12px;
+  color:var(--ink);font-size:13px;font-weight:600;outline:none;font-family:var(--sans)}
+.form-group input:focus,.form-group select:focus{border-color:var(--gold2);
+  box-shadow:0 0 0 3px rgba(160,112,32,.1)}
+.form-group input::placeholder{color:var(--muted2);font-weight:400}
 .fg2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-label{font-size:10px;text-transform:uppercase;letter-spacing:1.5px;color:var(--muted);font-weight:700}
-input,select,textarea{background:var(--s2);border:1.5px solid var(--border);
-  border-radius:7px;padding:8px 10px;color:var(--text);font-size:13px;outline:none;
-  font-family:var(--sans);width:100%;transition:border-color .15s;font-weight:600}
-input:focus,select:focus,textarea:focus{border-color:var(--gold);
-  box-shadow:0 0 0 2px rgba(139,96,16,.12);background:var(--s1)}
-select option{background:var(--s1);color:var(--text)}
-textarea{resize:vertical;min-height:75px;line-height:1.6}
-input::placeholder,textarea::placeholder{color:var(--muted2);font-weight:400}
+.razorpay-note{display:flex;align-items:center;gap:8px;background:var(--paper2);
+  border:1px solid var(--border);border-radius:8px;padding:10px 13px;
+  font-size:11px;color:var(--muted);margin-bottom:16px;line-height:1.4}
+.razorpay-note svg{flex-shrink:0;color:var(--gold)}
+.proceed-btn{width:100%;padding:14px;background:var(--gold2);color:var(--ink);
+  border:none;border-radius:10px;font-size:15px;font-weight:700;cursor:pointer;
+  font-family:var(--sans);transition:all .2s;display:flex;align-items:center;
+  justify-content:center;gap:8px}
+.proceed-btn:hover{background:var(--gold3);transform:translateY(-1px);
+  box-shadow:0 4px 24px rgba(160,112,32,.3)}
+.proceed-btn:disabled{opacity:.5;cursor:not-allowed;transform:none}
+.modal-footer-note{text-align:center;font-size:11px;color:var(--muted2);margin-top:12px;line-height:1.5}
 
-/* Gen selector in modal */
-.gen-selector{display:grid;grid-template-columns:repeat(10,1fr);gap:5px;margin-top:4px}
-.gsb{height:36px;border-radius:6px;border:1.5px solid var(--border);background:var(--s2);
-  color:var(--text);font-size:11px;font-weight:700;cursor:pointer;transition:all .18s;
-  display:flex;align-items:center;justify-content:center;font-family:var(--sans)}
-.gsb:hover{border-color:var(--gold);background:var(--s3)}
-.gsb.sel{color:#fff;border-color:transparent}
+/* ── SUCCESS SCREEN ── */
+.success-screen{text-align:center;padding:10px 0 20px}
+.success-icon{font-size:60px;margin-bottom:12px}
+.success-title{font-family:var(--serif);font-size:28px;color:var(--green);
+  font-weight:600;margin-bottom:6px}
+.success-sub{font-size:13px;color:var(--muted);margin-bottom:20px;line-height:1.6}
+.key-box{background:var(--ink);border-radius:10px;padding:16px;
+  margin:16px 0;cursor:pointer;transition:background .2s}
+.key-box:hover{background:#2a2010}
+.key-box-label{font-size:9px;color:rgba(200,152,48,.6);letter-spacing:2px;
+  text-transform:uppercase;margin-bottom:8px}
+.key-value{font-family:'Courier New',monospace;font-size:18px;letter-spacing:3px;
+  color:#a0e060;word-break:break-all;line-height:1.4}
+.key-copy-hint{font-size:11px;color:rgba(200,152,48,.5);margin-top:6px}
+.key-meta{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}
+.km{background:var(--paper2);border:1px solid var(--border);border-radius:7px;
+  padding:9px 12px;text-align:left}
+.km-l{font-size:9px;text-transform:uppercase;letter-spacing:1.5px;
+  color:var(--muted2);margin-bottom:2px;font-weight:700}
+.km-v{font-size:12px;color:var(--ink);font-weight:700}
+.download-btn{width:100%;padding:12px;background:var(--gold2);color:var(--ink);
+  border:none;border-radius:9px;font-size:14px;font-weight:700;cursor:pointer;
+  font-family:var(--sans);margin-top:10px;transition:all .2s}
+.download-btn:hover{background:var(--gold3)}
 
-/* Photo upload */
-.pu-area{border:2px dashed var(--border);border-radius:10px;padding:18px;
-  text-align:center;cursor:pointer;transition:all .2s;background:var(--s2);
-  position:relative;overflow:hidden;min-height:115px;
-  display:flex;align-items:center;justify-content:center;flex-direction:column;gap:7px}
-.pu-area:hover{border-color:var(--gold);background:rgba(139,96,16,.04)}
-.pu-area.has-photo{padding:0;border-style:solid;border-color:var(--gold)}
-.pu-area img{width:100%;max-height:180px;object-fit:cover;border-radius:8px;display:block}
-.pu-area input[type=file]{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%}
-.pu-icon svg{width:28px;height:28px;color:var(--gold);opacity:.65}
-.pu-text{font-size:12px;color:var(--muted);font-weight:700}
-.pu-hint{font-size:10px;color:var(--muted2)}
-.pu-remove{position:absolute;top:8px;right:8px;z-index:2;
-  background:rgba(253,250,244,.92);border:1.5px solid var(--border);
-  border-radius:5px;padding:3px 9px;color:var(--red);font-size:11px;
-  cursor:pointer;font-family:var(--sans);font-weight:700}
+/* ── FAQ ── */
+#faq{background:var(--paper)}
+.faq-list{max-width:680px}
+.faq-item{border-bottom:1.5px solid var(--border);overflow:hidden}
+.faq-q{width:100%;background:none;border:none;text-align:left;padding:16px 0;
+  font-family:var(--sans);font-size:14px;font-weight:700;color:var(--ink);
+  cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:12px}
+.faq-q .chevron{color:var(--gold);font-size:16px;transition:transform .25s;flex-shrink:0}
+.faq-q.open .chevron{transform:rotate(180deg)}
+.faq-a{max-height:0;overflow:hidden;transition:max-height .3s ease}
+.faq-a.open{max-height:300px}
+.faq-a-inner{padding:0 0 16px;font-size:13px;color:var(--muted);line-height:1.7}
 
-/* Export/Import banner */
-.backup-bar{background:rgba(139,96,16,.07);border:1px solid rgba(139,96,16,.2);
-  border-radius:8px;padding:9px 12px;margin-bottom:14px;
-  display:flex;align-items:center;gap:10px;flex-wrap:wrap}
-.backup-note{font-size:11px;color:var(--muted);font-weight:600;flex:1;min-width:150px;line-height:1.4}
+/* ── FOOTER ── */
+footer{background:var(--ink);padding:40px 24px;text-align:center}
+.footer-logo{font-family:var(--serif);font-size:26px;color:var(--gold3);margin-bottom:6px}
+.footer-sub{font-size:12px;color:rgba(200,152,48,.5);letter-spacing:1.5px;
+  text-transform:uppercase;margin-bottom:16px}
+.footer-note{font-size:12px;color:rgba(250,240,216,.35);line-height:1.6}
 
-/* Notification */
-.notif{position:fixed;bottom:22px;right:22px;background:var(--s1);
-  border:1.5px solid var(--gold);border-radius:10px;padding:11px 17px;
-  color:var(--text);font-size:13px;z-index:9999;
-  transform:translateY(80px);opacity:0;transition:all .3s;
-  display:flex;align-items:center;gap:8px;box-shadow:var(--shadow-md);font-weight:700}
-.notif.show{transform:translateY(0);opacity:1}
-.notif.error{border-color:var(--red);color:var(--red)}
+/* ── SETUP GUIDE ── */
+#setup{background:var(--paper3);border-top:1.5px solid var(--border)}
+.setup-steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:0}
+.step{padding:24px 20px;border-right:1.5px solid var(--border);position:relative}
+.step:last-child{border-right:none}
+.step-num{font-family:var(--serif);font-size:48px;color:rgba(160,112,32,.15);
+  font-weight:700;line-height:1;margin-bottom:8px}
+.step-title{font-size:13px;font-weight:700;color:var(--ink);margin-bottom:5px}
+.step-desc{font-size:12px;color:var(--muted);line-height:1.6}
 
-@media(max-width:940px){.sidebar{width:215px}.detail{width:255px}.hdr-stats{display:none}}
-@media(max-width:700px){.sidebar{width:0;overflow:hidden}.detail{display:none}.fg2{grid-template-columns:1fr}}
+/* RESPONSIVE */
+@media(max-width:600px){
+  .fg2{grid-template-columns:1fr}
+  .price-grid{grid-template-columns:repeat(auto-fit,minmax(200px,1fr))}
+  .setup-steps{grid-template-columns:1fr}
+  .step{border-right:none;border-bottom:1.5px solid var(--border)}
+  .step:last-child{border-bottom:none}
+}
 
-/* Help guide styles */
-.help-section{margin-bottom:18px;padding-bottom:16px;border-bottom:1px solid var(--border)}
-.help-h{font-family:var(--serif);font-size:19px;font-weight:700;color:var(--gold2);margin-bottom:8px}
-.help-p{font-size:13px;color:var(--text2);line-height:1.7;margin-bottom:8px;font-weight:500}
-.help-warn{color:#8a5000;background:#fff3cd;border:1px solid #e0c060;border-radius:8px;padding:9px 12px;font-size:12px}
-.help-ul{list-style:none;margin:6px 0 8px}
-.help-ul li{font-size:13px;color:var(--text2);line-height:1.7;padding:3px 0 3px 18px;position:relative;font-weight:500}
-.help-ul li::before{content:'•';color:var(--gold2);font-weight:700;position:absolute;left:4px}
-.help-ul li b,.help-p b{color:var(--ink);font-weight:700}
+/* ── ANIMATIONS ── */
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+.hero-inner>*{animation:fadeUp .6s ease both}
+.hero-inner>*:nth-child(2){animation-delay:.1s}
+.hero-inner>*:nth-child(3){animation-delay:.2s}
+.hero-inner>*:nth-child(4){animation-delay:.3s}
 </style>
 </head>
 <body>
 
-<!-- ============ LINEAGE WEB LICENCE GATE (uses existing activation server) ============ -->
+<!-- In-app browser top banner (shows only inside WhatsApp/Instagram/FB) -->
+<div id="inapp-banner" style="display:none;background:#e0a800;color:#1a1006;
+  padding:12px 16px;text-align:center;font-size:13px;font-weight:700;line-height:1.5;position:relative;z-index:200">
+  ⚠️ For payment to work, tap the ⋮ menu (top-right) and choose "Open in Chrome"
+</div>
 <script>
-(function(){
-  "use strict";
-  var ACTIVATE_URL = "https://lineage-download.llineage-aks.workers.dev/activate";
-  var GATE_KEY = "lineage_licence_ok";
-
-  // A stable-ish device fingerprint (same idea as the downloaded app)
-  function deviceId(){
-    var s = [navigator.userAgent, navigator.language, screen.width+"x"+screen.height,
-             screen.colorDepth, (navigator.hardwareConcurrency||0),
-             Intl.DateTimeFormat().resolvedOptions().timeZone||""].join("|");
-    var h=0; for(var i=0;i<s.length;i++){ h=((h<<5)-h)+s.charCodeAt(i); h|=0; }
-    return ("LNGW"+Math.abs(h).toString(16).toUpperCase()).slice(0,12);
-  }
-
-  function getStored(){
-    try{ return localStorage.getItem(GATE_KEY); }catch(e){ return null; }
-  }
-  function setStored(v){
-    try{ localStorage.setItem(GATE_KEY, v); }catch(e){}
-  }
-
-  // If already activated in this browser, let the app run.
-  if(getStored()==="1"){ return; }
-
-  // Otherwise, block the app and show the activation screen.
-  // We hide the app body until activated.
-  window.__LINEAGE_LOCKED__ = true;
-
-  function buildGate(){
-    var wrap=document.createElement("div");
-    wrap.id="lng-gate";
-    wrap.style.cssText="position:fixed;inset:0;z-index:99999;display:flex;align-items:center;justify-content:center;background:#efe9dd;font-family:Arial,sans-serif;padding:20px";
-    wrap.innerHTML=
-      '<div style="max-width:440px;width:100%;background:#fdfbf6;border:1px solid #e6dcc6;border-radius:16px;padding:36px 30px;box-shadow:0 10px 40px rgba(0,0,0,.12);text-align:center">'
-      + '<div style="font-size:40px;color:#6a4a08">\u2698</div>'
-      + '<h1 style="font-family:Georgia,serif;font-size:26px;color:#6a4a08;margin:6px 0 2px">Lineage Family Heritage</h1>'
-      + '<div style="letter-spacing:2px;font-size:12px;color:#8b7a55;margin-bottom:16px">LICENCE ACTIVATION</div>'
-      + '<p style="font-size:13px;color:#7a6448;line-height:1.5;margin-bottom:18px">Enter your licence key to activate. This needs internet once; afterwards it stays activated in this browser.</p>'
-      + '<div style="text-align:left;font-size:11px;font-weight:700;letter-spacing:1px;color:#6a4a08;margin-bottom:6px">YOUR LICENCE KEY</div>'
-      + '<input id="lng-key" type="text" placeholder="LNG-XXXXX-XXXXX-XXXXX-XXXX" style="width:100%;box-sizing:border-box;padding:13px;font-family:monospace;font-size:15px;letter-spacing:1px;border:1px solid #d8cba8;border-radius:9px;background:#f3eede;color:#3a2c10;text-transform:uppercase" />'
-      + '<div id="lng-msg" style="display:none;margin:12px 0;padding:11px;border-radius:8px;font-size:13px"></div>'
-      + '<button id="lng-btn" style="width:100%;margin-top:14px;padding:14px;font-size:16px;font-weight:700;color:#fff;background:#6a4a08;border:none;border-radius:9px;cursor:pointer">Activate Lineage</button>'
-      + '<div style="margin-top:18px;padding-top:14px;border-top:1px solid #ece3cf">'
-      +   '<div style="font-size:11px;color:#9a8a68">Your device ID (share with seller if needed)</div>'
-      +   '<div style="font-family:monospace;font-size:13px;color:#6a5838;background:#f0e9d8;border-radius:6px;padding:8px;margin-top:5px">'+deviceId()+'</div>'
-      +   '<div style="font-size:11px;color:#9a8a68;margin-top:10px">Each licence works on up to 3 devices.<br>Don\u2019t have a key? Visit <b>anilksinha.github.io</b></div>'
-      + '</div>'
-      + '</div>';
-    return wrap;
-  }
-
-  function showMsg(text, ok){
-    var m=document.getElementById("lng-msg");
-    m.style.display="block";
-    m.style.background = ok ? "#e7f6ec" : "#fdecec";
-    m.style.color = ok ? "#1a6020" : "#8a2010";
-    m.innerHTML = text;
-  }
-
-  async function doActivate(){
-    var key=(document.getElementById("lng-key").value||"").trim().toUpperCase();
-    if(!key){ showMsg("Please enter your licence key.", false); return; }
-    var btn=document.getElementById("lng-btn");
-    btn.disabled=true; btn.textContent="Activating\u2026";
-    try{
-      var res=await fetch(ACTIVATE_URL,{
-        method:"POST",
-        headers:{"Content-Type":"text/plain;charset=UTF-8"},
-        body:JSON.stringify({key:key, device:deviceId()})
-      });
-      var data=await res.json();
-      if(data && data.ok){
-        setStored("1");
-        showMsg("\u2713 Activated successfully! Loading your family\u2026", true);
-        setTimeout(function(){
-          var g=document.getElementById("lng-gate");
-          if(g) g.remove();
-          window.__LINEAGE_LOCKED__=false;
-          if(typeof window.__startLineage==="function") window.__startLineage();
-        }, 700);
-      } else {
-        showMsg((data && data.reason) ? data.reason : "Activation failed. Please check your key.", false);
-        btn.disabled=false; btn.textContent="Activate Lineage";
-      }
-    }catch(e){
-      showMsg("Could not reach the activation server. Please check your internet and try again.", false);
-      btn.disabled=false; btn.textContent="Activate Lineage";
+  (function(){
+    var ua = navigator.userAgent || '';
+    if (/WhatsApp|FBAN|FBAV|Instagram|Line|Messenger/i.test(ua)) {
+      var b = document.getElementById('inapp-banner');
+      if (b) b.style.display = 'block';
     }
-  }
-
-  function mount(){
-    document.body.appendChild(buildGate());
-    document.getElementById("lng-btn").addEventListener("click", doActivate);
-    document.getElementById("lng-key").addEventListener("keydown", function(e){ if(e.key==="Enter") doActivate(); });
-  }
-  if(document.body){ mount(); }
-  else { document.addEventListener("DOMContentLoaded", mount); }
-})();
+  })();
 </script>
-<!-- ============ END LICENCE GATE ============ -->
 
-<div id="app">
-
-  <header class="hdr">
-    <div class="logo">⚘ Lineage<small>10-Generation Heritage App</small></div>
-    <div class="hdr-stats" id="hdr-stats"></div>
-    <div class="hdr-actions">
-      <div class="view-toggle">
-        <button class="vtb active" id="btn-tree" onclick="setView('tree')">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v4M8 7h8M6 7v4M10 11h4M18 7v4M14 11h4M6 11v4M4 15h4M18 11v4M16 15h4"/></svg>Tree
-        </button>
-        <button class="vtb" id="btn-list" onclick="setView('list')">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="4" rx="1"/><rect x="3" y="10" width="18" height="4" rx="1"/><rect x="3" y="16" width="18" height="4" rx="1"/></svg>Cards
-        </button>
-      </div>
-      <button class="btn btn-gold btn-sm" onclick="openHelp()" title="How to use Lineage — full guide">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 015.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>Help
-      </button>
-      <button class="btn btn-gold btn-sm" onclick="exportData()" title="Export all data as backup file">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>Backup
-      </button>
-      <button class="btn btn-gold btn-sm" onclick="document.getElementById('import-file').click()" title="Import from another user's backup — Smart Merge Wizard will guide you through duplicates">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>Import &amp; Merge
-      </button>
-      <input type="file" id="import-file" accept=".json" style="display:none" onchange="importData(event)"/>
-      <button class="btn btn-primary" onclick="openAdd()">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-        Add Member
-      </button>
-    </div>
-  </header>
-
-  <div class="body">
-    <aside class="sidebar">
-      <div class="sb-top">
-        <div class="sb-label">Search</div>
-        <input class="sb-search" type="text" id="sb-search" placeholder="Name, profession…" oninput="renderAll()"/>
-        <select class="sb-filter" id="sb-gen" onchange="filterByGen(this.value)">
-          <option value="">All generations</option>
-        </select>
-      </div>
-      <div class="gen-nav">
-        <div class="gen-nav-label">Generations (click to filter)</div>
-        <div class="gen-dots" id="gen-dots"></div>
-      </div>
-      <div class="member-list" id="member-list"></div>
-    </aside>
-
-    <main class="main">
-      <div id="view-tree"></div>
-      <div id="view-list" style="display:none"></div>
-    </main>
-
-    <aside class="detail" id="detail">
-      <div class="d-empty">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
-        <p>Select a family member to view their full profile</p>
-      </div>
-    </aside>
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <div class="nav-logo">⚘ Lineage<span>Family Heritage</span></div>
+    <a href="#features" class="nav-link">Features</a>
+    <a href="#pricing" class="nav-link">Pricing</a>
+    <a href="#faq" class="nav-link">FAQ</a>
+    <a href="https://imjo.in/ZRNrJ4" target="_blank" class="nav-cta" style="text-decoration:none;display:inline-block">Buy Now</a>
   </div>
-</div>
+</nav>
 
-<!-- MODAL -->
-<div class="overlay" id="overlay" onclick="overlayClick(event)">
-  <div class="modal">
-    <div class="m-hdr">
-      <span class="m-title" id="m-title">Add Family Member</span>
-      <button class="m-close" onclick="closeModal()">×</button>
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-inner">
+    <div class="hero-badge">
+      <svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+      New Release — Version 2.0
     </div>
-    <div class="m-tabs">
-      <button class="mtab active" onclick="switchTab('personal',this)">Personal</button>
-      <button class="mtab" onclick="switchTab('family',this)">Family</button>
-      <button class="mtab" onclick="switchTab('career',this)">Career</button>
-      <button class="mtab" onclick="switchTab('photo',this)">Photo &amp; Story</button>
-    </div>
-    <div class="m-body">
-
-      <div class="tab-pane active" id="tp-personal">
-        <div class="fg2">
-          <div class="fg"><label>First name *</label><input id="f-first" type="text" placeholder="First name"/></div>
-          <div class="fg"><label>Last name</label><input id="f-last" type="text" placeholder="Last name"/></div>
-        </div>
-        <div class="fg2">
-          <div class="fg"><label>Gender</label>
-            <select id="f-gender"><option value="m">Male</option><option value="f">Female</option><option value="o">Other</option></select>
-          </div>
-          <div class="fg"><label>Status</label>
-            <select id="f-status"><option value="living">Living</option><option value="deceased">Deceased</option></select>
-          </div>
-        </div>
-        <div class="fg2">
-          <div class="fg"><label>Date of birth</label><input id="f-born" type="text" placeholder="e.g. 15 Mar 1945"/></div>
-          <div class="fg"><label>Date of death</label><input id="f-died" type="text" placeholder="e.g. 10 Jun 2020"/></div>
-        </div>
-        <div class="fg2">
-          <div class="fg"><label>Birthplace</label><input id="f-birthplace" type="text" placeholder="City, Country"/></div>
-          <div class="fg"><label>Nationality</label><input id="f-nationality" type="text" placeholder="e.g. Indian"/></div>
-        </div>
-        <div class="fg2">
-          <div class="fg"><label>Religion / Faith</label><input id="f-religion" type="text" placeholder="e.g. Hindu"/></div>
-          <div class="fg"><label>Mother tongue</label><input id="f-lang" type="text" placeholder="e.g. Hindi"/></div>
-        </div>
-      </div>
-
-      <div class="tab-pane" id="tp-family">
-        <div class="fg">
-          <label>Generation (1 = oldest ancestor, 10 = youngest)</label>
-          <div class="gen-selector" id="gen-selector">
-          </div>
-          <input type="hidden" id="f-gen"/>
-        </div>
-        <div class="fg"><label>Relationship role</label>
-          <select id="f-role">
-            <option value="">— Select —</option>
-            <option>Great-great-great-grandparent</option>
-            <option>Great-great-grandparent</option>
-            <option>Great-grandparent</option>
-            <option>Grandparent</option>
-            <option>Parent</option>
-            <option>Self</option>
-            <option>Sibling</option>
-            <option>Spouse / Partner</option>
-            <option>Child</option>
-            <option>Grandchild</option>
-            <option>Great-grandchild</option>
-            <option>Great-great-grandchild</option>
-            <option>Uncle / Aunt</option>
-            <option>Nephew / Niece</option>
-            <option>Cousin</option>
-            <option>Other relative</option>
-          </select>
-        </div>
-        <div class="fg"><label>Father's full name</label><input id="f-father" type="text" placeholder="Father's name"/></div>
-        <div class="fg"><label>Mother's full name</label><input id="f-mother" type="text" placeholder="Mother's name"/></div>
-        <div class="fg2">
-          <div class="fg"><label>Spouse / Partner</label><input id="f-spouse" type="text" placeholder="Spouse's name"/></div>
-          <div class="fg"><label>Marriage date</label><input id="f-married" type="text" placeholder="e.g. 22 Nov 1970"/></div>
-        </div>
-        <div class="fg"><label>Children (comma-separated names)</label><input id="f-children" type="text" placeholder="Child 1, Child 2…"/></div>
-        <div class="fg2">
-          <div class="fg"><label>Current city / Location</label><input id="f-city" type="text" placeholder="City, Country"/></div>
-          <div class="fg"><label>Phone / Email</label><input id="f-contact" type="text" placeholder="Contact info"/></div>
-        </div>
-      </div>
-
-      <div class="tab-pane" id="tp-career">
-        <div class="fg2">
-          <div class="fg"><label>Profession / Occupation</label><input id="f-prof" type="text" placeholder="e.g. Engineer"/></div>
-          <div class="fg"><label>Employer / Organisation</label><input id="f-employer" type="text" placeholder="Company or institution"/></div>
-        </div>
-        <div class="fg2">
-          <div class="fg"><label>Highest education</label><input id="f-edu" type="text" placeholder="Degree, institution"/></div>
-          <div class="fg"><label>Field of study</label><input id="f-field" type="text" placeholder="e.g. Medicine"/></div>
-        </div>
-        <div class="fg"><label>Hobbies &amp; interests</label><input id="f-hobbies" type="text" placeholder="Comma separated: Cricket, Music…"/></div>
-        <div class="fg"><label>Notable achievements / Awards</label>
-          <textarea id="f-achievements" placeholder="List key accomplishments, awards, milestones…"></textarea>
-        </div>
-      </div>
-
-      <div class="tab-pane" id="tp-photo">
-        <div class="fg">
-          <label>Profile photograph (one photo per member)</label>
-          <div class="pu-area" id="pu-area" onclick="puClick(event)">
-            <div class="pu-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="4" width="18" height="14" rx="2"/><circle cx="12" cy="11" r="3"/><path d="M8 4l1-2h6l1 2"/></svg></div>
-            <div class="pu-text">Click to upload a photograph</div>
-            <div class="pu-hint">JPG · PNG · GIF — auto-optimised</div>
-            <input type="file" id="photo-input" accept="image/*" onchange="handlePhoto(event)"
-              style="position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%"/>
-          </div>
-        </div>
-        <div class="fg" style="margin-top:14px">
-          <label>Personal story / Memories</label>
-          <textarea id="f-story" placeholder="Share memories, anecdotes, life stories, wisdom passed down…" style="min-height:95px"></textarea>
-        </div>
-        <div class="fg">
-          <label>Private notes (not shown publicly)</label>
-          <textarea id="f-notes" placeholder="Private notes — health history, relationships, family context…"></textarea>
-        </div>
-        <div class="backup-bar">
-          <div class="backup-note">
-            <strong>Tip:</strong> Use the <strong>Backup</strong> button in the header to save all family data as a file. Use <strong>Restore</strong> to reload it. This ensures all past and future generations are never lost.
-          </div>
-        </div>
-      </div>
-
-    </div>
-    <div class="m-footer">
-      <button class="btn" onclick="closeModal()">Cancel</button>
-      <button class="btn btn-primary" style="background:var(--gold2);color:#fff;border-color:var(--gold2)" onclick="saveMember()">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="14" height="14"><polyline points="20 6 9 17 4 12"/></svg>
-        Save Member
-      </button>
+    <h1 class="hero-title">Preserve Your Family's<br/><em>Story Forever</em></h1>
+    <p class="hero-sub">A beautiful, offline family tree app that records 10 generations of your heritage — names, photos, stories, professions, and connections — all in one file on your device.</p>
+    <div class="hero-pills">
+      <div class="hpill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>No internet required</div>
+      <div class="hpill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Works on any device</div>
+      <div class="hpill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>One-time payment</div>
+      <div class="hpill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>One licence, up to 3 devices</div>
+      <div class="hpill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>Pay via UPI instantly</div>
     </div>
   </div>
 </div>
 
-<!-- MERGE WIZARD MODAL -->
-<div class="overlay" id="merge-overlay" onclick="mergeOverlayClick(event)">
-  <div class="modal" style="max-width:680px">
-    <div class="m-hdr">
-      <span class="m-title" id="merge-title">Smart Merge Wizard</span>
-      <button class="m-close" onclick="closeMergeWizard()">×</button>
+<!-- FEATURES -->
+<section id="features">
+  <div class="sec-inner">
+    <div class="sec-label">What you get</div>
+    <h2 class="sec-title">Everything your family needs</h2>
+    <p class="sec-sub">Record every generation — from your oldest ancestors to your grandchildren — with rich detail and beautiful presentation.</p>
+    <div class="feat-grid">
+      <div class="feat-card"><div class="feat-icon">🌳</div><div class="feat-title">10-Generation Tree</div><div class="feat-desc">Visual colour-coded family tree from great-great-grandparents down to grandchildren and beyond.</div></div>
+      <div class="feat-card"><div class="feat-icon">📸</div><div class="feat-title">Photo Portraits</div><div class="feat-desc">Upload a photograph for each family member. Displayed beautifully in the tree, cards, and detail view.</div></div>
+      <div class="feat-card"><div class="feat-icon">📋</div><div class="feat-title">25+ Fields Per Person</div><div class="feat-desc">Name, birth, death, birthplace, religion, profession, education, achievements, hobbies, spouse, children, and personal story.</div></div>
+      <div class="feat-card"><div class="feat-icon">🔍</div><div class="feat-title">Search & Filter</div><div class="feat-desc">Instantly find any family member by name, profession, or generation. Filter to see just one era at a time.</div></div>
+      <div class="feat-card"><div class="feat-icon">🔗</div><div class="feat-title">Smart Family Merge</div><div class="feat-desc">Your nephew prepares his own copy? The Smart Merge Wizard combines both trees, detecting duplicates automatically.</div></div>
+      <div class="feat-card"><div class="feat-icon">👨‍👩‍👧‍👦</div><div class="feat-title">One Licence, 3 Devices</div><div class="feat-desc">A single licence activates on up to 3 devices — perfect for sharing across your family. Your phone, your laptop, and a relative's device, all from one purchase.</div></div>
+      <div class="feat-card"><div class="feat-icon">💾</div><div class="feat-title">Backup & Restore</div><div class="feat-desc">Export all your data as a portable file. Share it with family or restore it on any device at any time.</div></div>
+      <div class="feat-card"><div class="feat-icon">📱</div><div class="feat-title">Works Everywhere</div><div class="feat-desc">Open the file in any browser — Chrome, Safari, Firefox, Edge. Works on phones, tablets, and computers.</div></div>
+      <div class="feat-card"><div class="feat-icon">🔒</div><div class="feat-title">Fully Private</div><div class="feat-desc">All data stays on your device. Nothing is uploaded to any server. Your family's history is yours alone.</div></div>
+      <div class="feat-card"><div class="feat-icon">📖</div><div class="feat-title">Full User Manual</div><div class="feat-desc">Detailed PDF manual included with every purchase — covers every feature from first use to advanced sharing.</div></div>
     </div>
-    <div class="m-body" id="merge-body" style="min-height:260px"></div>
-    <div class="m-footer" id="merge-footer"></div>
   </div>
-</div>
+</section>
 
-<div class="notif" id="notif">
-  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
-  <span id="notif-msg"></span>
+<!-- PRICING -->
+<section id="pricing">
+  <div class="sec-inner">
+    <div style="text-align:center;margin-bottom:36px">
+      <div class="sec-label" style="justify-content:center;display:flex">Pricing</div>
+      <h2 class="sec-title" style="text-align:center">Simple, honest pricing</h2>
+      <p class="sec-sub" style="margin:0 auto;text-align:center">Start with a ₹51 trial. Upgrade anytime. Lifetime plan available.</p>
+    </div>
+    <div class="price-grid">
+
+      <div class="price-card" style="border-color:#5a8a5a">
+        <div class="price-badge" style="background:#2a7a3a">✦ Try First</div>
+        <div class="price-name">1-Month Trial</div>
+        <div class="price-amount"><sup>₹</sup>51</div>
+        <div class="price-period">try for 30 days — then upgrade</div>
+        <ul class="price-features">
+          <li>Complete family tree app</li>
+          <li><strong>One licence — up to 3 devices</strong></li>
+          <li>10 generations support</li>
+          <li>Photo upload per member</li>
+          <li>Backup &amp; restore</li>
+          <li>User manual (PDF)</li>
+          <li class="no">Smart Merge Wizard</li>
+          <li class="no">Priority support</li>
+          <li class="no">Free future updates</li>
+        </ul>
+        <a href="https://imjo.in/jNCeMH" target="_blank" class="pay-btn secondary" style="border-color:#2a7a3a;color:#2a7a3a;display:block;text-align:center;text-decoration:none;line-height:1.4">Start Trial — ₹51</a>
+      </div>
+
+      <div class="price-card">
+        <div class="price-name">Annual Plan</div>
+        <div class="price-amount"><sup>₹</sup>199</div>
+        <div class="price-period">per year — renew to continue</div>
+        <ul class="price-features">
+          <li>Complete family tree app</li>
+          <li><strong>One licence — up to 3 devices</strong></li>
+          <li>10 generations support</li>
+          <li>Photo upload per member</li>
+          <li>Backup &amp; restore</li>
+          <li>User manual (PDF)</li>
+          <li>Email support</li>
+          <li class="no">Smart Merge Wizard</li>
+          <li class="no">Free future updates</li>
+        </ul>
+        <a href="https://imjo.in/CHnNfh" target="_blank" class="pay-btn secondary" style="display:block;text-align:center;text-decoration:none;line-height:1.4">Buy Annual Plan</a>
+      </div>
+
+      <div class="price-card featured">
+        <div class="price-badge">⚘ Most Popular</div>
+        <div class="price-name">Lifetime Licence</div>
+        <div class="price-amount"><sup>₹</sup>499</div>
+        <div class="price-period">one-time payment — never pay again</div>
+        <ul class="price-features">
+          <li>Complete family tree app</li>
+          <li><strong>One licence — up to 3 devices</strong></li>
+          <li>10 generations support</li>
+          <li>Photo upload per member</li>
+          <li>Backup &amp; restore</li>
+          <li>User manual (PDF)</li>
+          <li>Priority email support</li>
+          <li>Smart Merge Wizard</li>
+          <li>Free future updates</li>
+        </ul>
+        <a href="https://imjo.in/ZRNrJ4" target="_blank" class="pay-btn primary" style="display:block;text-align:center;text-decoration:none;line-height:1.4">Buy Lifetime Licence</a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section id="setup">
+  <div class="sec-inner">
+    <div class="sec-label">After purchase</div>
+    <h2 class="sec-title" style="margin-bottom:24px">Up and running in 2 minutes</h2>
+    <div class="setup-steps">
+      <div class="step"><div class="step-num">01</div><div class="step-title">Pay securely</div><div class="step-desc">UPI, debit/credit card, or net banking via Razorpay — India's most trusted payment gateway.</div></div>
+      <div class="step"><div class="step-num">02</div><div class="step-title">Get your key instantly</div><div class="step-desc">Your licence key appears on screen immediately after payment. No waiting, no email delays.</div></div>
+      <div class="step"><div class="step-num">03</div><div class="step-title">Download the app</div><div class="step-desc">Download the single HTML file. Save it anywhere on your computer or phone.</div></div>
+      <div class="step"><div class="step-num">04</div><div class="step-title">Enter your key</div><div class="step-desc">Open the file in any browser. Enter your licence key once. The app unlocks permanently.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq">
+  <div class="sec-inner">
+    <div class="sec-label">Questions</div>
+    <h2 class="sec-title" style="margin-bottom:28px">Frequently asked questions</h2>
+    <div class="faq-list" id="faq-list"></div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">⚘ Lineage</div>
+  <div class="footer-sub">Family Heritage App</div>
+  <div class="footer-note">
+    Secure UPI payments &nbsp;·&nbsp; All data stays on your device &nbsp;·&nbsp; No subscription, no tracking<br/>
+    Questions? Contact: <span id="seller-email" style="color:rgba(200,152,48,.7)">your@email.com</span>
+  </div>
+</footer>
+
+<!-- PAYMENT MODAL -->
+<div class="modal-bg" id="pay-modal" onclick="modalBgClick(event)">
+  <div class="modal" id="modal-inner">
+    <!-- content injected by JS -->
+  </div>
 </div>
 
 <script>
-// ── GENERATION COLOUR PALETTE (10 distinct colours) ──────────────────────────
-const GEN_COLORS=[
-  '#7a2020','#7a4010','#6a5808','#2a5820','#185870',
-  '#281878','#580868','#680828','#206040','#404040'
-];
-const GEN_NAMES=[
-  '','1st Generation','2nd Generation','3rd Generation','4th Generation',
-  '5th Generation','6th Generation','7th Generation','8th Generation',
-  '9th Generation','10th Generation'
-];
-const GEN_LABELS=[
-  '','Ancestors (G1)','Ancestors (G2)','Great-grandparents (G3)',
-  'Grandparents (G4)','Parents (G5)','Current (G6)',
-  'Children (G7)','Grandchildren (G8)','Great-grandchildren (G9)',
-  'Future (G10)'
-];
-
-// ── STATE ─────────────────────────────────────────────────────────────────────
-let members=[], selId=null, editId=null, curView='tree';
-let pendingPhoto=null, genFilter='', selGen=null;
-
-const SAMPLE=[
-  {id:1,first:'Ramu',last:'Sharma',gender:'m',status:'deceased',born:'c.1900',died:'1978',birthplace:'Jaipur, India',nationality:'Indian',religion:'Hindu',lang:'Rajasthani',gen:1,role:'Great-great-grandparent',father:'',mother:'',spouse:'Kamla Sharma',married:'c.1920',children:'Govind Sharma',city:'Jaipur, India',contact:'',prof:'Landlord (Zamindar)',employer:'',edu:'Traditional Vedic schooling',field:'',hobbies:'Farming, Vedic studies',achievements:'Founded the Sharma family estate in Rajasthan. Known for his generosity during famines.',story:'Ramu ji was a man of immense dignity. He would sit under the old peepal tree each evening and teach the village children Sanskrit shlokas.',notes:'',photo:''},
-  {id:2,first:'Kamla',last:'Sharma',gender:'f',status:'deceased',born:'c.1905',died:'1982',birthplace:'Ajmer, India',nationality:'Indian',religion:'Hindu',lang:'Hindi',gen:1,role:'Great-great-grandparent',father:'',mother:'',spouse:'Ramu Sharma',married:'c.1920',children:'Govind Sharma',city:'Jaipur, India',contact:'',prof:'Homemaker',employer:'',edu:'',field:'',hobbies:'Embroidery, Devotional music, Cooking',achievements:'',story:'Kamla Devi was the true anchor of the household. Her recipes are still cooked today.',notes:'',photo:''},
-  {id:3,first:'Govind',last:'Sharma',gender:'m',status:'deceased',born:'1925',died:'1995',birthplace:'Jaipur, India',nationality:'Indian',religion:'Hindu',lang:'Hindi',gen:2,role:'Great-grandparent',father:'Ramu Sharma',mother:'Kamla Sharma',spouse:'Savitri Sharma',married:'1948',children:'Mohan Sharma, Lata Verma',city:'Jaipur, India',contact:'',prof:'Government Officer (IAS)',employer:'Government of Rajasthan',edu:'B.A. (Hons), Rajasthan University',field:'Public Administration',hobbies:'Chess, Classical Hindustani music, Reading',achievements:"President's Certificate of Merit (1975). Served IAS 35 years. Rose to Chief Secretary.",story:'He believed education was the only true inheritance. He funded six village students through college.',notes:'',photo:''},
-  {id:4,first:'Savitri',last:'Sharma',gender:'f',status:'deceased',born:'1930',died:'2005',birthplace:'Bikaner, India',nationality:'Indian',religion:'Hindu',lang:'Hindi',gen:2,role:'Great-grandparent',father:'',mother:'',spouse:'Govind Sharma',married:'1948',children:'Mohan Sharma, Lata Verma',city:'Jaipur, India',contact:'',prof:'School Teacher',employer:'Government Girls School, Jaipur',edu:'B.Ed., Rajasthan University',field:'Education',hobbies:'Cooking, Reading, Yoga',achievements:'Taught 30 years. State Best Teacher Award (1988).',story:'',notes:'',photo:''},
-  {id:5,first:'Mohan',last:'Sharma',gender:'m',status:'deceased',born:'1950',died:'2018',birthplace:'Jaipur, India',nationality:'Indian',religion:'Hindu',lang:'Hindi',gen:3,role:'Grandparent',father:'Govind Sharma',mother:'Savitri Sharma',spouse:'Meena Sharma',married:'1974',children:'Raj Sharma, Priya Sharma',city:'Delhi, India',contact:'',prof:'Civil Engineer',employer:'Sharma Constructions Pvt. Ltd.',edu:'B.Tech, IIT Delhi (1972)',field:'Civil Engineering',hobbies:'Photography, Travel, Cricket',achievements:"Founded Sharma Constructions (1980). 200+ residential projects. Padma Shri nominee 2015.",story:"Papa was always building things. He said every home he built was a nest for someone's story.",notes:'',photo:''},
-  {id:6,first:'Meena',last:'Sharma',gender:'f',status:'living',born:'1955',died:'',birthplace:'Lucknow, India',nationality:'Indian',religion:'Hindu',lang:'Hindi',gen:3,role:'Grandparent',father:'',mother:'',spouse:'Mohan Sharma',married:'1974',children:'Raj Sharma, Priya Sharma',city:'Delhi, India',contact:'meena.sharma@gmail.com',prof:'Retired Senior Consultant',employer:'AIIMS, New Delhi (retired)',edu:'MBBS, MS (Obstetrics) — KGMU Lucknow',field:'Medicine',hobbies:'Yoga, Gardening, Devotional music',achievements:'Senior Consultant at AIIMS 20 years. Delivered 3,000+ babies. Mentor to 40+ residents.',story:'',notes:'',photo:''},
-  {id:7,first:'Lata',last:'Verma',gender:'f',status:'living',born:'1955',died:'',birthplace:'Jaipur, India',nationality:'Indian',religion:'Hindu',lang:'Hindi',gen:3,role:'Uncle / Aunt',father:'Govind Sharma',mother:'Savitri Sharma',spouse:'Arun Verma',married:'1977',children:'Vikram Verma, Sunita Verma',city:'Jaipur, India',contact:'lata.verma@jaipur.edu',prof:'Professor & Author',employer:'University of Rajasthan',edu:'M.A., Ph.D. — Hindi Literature',field:'Hindi Literature',hobbies:'Writing, Poetry, Classical vocal music',achievements:'Published 3 books on Rajasthani folk literature. Sahitya Akademi nominee 2020.',story:'Bua Lata always had a poem for every occasion. She gave each grandchild a handwritten verse on their birthday.',notes:'',photo:''},
-  {id:8,first:'Raj',last:'Sharma',gender:'m',status:'living',born:'1978',died:'',birthplace:'Delhi, India',nationality:'Indian',religion:'Hindu',lang:'Hindi',gen:4,role:'Parent',father:'Mohan Sharma',mother:'Meena Sharma',spouse:'Anita Sharma',married:'2003',children:'Aryan Sharma, Riya Sharma',city:'Mumbai, India',contact:'raj.sharma@techcorp.com',prof:'VP of Engineering',employer:'TechCorp India',edu:'M.Tech, IIT Bombay (2001)',field:'Computer Science',hobbies:'Cricket, Open-source coding, Travel, Astronomy',achievements:'TEDx speaker (2019). Led 300-engineer team. 3 patents in distributed systems.',story:'',notes:'',photo:''},
-  {id:9,first:'Anita',last:'Sharma',gender:'f',status:'living',born:'1980',died:'',birthplace:'Mumbai, India',nationality:'Indian',religion:'Hindu',lang:'Marathi',gen:4,role:'Parent',father:'',mother:'',spouse:'Raj Sharma',married:'2003',children:'Aryan Sharma, Riya Sharma',city:'Mumbai, India',contact:'anita.sharma@design.com',prof:'Architect & Interior Designer',employer:'Studio Anita (founder)',edu:'B.Arch, CEPT Ahmedabad (2002)',field:'Architecture',hobbies:'Painting, Bharatanatyam, Photography',achievements:'50+ residential projects. Architectural Digest India 2022. Jury, Mumbai Design Week.',story:'',notes:'',photo:''},
-  {id:10,first:'Aryan',last:'Sharma',gender:'m',status:'living',born:'2006',died:'',birthplace:'Mumbai, India',nationality:'Indian',religion:'Hindu',lang:'Hindi',gen:5,role:'Child',father:'Raj Sharma',mother:'Anita Sharma',spouse:'',married:'',children:'',city:'Mumbai, India',contact:'',prof:'Student (IB Diploma)',employer:'',edu:'Cathedral & John Connon School, Mumbai',field:'',hobbies:'Football, Music production, Gaming, Sci-fi',achievements:'State football player (U-17). School chess champion 2023.',story:'',notes:'',photo:''},
-  {id:11,first:'Riya',last:'Sharma',gender:'f',status:'living',born:'2009',died:'',birthplace:'Mumbai, India',nationality:'Indian',religion:'Hindu',lang:'Hindi',gen:5,role:'Child',father:'Raj Sharma',mother:'Anita Sharma',spouse:'',married:'',children:'',city:'Mumbai, India',contact:'',prof:'Student (Class 9)',employer:'',edu:'Dhirubhai Ambani International School',field:'',hobbies:'Classical violin, Badminton, Watercolour art',achievements:'National Science Olympiad Gold (2023). Regional violin competition winner.',story:'Riya drew a family tree on chart paper when she was 7 and put it on the fridge. This app is for her.',notes:'',photo:''},
-];
-
-// ── PERSISTENCE (IndexedDB — holds far more data + photos than localStorage) ────
-const SK='lineage_v5';
-const DB_NAME='lineage_db', DB_STORE='data', DB_VERSION=1;
-let _db=null;
-
-// Open (or create) the IndexedDB database
-function openDB(){
-  return new Promise((resolve,reject)=>{
-    if(_db){resolve(_db);return;}
-    let req;
-    try{ req=indexedDB.open(DB_NAME,DB_VERSION); }
-    catch(e){ reject(e); return; }
-    req.onupgradeneeded=ev=>{
-      const db=ev.target.result;
-      if(!db.objectStoreNames.contains(DB_STORE)) db.createObjectStore(DB_STORE);
-    };
-    req.onsuccess=ev=>{ _db=ev.target.result; resolve(_db); };
-    req.onerror=ev=>reject(ev.target.error);
-  });
-}
-
-// Save members to IndexedDB (async). Debounced so rapid edits don't thrash.
-let _saveTimer=null;
-function save(){
-  if(_saveTimer) clearTimeout(_saveTimer);
-  _saveTimer=setTimeout(_doSave, 300);
-}
-async function _doSave(){
-  try{
-    const db=await openDB();
-    const meta={count:members.length,updated:new Date().toISOString(),
-      gens:[...new Set(members.map(m=>m.gen).filter(Boolean))].sort((a,b)=>a-b)};
-    await new Promise((resolve,reject)=>{
-      const tx=db.transaction(DB_STORE,'readwrite');
-      const store=tx.objectStore(DB_STORE);
-      store.put(members, SK);
-      store.put(meta, SK+'_meta');
-      tx.oncomplete=()=>resolve();
-      tx.onerror=()=>reject(tx.error);
-    });
-  }catch(e){
-    // Fallback: try localStorage (small data), else warn
-    try{ localStorage.setItem(SK,JSON.stringify(members)); }
-    catch(e2){ notify('Could not save — please export a backup!','error'); }
-  }
-}
-
-// Load members. Tries IndexedDB first, then migrates any old localStorage data.
-async function load(){
-  try{
-    const db=await openDB();
-    const data=await new Promise((resolve,reject)=>{
-      const tx=db.transaction(DB_STORE,'readonly');
-      const req=tx.objectStore(DB_STORE).get(SK);
-      req.onsuccess=()=>resolve(req.result);
-      req.onerror=()=>reject(req.error);
-    });
-    if(data && Array.isArray(data) && data.length){ members=data; return; }
-  }catch(e){ /* fall through to migration/sample */ }
-
-  // Migration: if the user has old data in localStorage, bring it into IndexedDB
-  try{
-    const old=localStorage.getItem(SK);
-    if(old){
-      const parsed=JSON.parse(old);
-      if(Array.isArray(parsed) && parsed.length){
-        members=parsed;
-        _doSave();               // copy into IndexedDB
-        // keep localStorage copy as backup; don't delete
-        return;
-      }
-    }
-  }catch(e){}
-
-  // First run: load the sample family
-  members=JSON.parse(JSON.stringify(SAMPLE));
-  _doSave();
-}
-
-function mergeOverlayClick(e){if(e.target===document.getElementById('merge-overlay'))closeMergeWizard();}
-
-// ── EXPORT ────────────────────────────────────────────────────────────────────
-function exportData(){
-  const owner=prompt('Your name (shown to recipient during merge):','');
-  const payload={app:'Lineage Family Heritage',version:2,
-    exported:new Date().toISOString(),
-    exportedBy:owner||'Unknown',
-    generationCount:[...new Set(members.map(m=>m.gen).filter(Boolean))].length,
-    memberCount:members.length,
-    members};
-  const blob=new Blob([JSON.stringify(payload,null,2)],{type:'application/json'});
-  const url=URL.createObjectURL(blob);
-  const a=document.createElement('a');
-  a.href=url;
-  const d=new Date();
-  a.download=`lineage-${(owner||'family').replace(/\s+/g,'-').toLowerCase()}-${d.getFullYear()}${String(d.getMonth()+1).padStart(2,'0')}${String(d.getDate()).padStart(2,'0')}.json`;
-  a.click();URL.revokeObjectURL(url);
-  notify(`Backup saved — ${members.length} members, ${payload.generationCount} generation${payload.generationCount!==1?'s':''}`);
-}
-
-// ── SMART MERGE WIZARD STATE ──────────────────────────────────────────────────
-let mergeData={imported:[],newOnes:[],conflicts:[],skipped:[],decisions:{}};
-
-function importData(e){
-  const file=e.target.files[0];if(!file)return;
-  const r=new FileReader();
-  r.onload=ev=>{
-    try{
-      const p=JSON.parse(ev.target.result);
-      const imported=(p.members||p);
-      if(!Array.isArray(imported)||!imported.length)throw new Error('No members found');
-      analyseAndOpenWizard(imported, p.exportedBy||'Another user');
-    }catch(err){notify('Could not read file — please use a valid Lineage export.','error');}
-  };
-  r.readAsText(file);
-  e.target.value='';
-}
-
-// Similarity score between two members (0–1)
-function similarity(a,b){
-  const na=fn(a).toLowerCase().trim();
-  const nb=fn(b).toLowerCase().trim();
-  if(!na||!nb)return 0;
-  // Exact name match
-  if(na===nb)return 1;
-  // First name exact + same gen or birth year
-  const fa=(a.first||'').toLowerCase(), fb=(b.first||'').toLowerCase();
-  if(fa===fb){
-    if(a.gen&&b.gen&&a.gen===b.gen)return 0.92;
-    if(a.born&&b.born&&a.born.replace(/\D/g,'').slice(0,4)===b.born.replace(/\D/g,'').slice(0,4)&&a.born.replace(/\D/g,'').length>=4)return 0.90;
-  }
-  // Last name same + born same year
-  const la=(a.last||'').toLowerCase(), lb=(b.last||'').toLowerCase();
-  if(la&&lb&&la===lb&&a.born&&b.born){
-    const ya=a.born.replace(/\D/g,'').slice(0,4), yb=b.born.replace(/\D/g,'').slice(0,4);
-    if(ya.length===4&&ya===yb)return 0.85;
-  }
-  return 0;
-}
-
-function analyseAndOpenWizard(imported, sourceLabel){
-  const newOnes=[], conflicts=[], skipped=[];
-  const THRESHOLD=0.85;
-
-  imported.forEach(imp=>{
-    let bestScore=0, bestMatch=null;
-    members.forEach(m=>{
-      const s=similarity(imp,m);
-      if(s>bestScore){bestScore=s;bestMatch=m;}
-    });
-    if(bestScore>=1.0){
-      skipped.push({imp,match:bestMatch,score:bestScore}); // identical name exact
-    } else if(bestScore>=THRESHOLD){
-      conflicts.push({imp,match:bestMatch,score:bestScore});
-    } else {
-      newOnes.push(imp);
-    }
-  });
-
-  mergeData={imported,newOnes,conflicts,skipped,decisions:{},sourceLabel};
-  // Default decisions: for exact matches skip, for conflicts show wizard
-  conflicts.forEach((c,i)=>mergeData.decisions[i]='keep'); // default: keep mine
-
-  openMergeWizard();
-}
-
-function openMergeWizard(){
-  renderWizardStep(0);
-  document.getElementById('merge-overlay').classList.add('open');
-}
-
-function closeMergeWizard(){
-  document.getElementById('merge-overlay').classList.remove('open');
-}
-
-let wizardStep=0;
-function renderWizardStep(step){
-  wizardStep=step;
-  const {newOnes,conflicts,skipped,sourceLabel}=mergeData;
-  const panel=document.getElementById('merge-body');
-  const footer=document.getElementById('merge-footer');
-
-  if(step===0){
-    // Summary step
-    document.getElementById('merge-title').textContent='Smart Merge Wizard';
-    panel.innerHTML=`
-      <div style="text-align:center;padding:10px 0 18px">
-        <div style="font-family:var(--serif);font-size:28px;color:var(--gold2);margin-bottom:6px">⚘</div>
-        <div style="font-size:15px;font-weight:700;color:var(--text);margin-bottom:4px">Merging from: ${sourceLabel}</div>
-        <div style="font-size:13px;color:var(--muted);margin-bottom:20px">Here's what was found in the imported file:</div>
-      </div>
-      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-bottom:20px">
-        ${wStat(newOnes.length,'New members','Will be added automatically','#1a6830')}
-        ${wStat(conflicts.length,'Possible duplicates','You decide which version to keep','#7a4010')}
-        ${wStat(skipped.length,'Exact matches','Already in your tree — skipped','#5c4828')}
-      </div>
-      <div style="background:rgba(139,96,16,.07);border:1px solid rgba(139,96,16,.2);border-radius:8px;padding:12px 14px;font-size:12px;color:var(--muted);line-height:1.7">
-        <strong style="color:var(--gold2)">How this works:</strong><br/>
-        • <strong>New members</strong> are added directly — no action needed.<br/>
-        • <strong>Possible duplicates</strong> are shown side-by-side so you choose which version to keep, or merge both.<br/>
-        • <strong>Exact matches</strong> are skipped to avoid duplicates.<br/>
-        • Your existing data is never automatically overwritten.
-      </div>
-      ${conflicts.length===0?`<div style="margin-top:14px;background:rgba(26,104,48,.08);border:1px solid rgba(26,104,48,.2);border-radius:8px;padding:11px 14px;font-size:13px;color:var(--green);font-weight:700">✓ No conflicts — safe to merge all ${newOnes.length} new members instantly.</div>`:''}
-    `;
-    footer.innerHTML=`
-      <button class="btn" onclick="closeMergeWizard()">Cancel</button>
-      ${conflicts.length>0
-        ?`<button class="btn btn-primary" style="background:var(--gold2);color:#fff;border-color:var(--gold2)" onclick="renderWizardStep(1)">Review ${conflicts.length} duplicate${conflicts.length!==1?'s':''} →</button>`
-        :`<button class="btn btn-primary" style="background:var(--green);color:#fff;border-color:var(--green)" onclick="applyMerge()">✓ Add ${newOnes.length} new member${newOnes.length!==1?'s':''} now</button>`}
-    `;
-  } else {
-    // Conflict review steps
-    const idx=step-1;
-    const c=conflicts[idx];
-    if(!c){renderWizardStep(0);return;}
-    const mine=c.match, theirs=c.imp;
-    const dec=mergeData.decisions[idx]||'keep';
-    document.getElementById('merge-title').textContent=`Duplicate ${idx+1} of ${conflicts.length}`;
-
-    const fields=['born','died','birthplace','nationality','religion','lang','gen','role',
-      'father','mother','spouse','married','children','city','contact',
-      'prof','employer','edu','field','hobbies','achievements','story'];
-    const diffFields=fields.filter(k=>{
-      const a=(mine[k]||'').toString().trim(), b=(theirs[k]||'').toString().trim();
-      return a!==b&&(a||b);
-    });
-
-    panel.innerHTML=`
-      <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px;padding-bottom:12px;border-bottom:1px solid var(--border)">
-        <div style="flex:1;font-size:13px;color:var(--muted)">Similarity: <strong style="color:var(--gold2)">${Math.round(c.score*100)}%</strong></div>
-        <div style="font-size:11px;font-weight:700;color:var(--muted)">Step ${idx+1} / ${conflicts.length}</div>
-      </div>
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px">
-        ${wCard(mine,'My record','keep',dec,idx)}
-        ${wCard(theirs,'Their record','theirs',dec,idx)}
-      </div>
-      <div style="margin-bottom:12px">
-        <div style="font-size:10px;text-transform:uppercase;letter-spacing:2px;color:var(--muted);font-weight:700;margin-bottom:7px">Fields that differ (${diffFields.length})</div>
-        ${diffFields.length===0
-          ?'<div style="font-size:12px;color:var(--muted);font-style:italic">Names match closely but all other fields are identical.</div>'
-          :diffFields.map(k=>`
-            <div style="display:grid;grid-template-columns:80px 1fr 1fr;gap:6px;margin-bottom:5px;font-size:11px;align-items:start">
-              <div style="font-weight:700;color:var(--muted);padding-top:2px;text-transform:capitalize">${k}</div>
-              <div style="background:${dec==='keep'?'rgba(26,104,48,.1)':'var(--s2)'};border:1px solid ${dec==='keep'?'rgba(26,104,48,.25)':'var(--border)'};border-radius:5px;padding:4px 7px;color:var(--text2);font-weight:600">${mine[k]||'—'}</div>
-              <div style="background:${dec==='theirs'?'rgba(26,104,48,.1)':'var(--s2)'};border:1px solid ${dec==='theirs'?'rgba(26,104,48,.25)':'var(--border)'};border-radius:5px;padding:4px 7px;color:var(--text2);font-weight:600">${theirs[k]||'—'}</div>
-            </div>`).join('')}
-        ${diffFields.length>0&&dec==='merge'?`
-          <div style="margin-top:8px;background:rgba(26,104,48,.08);border:1px solid rgba(26,104,48,.2);border-radius:6px;padding:9px 11px;font-size:12px;color:var(--green);font-weight:700">
-            ✓ Merge: your record kept as base, any empty fields filled from their record
-          </div>`:''}`+`
-      </div>
-      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px">
-        ${wDecBtn('keep',dec,idx,'Keep mine','Use your existing record')}
-        ${wDecBtn('theirs',dec,idx,'Use theirs','Replace with their record')}
-        ${wDecBtn('merge',dec,idx,'Merge both','Fill my gaps from theirs')}
-      </div>
-    `;
-    footer.innerHTML=`
-      <button class="btn" onclick="closeMergeWizard()">Cancel</button>
-      <button class="btn" ${idx===0?'disabled style="opacity:.4"':''} onclick="renderWizardStep(${step-1})">← Back</button>
-      ${idx<conflicts.length-1
-        ?`<button class="btn btn-primary" style="background:var(--gold2);color:#fff;border-color:var(--gold2)" onclick="renderWizardStep(${step+1})">Next →</button>`
-        :`<button class="btn btn-primary" style="background:var(--green);color:#fff;border-color:var(--green)" onclick="applyMerge()">✓ Apply merge</button>`}
-    `;
-  }
-}
-
-function wStat(n,title,sub,color){
-  return`<div style="background:var(--s2);border:1.5px solid var(--border);border-radius:10px;padding:14px;text-align:center">
-    <div style="font-size:28px;font-weight:700;font-family:var(--serif);color:${color}">${n}</div>
-    <div style="font-size:12px;font-weight:700;color:var(--text);margin:3px 0">${title}</div>
-    <div style="font-size:10px;color:var(--muted);line-height:1.4">${sub}</div>
-  </div>`;
-}
-
-function wCard(m,label,val,dec,idx){
-  const g=m.gender==='f'?'f':'m';
-  const img=m.photo?`<img src="${m.photo}" style="width:100%;height:100%;object-fit:cover"/>`:((m.first||'')[0]||'')+((m.last||'')[0]||'');
-  const active=dec===val;
-  return`<div onclick="setDecision(${idx},'${val}')" style="border:2px solid ${active?'var(--green)':'var(--border)'};border-radius:10px;padding:11px;cursor:pointer;background:${active?'rgba(26,104,48,.06)':'var(--s2)'};transition:all .18s">
-    <div style="font-size:9px;text-transform:uppercase;letter-spacing:2px;font-weight:700;color:${active?'var(--green)':'var(--muted)'};margin-bottom:8px">${label} ${active?'✓':''}</div>
-    <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px">
-      <div class="av ${g}" style="width:32px;height:32px;font-size:11px;flex-shrink:0">${img}</div>
-      <div>
-        <div style="font-size:12px;font-weight:700;color:var(--text)">${fn(m)}</div>
-        <div style="font-size:10px;color:var(--muted)">${m.born||'?'}${m.gen?' · Gen '+m.gen:''}</div>
-      </div>
-    </div>
-    <div style="font-size:10px;color:var(--muted2)">${m.prof||m.role||'—'}</div>
-  </div>`;
-}
-
-function wDecBtn(val,dec,idx,label,sub){
-  const active=dec===val;
-  const colors={'keep':'var(--blue)','theirs':'var(--gold2)','merge':'var(--green)'};
-  const c=colors[val];
-  return`<div onclick="setDecision(${idx},'${val}')" style="border:2px solid ${active?c:'var(--border)'};border-radius:8px;padding:9px;cursor:pointer;background:${active?c+'18':'var(--s2)'};text-align:center;transition:all .18s">
-    <div style="font-size:12px;font-weight:700;color:${active?c:'var(--muted)'}">${label}</div>
-    <div style="font-size:10px;color:${active?c:'var(--muted2)'};margin-top:2px">${sub}</div>
-  </div>`;
-}
-
-function setDecision(idx,val){
-  mergeData.decisions[idx]=val;
-  renderWizardStep(idx+1); // re-render current step
-}
-
-function applyMerge(){
-  const {newOnes,conflicts,decisions}=mergeData;
-  let added=0,updated=0,merged=0;
-  let nextId=nid();
-
-  // Add brand-new members
-  newOnes.forEach(imp=>{
-    const m={...imp,id:nextId++};
-    members.push(m);
-    added++;
-  });
-
-  // Apply conflict decisions
-  conflicts.forEach((c,i)=>{
-    const dec=decisions[i]||'keep';
-    const {imp,match}=c;
-    const idx=members.findIndex(m=>m.id===match.id);
-    if(idx<0)return;
-    if(dec==='theirs'){
-      // Replace with their record but keep our id
-      members[idx]={...imp,id:match.id};
-      updated++;
-    } else if(dec==='merge'){
-      // Fill empty fields from theirs
-      const merged2={...match};
-      Object.keys(imp).forEach(k=>{
-        if(k==='id')return;
-        if(!merged2[k]&&imp[k])merged2[k]=imp[k];
-      });
-      members[idx]=merged2;
-      merged++;
-    }
-    // 'keep' = do nothing, keep mine
-  });
-
-  save();closeMergeWizard();renderAll();
-  const parts=[];
-  if(added)parts.push(`${added} new member${added!==1?'s':''} added`);
-  if(updated)parts.push(`${updated} updated from their record`);
-  if(merged)parts.push(`${merged} merged`);
-  if(!parts.length)parts.push('No changes made');
-  notify('Merge complete — '+parts.join(', '));
-}
-
-// ── HELPERS ───────────────────────────────────────────────────────────────────
-function fn(m){return(m.first+' '+m.last).trim();}
-function ini(m){return((m.first||'')[0]||'')+((m.last||'')[0]||'');}
-function nid(){return members.length?Math.max(...members.map(m=>m.id))+1:1;}
-function gc(g){return GEN_COLORS[(g-1)%10]||'#404040';}
-
-function filtered(){
-  const q=(document.getElementById('sb-search').value||'').toLowerCase();
-  const gf=genFilter;
-  return members.filter(m=>{
-    const ok=!q||fn(m).toLowerCase().includes(q)||(m.prof||'').toLowerCase().includes(q)||(m.role||'').toLowerCase().includes(q)||(m.city||'').toLowerCase().includes(q);
-    const gok=!gf||String(m.gen)===String(gf);
-    return ok&&gok;
-  });
-}
-
-function notify(msg,type='ok'){
-  const n=document.getElementById('notif');
-  document.getElementById('notif-msg').textContent=msg;
-  n.className='notif show'+(type==='error'?' error':'');
-  setTimeout(()=>n.classList.remove('show'),3200);
-}
-
-// ── RENDER ALL ─────────────────────────────────────────────────────────────────
-function renderAll(){
-  renderStats();renderGenDots();renderGenFilter();renderSidebar();
-  if(curView==='tree')renderTree();else renderList();
-}
-
-function renderStats(){
-  const living=members.filter(m=>m.status==='living').length;
-  const usedGens=[...new Set(members.map(m=>m.gen).filter(Boolean))].length;
-  document.getElementById('hdr-stats').innerHTML=
-    st(members.length,'Members')+st(living,'Living')+
-    st(members.filter(m=>m.status==='deceased').length,'Deceased')+
-    st(usedGens+'/10','Generations');
-}
-function st(n,l){return`<div class="hst"><div class="hst-n">${n}</div><div class="hst-l">${l}</div></div>`;}
-
-function renderGenDots(){
-  const usedGens=new Set(members.map(m=>m.gen).filter(Boolean));
-  document.getElementById('gen-dots').innerHTML=[1,2,3,4,5,6,7,8,9,10].map(g=>{
-    const has=usedGens.has(g);
-    const cnt=members.filter(m=>m.gen===g).length;
-    const isActive=String(genFilter)===String(g);
-    const title=has?`Gen ${g}: ${cnt} member${cnt!==1?'s':''}` : `Gen ${g}: empty — click to filter`;
-    return`<div class="gdot ${has?'has':'empty'} ${isActive?'active-filter':''}"
-      style="${has?'background:'+gc(g)+';':''}"
-      title="${title}" onclick="filterByGen(${isActive?'\'\'':g})">
-      ${g}
-    </div>`;
-  }).join('');
-}
-
-function filterByGen(val){
-  genFilter=String(val);
-  document.getElementById('sb-gen').value=genFilter;
-  renderAll();
-}
-
-function renderGenFilter(){
-  const sel=document.getElementById('sb-gen'),cur=genFilter;
-  const gens=[...new Set(members.map(m=>m.gen).filter(Boolean))].sort((a,b)=>a-b);
-  sel.innerHTML='<option value="">All generations</option>'+
-    gens.map(g=>`<option value="${g}"${String(cur)===String(g)?' selected':''}>Generation ${g} — ${GEN_NAMES[g]||'Gen '+g} (${members.filter(m=>m.gen===g).length})</option>`).join('');
-}
-
-function renderSidebar(){
-  const list=document.getElementById('member-list'),f=filtered();
-  if(!f.length){
-    list.innerHTML='<div style="padding:18px;text-align:center;color:var(--muted2);font-size:12px;font-weight:600">No members found</div>';
-    return;
-  }
-  // Group by generation
-  const gens=[...new Set(f.map(m=>m.gen).filter(Boolean))].sort((a,b)=>a-b);
-  const noGen=f.filter(m=>!m.gen);
-  let html='';
-  gens.forEach(g=>{
-    const gm=f.filter(m=>m.gen===g);
-    html+=`<div style="padding:5px 11px 3px;font-size:9px;font-weight:700;text-transform:uppercase;
-      letter-spacing:2px;color:#fff;background:${gc(g)};display:flex;align-items:center;gap:6px">
-      <span>${GEN_NAMES[g]||'Gen '+g}</span>
-      <span style="opacity:.7">(${gm.length})</span>
-    </div>`;
-    html+=gm.map(m=>miHtml(m)).join('');
-  });
-  if(noGen.length){
-    html+=`<div style="padding:5px 11px 3px;font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:2px;color:var(--muted);background:var(--s3)">Unassigned</div>`;
-    html+=noGen.map(m=>miHtml(m)).join('');
-  }
-  list.innerHTML=html;
-}
-
-function miHtml(m){
-  const g=m.gender==='f'?'f':'m';
-  const img=m.photo?`<img src="${m.photo}" style="width:100%;height:100%;object-fit:cover"/>`:ini(m);
-  const genDot=m.gen?`<span style="width:6px;height:6px;border-radius:50%;background:${gc(m.gen)};flex-shrink:0;display:inline-block"></span>`:''
-  return`<div class="mi${selId===m.id?' active':''}" onclick="select(${m.id})">
-    <div class="av ${g}" style="width:34px;height:34px;font-size:11px">${img}</div>
-    <div class="mi-info">
-      <div class="mi-name">${fn(m)}</div>
-      <div class="mi-sub">${genDot} ${m.prof||m.role||'—'}</div>
-    </div>
-    ${m.gen?`<div class="gb">G${m.gen}</div>`:''}
-    ${m.status==='deceased'?`<div class="dec-mark">†</div>`:''}
-  </div>`;
-}
-
-function renderTree(){
-  const f=filtered();
-  const gens=[...new Set(f.map(m=>m.gen).filter(Boolean))].sort((a,b)=>a-b);
-  const el=document.getElementById('view-tree');
-  if(!f.length){
-    el.innerHTML=`<div class="empty"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M12 3v4M8 7h8M6 7v4M10 11h4M18 7v4M14 11h4"/></svg><p>No members to display.<br/>Add your first family member to begin.</p></div>`;
-    return;
-  }
-  // Build one section per generation — ALL stored gens always render
-  let html=gens.map((g,gi)=>{
-    const gm=f.filter(m=>m.gen===g);
-    const color=gc(g);
-    const nodes=gm.map(m=>{
-      const g2=m.gender==='f'?'f':'m';
-      const img=m.photo?`<img src="${m.photo}" style="width:100%;height:100%;object-fit:cover"/>`:ini(m);
-      const dec=m.status==='deceased';
-      return`<div class="tnode${dec?' dec':''}${selId===m.id?' sel':''}"
-        style="${selId===m.id?'border-color:'+color+';':''}"
-        onclick="select(${m.id})">
-        <div class="tnode-gen-strip" style="background:${color}"></div>
-        ${dec?`<div class="tnode-dec-badge" title="Deceased">†</div>`:''}
-        <div class="tav ${g2}">${img}</div>
-        <div class="tnode-name">${fn(m)}</div>
-        <div class="tnode-years">${m.born||'?'}${m.died?' – '+m.died:m.status==='living'?' · Living':''}</div>
-        ${m.role?`<div class="tnode-role">${m.role}</div>`:''}
-      </div>`;
-    }).join('');
-    const connector=gi<gens.length-1
-      ?`<div class="gen-spacer"><div class="gen-connector" style="height:22px"></div></div>`:''
-    return`<div class="gen-section">
-      <div class="gen-header">
-        <div class="gen-color-bar" style="background:${color}"></div>
-        <span class="gen-header-text">${GEN_NAMES[g]||'Generation '+g}</span>
-        <span class="gen-header-count">· ${gm.length} member${gm.length!==1?'s':''}</span>
-      </div>
-      <div class="gen-row">${nodes}</div>
-      ${connector}
-    </div>`;
-  }).join('');
-
-  // Show empty future gens if not filtering
-  if(!genFilter){
-    const usedGens=new Set(gens);
-    const maxUsed=gens.length?Math.max(...gens):0;
-    if(maxUsed<10){
-      html+=`<div style="margin-top:16px;padding:14px 16px;background:var(--s2);
-        border:1.5px dashed var(--border);border-radius:10px;text-align:center">
-        <div style="font-size:11px;font-weight:700;color:var(--muted);margin-bottom:6px">
-          Future generations — ready to record
-        </div>
-        <div style="display:flex;gap:6px;justify-content:center;flex-wrap:wrap">
-        ${[...Array(10).keys()].map(i=>i+1).filter(g=>!usedGens.has(g)).map(g=>`
-          <div onclick="openAddGen(${g})" title="Add Gen ${g} member"
-            style="width:44px;height:44px;border-radius:8px;border:1.5px dashed ${gc(g)};
-            display:flex;align-items:center;justify-content:center;cursor:pointer;
-            font-size:10px;font-weight:700;color:${gc(g)};transition:all .18s;
-            background:rgba(255,255,255,.5)"
-            onmouseover="this.style.background='rgba(255,255,255,.9)'"
-            onmouseout="this.style.background='rgba(255,255,255,.5)'">
-            G${g}
-          </div>`).join('')}
-        </div>
-        <div style="font-size:10px;color:var(--muted2);margin-top:8px">Click a box to add a member to that generation</div>
-      </div>`;
-    }
-  }
-  el.innerHTML=html;
-}
-
-function renderList(){
-  const f=filtered(),el=document.getElementById('view-list');
-  if(!f.length){
-    el.innerHTML=`<div class="empty" style="grid-column:1/-1"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg><p>No members found.</p></div>`;
-    return;
-  }
-  el.innerHTML=f.map(m=>{
-    const g=m.gender==='f'?'f':'m';
-    const img=m.photo?`<img src="${m.photo}" style="width:100%;height:100%;object-fit:cover"/>`:ini(m);
-    const color=m.gen?gc(m.gen):'#999';
-    return`<div class="lcard${selId===m.id?' sel':''}" onclick="select(${m.id})">
-      <div class="lcard-stripe" style="background:${color}"></div>
-      <div class="lcard-top">
-        <div class="lcard-av ${g}">${img}</div>
-        <div style="min-width:0;flex:1">
-          <div class="lcard-name">${fn(m)}</div>
-          <div class="lcard-role">${m.role||''}</div>
-        </div>
-        ${m.gen?`<div class="gb">G${m.gen}</div>`:''}
-      </div>
-      ${m.prof?`<div class="lcard-row">💼 ${m.prof}</div>`:''}
-      ${m.born?`<div class="lcard-row">📅 ${m.born}${m.died?' – '+m.died:''}</div>`:''}
-      ${m.city?`<div class="lcard-row">📍 ${m.city}</div>`:''}
-      <div>
-        <span class="pill ${m.status}">${m.status==='living'?'Living':'Deceased'}</span>
-        ${m.gen?`<span class="pill living" style="background:${color}18;color:${color};border-color:${color}44;margin-left:4px">Gen ${m.gen}</span>`:''}
-      </div>
-    </div>`;
-  }).join('');
-}
-
-function renderDetail(id){
-  const m=members.find(x=>x.id===id),panel=document.getElementById('detail');
-  if(!m){
-    panel.innerHTML=`<div class="d-empty"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg><p>Select a family member to view their full profile</p></div>`;
-    return;
-  }
-  const g=m.gender==='f'?'f':'m';
-  const color=m.gen?gc(m.gen):'var(--gold)';
-  const photoHtml=m.photo
-    ?`<img src="${m.photo}" alt="${fn(m)}" style="width:100%;height:100%;object-fit:cover"/>`
-    :`<div class="d-initials ${g}">${ini(m)}</div>`;
-  const row=(k,v)=>v?`<div class="d-row"><span class="d-key">${k}</span><span class="d-val">${v}</span></div>`:'';
-
-  panel.innerHTML=`
-    <div class="d-photo-wrap">
-      ${photoHtml}
-      <div class="d-gen-strip" style="background:${color}"></div>
-      <div class="d-overlay"></div>
-      <div class="d-info">
-        <div class="d-name">${fn(m)}</div>
-        <div class="d-role-txt">${m.role||''}${m.gen?' · '+GEN_NAMES[m.gen]:''}</div>
-        <div class="d-pills">
-          <span class="pill ${m.status}" style="font-size:10px">${m.status==='living'?'Living':'Deceased'}</span>
-          ${m.gen?`<span class="pill living" style="background:${color}30;color:${color};border-color:${color}60;font-size:10px">Gen ${m.gen}</span>`:''}
-          <span class="pill deceased" style="font-size:10px">${m.gender==='f'?'Female':m.gender==='m'?'Male':'Other'}</span>
-        </div>
-      </div>
-    </div>
-    <div class="d-body">
-      <div class="d-sec">
-        <div class="d-sec-title">Personal</div>
-        ${row('Born',m.born)}${row('Died',m.died)}
-        ${row('Birthplace',m.birthplace)}${row('Nationality',m.nationality)}
-        ${row('Religion',m.religion)}${row('Language',m.lang)}
-      </div>
-      <div class="d-sec">
-        <div class="d-sec-title">Family</div>
-        ${row('Father',m.father)}${row('Mother',m.mother)}
-        ${row('Spouse',m.spouse)}${row('Married',m.married)}
-        ${row('Children',m.children)}${row('Lives in',m.city)}
-        ${row('Contact',m.contact)}
-      </div>
-      <div class="d-sec">
-        <div class="d-sec-title">Career & Education</div>
-        ${row('Profession',m.prof)}${row('Employer',m.employer)}
-        ${row('Education',m.edu)}${row('Field',m.field)}
-      </div>
-      ${m.hobbies?`<div class="d-sec"><div class="d-sec-title">Interests</div><div style="margin-top:5px">${m.hobbies.split(',').map(h=>`<span class="tag">${h.trim()}</span>`).join('')}</div></div>`:''}
-      ${m.achievements?`<div class="d-sec"><div class="d-sec-title">Achievements</div><p class="d-achieve">${m.achievements}</p></div>`:''}
-      ${m.story?`<div class="d-sec"><div class="d-sec-title">Story</div><p class="d-story">"${m.story}"</p></div>`:''}
-    </div>
-    <div class="d-actions">
-      <button class="btn" style="flex:1;justify-content:center" onclick="openEdit(${m.id})">
-        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/><path d="M18.5 2.5a2.1 2.1 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>Edit
-      </button>
-      <button class="btn btn-danger" onclick="deleteMember(${m.id})">
-        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14H6L5 6"/><path d="M10 11v6M14 11v6"/><path d="M9 6V4h6v2"/></svg>
-      </button>
-    </div>`;
-}
-
-// ── SELECTION ─────────────────────────────────────────────────────────────────
-function select(id){
-  selId=id;
-  renderSidebar();
-  if(curView==='tree')renderTree();else renderList();
-  renderDetail(id);
-}
-
-// ── VIEW SWITCH ───────────────────────────────────────────────────────────────
-function setView(v){
-  curView=v;
-  document.getElementById('view-tree').style.display=v==='tree'?'block':'none';
-  document.getElementById('view-list').style.display=v==='list'?'grid':'none';
-  document.getElementById('btn-tree').classList.toggle('active',v==='tree');
-  document.getElementById('btn-list').classList.toggle('active',v==='list');
-  if(v==='tree')renderTree();else renderList();
-}
-
-// ── GENERATION SELECTOR (in modal) ───────────────────────────────────────────
-function buildGenSelector(selected){
-  const container=document.getElementById('gen-selector');
-  container.innerHTML=[1,2,3,4,5,6,7,8,9,10].map(g=>`
-    <div class="gsb${selected===g?' sel':''}"
-      style="${selected===g?'background:'+gc(g)+';border-color:'+gc(g)+';':''}"
-      title="${GEN_NAMES[g]||'Gen '+g}"
-      onclick="pickGen(${g},this)">
-      G${g}
-    </div>`).join('');
-  document.getElementById('f-gen').value=selected||'';
-}
-
-function pickGen(g,el){
-  document.querySelectorAll('.gsb').forEach(b=>{
-    b.classList.remove('sel');
-    b.style.background='';b.style.borderColor='';b.style.color='';
-  });
-  el.classList.add('sel');
-  el.style.background=gc(g);el.style.borderColor=gc(g);el.style.color='#fff';
-  document.getElementById('f-gen').value=g;
-}
-
-// ── MODAL ─────────────────────────────────────────────────────────────────────
-function openAdd(){
-  editId=null;pendingPhoto=null;
-  document.getElementById('m-title').textContent='Add Family Member';
-  clearForm();resetPhotoUI();buildGenSelector(null);
-  switchTab('personal',document.querySelector('.mtab'));
-  document.getElementById('overlay').classList.add('open');
-}
-
-function openAddGen(g){
-  openAdd();
-  // Auto-select the generation
-  setTimeout(()=>{
-    switchTab('family',document.querySelectorAll('.mtab')[1]);
-    buildGenSelector(g);
-  },50);
-}
-
-function openEdit(id){
-  const m=members.find(x=>x.id===id);if(!m)return;
-  editId=id;pendingPhoto=m.photo||null;
-  document.getElementById('m-title').textContent='Edit — '+fn(m);
-  const F=['first','last','born','died','birthplace','nationality','religion','lang',
-    'father','mother','spouse','married','children','city','contact',
-    'prof','employer','edu','field','hobbies','achievements','story','notes'];
-  F.forEach(k=>sf('f-'+k,m[k]));
-  sf('f-gender',m.gender);sf('f-status',m.status);sf('f-role',m.role);
-  buildGenSelector(m.gen||null);
-  if(m.photo)setPhotoPreview(m.photo);else resetPhotoUI();
-  switchTab('personal',document.querySelector('.mtab'));
-  document.getElementById('overlay').classList.add('open');
-}
-
-function closeModal(){document.getElementById('overlay').classList.remove('open');pendingPhoto=null;}
-function overlayClick(e){if(e.target===document.getElementById('overlay'))closeModal();}
-function sf(id,val){const el=document.getElementById(id);if(el)el.value=val||'';}
-
-function clearForm(){
-  ['f-first','f-last','f-born','f-died','f-birthplace','f-nationality','f-religion',
-   'f-lang','f-father','f-mother','f-spouse','f-married','f-children','f-city',
-   'f-contact','f-prof','f-employer','f-edu','f-field','f-hobbies',
-   'f-achievements','f-story','f-notes'].forEach(id=>sf(id,''));
-  sf('f-gender','m');sf('f-status','living');sf('f-role','');
-  sf('f-gen','');
-}
-
-function switchTab(tab,btn){
-  document.querySelectorAll('.tab-pane').forEach(p=>p.classList.remove('active'));
-  document.querySelectorAll('.mtab').forEach(b=>b.classList.remove('active'));
-  const pane=document.getElementById('tp-'+tab);
-  if(pane)pane.classList.add('active');
-  if(btn)btn.classList.add('active');
-}
-
-// ── PHOTO ─────────────────────────────────────────────────────────────────────
-function puClick(e){if(e.target.classList.contains('pu-remove'))return;}
-
-function handlePhoto(e){
-  const file=e.target.files[0];if(!file)return;
-  if(file.size>15*1024*1024){notify('Photo must be under 15 MB','error');return;}
-  const r=new FileReader();
-  r.onload=ev=>{
-    // Compress/resize the image before storing so many photos fit comfortably.
-    compressImage(ev.target.result, 800, 0.82).then(small=>{
-      pendingPhoto=small;
-      setPhotoPreview(pendingPhoto);
-    }).catch(()=>{
-      // If compression fails for any reason, fall back to the original.
-      pendingPhoto=ev.target.result;
-      setPhotoPreview(pendingPhoto);
-    });
-  };
-  r.readAsDataURL(file);
-}
-
-// Resize an image (data URL) to fit within maxDim, re-encode as JPEG.
-function compressImage(dataUrl, maxDim, quality){
-  return new Promise((resolve,reject)=>{
-    const img=new Image();
-    img.onload=()=>{
-      let {width:w, height:h}=img;
-      if(w>maxDim || h>maxDim){
-        if(w>=h){ h=Math.round(h*maxDim/w); w=maxDim; }
-        else { w=Math.round(w*maxDim/h); h=maxDim; }
-      }
-      try{
-        const canvas=document.createElement('canvas');
-        canvas.width=w; canvas.height=h;
-        const ctx=canvas.getContext('2d');
-        ctx.fillStyle='#ffffff'; ctx.fillRect(0,0,w,h); // flatten transparency
-        ctx.drawImage(img,0,0,w,h);
-        resolve(canvas.toDataURL('image/jpeg', quality));
-      }catch(err){ reject(err); }
-    };
-    img.onerror=()=>reject(new Error('bad image'));
-    img.src=dataUrl;
-  });
-}
-
-function setPhotoPreview(src){
-  const a=document.getElementById('pu-area');
-  a.classList.add('has-photo');
-  a.innerHTML=`<img src="${src}" style="width:100%;max-height:190px;object-fit:cover;border-radius:8px;display:block"/>
-    <button class="pu-remove" onclick="removePhoto(event)">✕ Remove</button>
-    <input type="file" id="photo-input" accept="image/*" onchange="handlePhoto(event)"
-      style="position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%"/>`;
-}
-
-function resetPhotoUI(){
-  pendingPhoto=null;
-  const a=document.getElementById('pu-area');
-  a.classList.remove('has-photo');
-  a.innerHTML=`<div class="pu-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="4" width="18" height="14" rx="2"/><circle cx="12" cy="11" r="3"/><path d="M8 4l1-2h6l1 2"/></svg></div>
-    <div class="pu-text">Click to upload a photograph</div>
-    <div class="pu-hint">JPG · PNG · GIF — auto-optimised</div>
-    <input type="file" id="photo-input" accept="image/*" onchange="handlePhoto(event)"
-      style="position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%"/>`;
-}
-
-function removePhoto(e){e.stopPropagation();resetPhotoUI();}
-
-// ── SAVE / DELETE ─────────────────────────────────────────────────────────────
-function saveMember(){
-  const first=(document.getElementById('f-first').value||'').trim();
-  if(!first){notify('First name is required.','error');return;}
-  const genVal=parseInt(document.getElementById('f-gen').value)||null;
-  const data={
-    first, last:(document.getElementById('f-last').value||'').trim(),
-    gender:document.getElementById('f-gender').value,
-    status:document.getElementById('f-status').value,
-    born:(document.getElementById('f-born').value||'').trim(),
-    died:(document.getElementById('f-died').value||'').trim(),
-    birthplace:(document.getElementById('f-birthplace').value||'').trim(),
-    nationality:(document.getElementById('f-nationality').value||'').trim(),
-    religion:(document.getElementById('f-religion').value||'').trim(),
-    lang:(document.getElementById('f-lang').value||'').trim(),
-    gen:genVal,
-    role:(document.getElementById('f-role').value||'').trim(),
-    father:(document.getElementById('f-father').value||'').trim(),
-    mother:(document.getElementById('f-mother').value||'').trim(),
-    spouse:(document.getElementById('f-spouse').value||'').trim(),
-    married:(document.getElementById('f-married').value||'').trim(),
-    children:(document.getElementById('f-children').value||'').trim(),
-    city:(document.getElementById('f-city').value||'').trim(),
-    contact:(document.getElementById('f-contact').value||'').trim(),
-    prof:(document.getElementById('f-prof').value||'').trim(),
-    employer:(document.getElementById('f-employer').value||'').trim(),
-    edu:(document.getElementById('f-edu').value||'').trim(),
-    field:(document.getElementById('f-field').value||'').trim(),
-    hobbies:(document.getElementById('f-hobbies').value||'').trim(),
-    achievements:(document.getElementById('f-achievements').value||'').trim(),
-    story:(document.getElementById('f-story').value||'').trim(),
-    notes:(document.getElementById('f-notes').value||'').trim(),
-    photo:pendingPhoto||'',
-  };
-  if(editId){
-    const i=members.findIndex(m=>m.id===editId);
-    // IMPORTANT: merge preserves all existing fields not in new data
-    members[i]={...members[i],...data};
-    selId=editId;
-    notify('Member updated — all generations preserved');
-  }else{
-    data.id=nid();
-    members.push(data);
-    selId=data.id;
-    notify(`${fn(data)} added${genVal?' to Generation '+genVal:''}`);
-  }
-  save();closeModal();renderAll();renderDetail(selId);
-}
-
-function deleteMember(id){
-  const m=members.find(x=>x.id===id);
-  if(!m)return;
-  if(!confirm(`Remove ${fn(m)} from the family tree? This cannot be undone.\n\nAll other ${members.length-1} members will remain.`))return;
-  members=members.filter(m=>m.id!==id);
-  if(selId===id)selId=null;
-  save();renderAll();
-  if(!selId)document.getElementById('detail').innerHTML=`<div class="d-empty"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg><p>Select a family member to view their full profile</p></div>`;
-  notify('Member removed — all other generations intact');
-}
-
-// ── INIT ──────────────────────────────────────────────────────────────────────
-window.__startLineage = async function(){
-  await load();          // IndexedDB load is async
-  renderAll();
-  setView('tree');
+// ═══════════════════════════════════════════════════════════════════
+//  SELLER CONFIGURATION — Edit these values before going live
+// ═══════════════════════════════════════════════════════════════════
+const CONFIG = {
+  // ── YOUR UPI DETAILS — fill these in ─────────────────────────────
+  upi_id:         '8283816539@ptsbi',             // Your UPI ID
+  upi_name:       'Anil Kumar Sinha',             // Your name in UPI apps
+
+  // ── YOUR DETAILS ─────────────────────────────────────────────────
+  business_name:  'Lineage Family Heritage',      // Business name
+  business_email: 'llineage.aks@gmail.com',        // Your email
+  business_phone: '+91 8283816539',               // Your WhatsApp number
+  seller_name:    'Anil Kumar Sinha',             // Your name
+
+  // ── APP DOWNLOAD (the file customers download after paying) ──────
+  // Upload Lineage-Customer-Package.zip to your GitHub repository,
+  // then this link works automatically:
+  download_url:   'https://lineage-download.llineage-aks.workers.dev/',
+
+  // ── RAZORPAY (fill in when account is ready, leave as-is for now) ─
+  razorpay_key_id: '',                            // ← Add rzp_live_XXXX when ready
+  razorpay_ready:  false,                         // ← Change to true when Razorpay is active
+
+  // ── LICENCE SECRET ───────────────────────────────────────────────
+  // THIS MUST EXACTLY MATCH the secret in lineage-protected.html
+  licence_secret: 'LNG-2026-XPRT-SEED-77F3A9B2',
+
+  // ── PLANS ────────────────────────────────────────────────────────
+  plans: {
+    trial:    { name: '1-Month Trial',     price:  5100, display: '₹51',  months: 1,         keys: 1 },
+    annual:   { name: 'Annual Plan',       price: 19900, display: '₹199', months: 12,        keys: 1 },
+    lifetime: { name: 'Lifetime Licence',  price: 49900, display: '₹499', months: 'lifetime', keys: 1 },
+  },
+  // Prices are in PAISE (1 rupee = 100 paise): ₹51 = 5100, ₹199 = 19900, ₹499 = 49900 paise
 };
-// If the licence gate has NOT locked the app (already activated, or gate absent), start now.
-if(!window.__LINEAGE_LOCKED__){ window.__startLineage(); }
-</script>
+// ═══════════════════════════════════════════════════════════════════
 
-<!-- HELP / USER GUIDE MODAL -->
-<div class="overlay" id="help-overlay" onclick="helpOverlayClick(event)">
-  <div class="modal" style="max-width:640px">
-    <div class="m-hdr">
-      <span class="m-title">⚘ Lineage — User Guide</span>
-      <button class="m-close" onclick="closeHelp()">×</button>
+// ── SELLER CONTACT ────────────────────────────────────────────────
+document.getElementById('seller-email').textContent = CONFIG.business_email;
+
+// ── LICENCE KEY GENERATOR ─────────────────────────────────────────
+function djb2(str){
+  let h=5381;
+  for(let i=0;i<str.length;i++){h=((h<<5)+h)+str.charCodeAt(i);h=h&0xFFFFFFFF;}
+  return Math.abs(h);
+}
+
+function generateLicenceKey(customerName, customerEmail, planKey) {
+  const plan = CONFIG.plans[planKey];
+  const expiryCode = plan.months === 'lifetime' ? 'ZZZZ'
+    : plan.months.toString(16).toUpperCase().padStart(4,'0');  // hex months
+
+  // Wait — use base36 to match the app's validation
+  const expiryCodeB36 = plan.months === 'lifetime' ? 'ZZZZ'
+    : plan.months.toString(36).toUpperCase().padStart(4,'0');
+
+  const custHash = djb2(customerName + customerEmail).toString(36).toUpperCase().padStart(8,'0').substring(0,8);
+  const fpCode   = 'FREE';  // no device binding on web purchase
+  const toCheck  = CONFIG.licence_secret + expiryCodeB36 + custHash + fpCode;
+  const cs       = djb2(toCheck).toString(36).toUpperCase().padStart(4,'0').substring(0,4);
+
+  const payload  = expiryCodeB36 + custHash + fpCode + cs;
+  return 'LNG-' + payload.substring(0,5)+'-'+payload.substring(5,10)+'-'+payload.substring(10,15)+'-'+payload.substring(15,20);
+}
+
+function generateKeys(name, email, planKey, count) {
+  const keys = [];
+  for (let i = 0; i < count; i++) {
+    // Vary the customer code slightly per key if multiple
+    keys.push(generateLicenceKey(name + (i > 0 ? '_'+i : ''), email, planKey));
+  }
+  return keys;
+}
+
+// ── UPI PAYMENT FLOW ──────────────────────────────────────────────
+let currentPlan = 'lifetime';
+let customerData = {};
+let paymentCheckInterval = null;
+
+// Build UPI deep link for any amount
+function upiLink(amount) {
+  const uid  = encodeURIComponent(CONFIG.upi_id);
+  const name = encodeURIComponent(CONFIG.upi_name);
+  const note = encodeURIComponent('Lineage App Licence');
+  return `upi://pay?pa=${uid}&pn=${name}&am=${amount}&cu=INR&tn=${note}`;
+}
+
+// Generate a simple QR code URL using Google Charts API (free, no key needed)
+function qrUrl(amount) {
+  const link = upiLink(amount);
+  // Uses api.qrserver.com (free, reliable, currently active)
+  return `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(link)}`;
+}
+
+function openPayModal(planKey) {
+  currentPlan = planKey;
+  const plan = CONFIG.plans[planKey];
+  document.getElementById('modal-inner').innerHTML = buildStep1(plan);
+  document.getElementById('pay-modal').classList.add('open');
+  setTimeout(() => document.getElementById('buyer-name').focus(), 100);
+}
+
+// STEP 1 — Collect customer details
+function buildStep1(plan) {
+  return `
+    <div class="modal-hdr">
+      <span class="modal-title">Buy — ${plan.name}</span>
+      <button class="modal-close" onclick="closePayModal()">×</button>
     </div>
-    <div class="m-body" id="help-body" style="max-height:70vh">
-      <div class="help-section">
-        <div class="help-h">Welcome to Lineage</div>
-        <p class="help-p">Lineage lets you record your family history across up to <b>10 generations</b> — names, photos, professions, education, and personal stories. Everything is saved on your own device and works without internet.</p>
+    <div class="modal-body">
+      <div class="order-summary">
+        <div class="os-row"><span class="os-label">Product</span><span class="os-value">Lineage — ${plan.name}</span></div>
+        <div class="os-row"><span class="os-label">Validity</span><span class="os-value">${plan.months === 'lifetime' ? 'Lifetime (never expires)' : plan.months + ' month(s)'}</span></div>
+        ${plan.keys > 1 ? `<div class="os-row"><span class="os-label">Keys included</span><span class="os-value">${plan.keys} licence keys</span></div>` : ''}
+        <div class="os-row total"><span class="os-label">Amount to pay</span><span class="os-value" style="color:var(--gold);font-size:20px;font-family:var(--serif)">${plan.display}</span></div>
       </div>
+      <div class="form-group">
+        <label>Your full name *</label>
+        <input id="buyer-name" type="text" placeholder="e.g. Ramesh Kumar Sharma" autocomplete="name"/>
+      </div>
+      <div class="fg2">
+        <div class="form-group">
+          <label>WhatsApp number *</label>
+          <input id="buyer-phone" type="tel" placeholder="98765 43210" autocomplete="tel"/>
+        </div>
+        <div class="form-group">
+          <label>Email (optional)</label>
+          <input id="buyer-email" type="email" placeholder="your@email.com" autocomplete="email"/>
+        </div>
+      </div>
+      <div style="background:var(--gold-pale);border:1px solid rgba(160,112,32,.25);border-radius:8px;
+        padding:10px 13px;font-size:12px;color:var(--muted);margin-bottom:14px;line-height:1.6">
+        <strong style="color:var(--gold2)">🔒 Secure UPI Payment</strong><br/>
+        Pay safely using Google Pay, PhonePe, Paytm, or any UPI app.
+        Your licence key is delivered on screen immediately after you confirm payment.
+      </div>
+      <button class="proceed-btn" onclick="goToStep2()">
+        Continue to Payment →
+      </button>
+      <div class="modal-footer-note">
+        No refunds on digital products once the licence key is delivered.
+      </div>
+    </div>`;
+}
 
-      <div class="help-section">
-        <div class="help-h">1. Adding a family member</div>
-        <p class="help-p">Click the <b>Add Member</b> button (top right). Fill in the details across the four tabs:</p>
-        <ul class="help-ul">
-          <li><b>Personal</b> — name, gender, birth/death dates, birthplace, religion, language.</li>
-          <li><b>Family</b> — choose the generation (G1 = oldest ancestor, G10 = youngest), relationship, parents, spouse, children.</li>
-          <li><b>Career</b> — profession, employer, education, hobbies, achievements.</li>
-          <li><b>Photo &amp; Story</b> — upload one photo and write their personal story.</li>
-        </ul>
-        <p class="help-p">Click <b>Save Member</b> when done. Only the first name is required — fill in as much or as little as you like.</p>
-      </div>
+// STEP 2 — Show UPI payment screen
+function goToStep2() {
+  const name  = document.getElementById('buyer-name').value.trim();
+  const phone = document.getElementById('buyer-phone').value.trim();
+  const email = document.getElementById('buyer-email').value.trim();
 
-      <div class="help-section">
-        <div class="help-h">2. Choosing the generation</div>
-        <p class="help-p">The generation number decides where the person appears in the tree. Use the coloured G1–G10 buttons in the Family tab. Generation 1 is your oldest known ancestor; each later generation is their children, grandchildren, and so on down to Generation 10.</p>
-      </div>
+  if (!name)  { alert('Please enter your full name.'); document.getElementById('buyer-name').focus(); return; }
+  if (!phone) { alert('Please enter your WhatsApp number.'); document.getElementById('buyer-phone').focus(); return; }
 
-      <div class="help-section">
-        <div class="help-h">3. Viewing your tree</div>
-        <ul class="help-ul">
-          <li><b>Tree view</b> — shows all members in colour-coded generation rows, oldest at top.</li>
-          <li><b>Cards view</b> — a grid of cards for quick browsing.</li>
-          <li><b>Search box</b> — find anyone by name, profession, or place.</li>
-          <li><b>Generation dots</b> — click a coloured dot to show only that generation; click again to clear.</li>
-        </ul>
-      </div>
+  customerData = {name, phone, email};
+  const plan = CONFIG.plans[currentPlan];
+  const upiAmount = plan.price / 100; // convert paise to rupees
 
-      <div class="help-section">
-        <div class="help-h">4. Editing or deleting</div>
-        <p class="help-p">Click any member to open their profile on the right. Use the <b>Edit</b> button to change their details, or the <b>Delete</b> (bin) button to remove them. Deleting one member never affects anyone else.</p>
-      </div>
+  // If Razorpay is active, show payment method chooser; otherwise go straight to UPI
+  if (CONFIG.razorpay_ready && CONFIG.razorpay_key_id) {
+    document.getElementById('modal-inner').innerHTML = buildMethodChooser(plan, upiAmount);
+  } else {
+    document.getElementById('modal-inner').innerHTML = buildStep2(plan, upiAmount);
+  }
+}
 
-      <div class="help-section">
-        <div class="help-h">5. Backup — keep your data safe</div>
-        <p class="help-p">Your data is stored in this browser. To keep it safe, click <b>Backup</b> regularly. This saves a file with all your family records. Store it in Google Drive, email, or a USB drive. If you ever lose your data or switch devices, use <b>Import &amp; Merge</b> to restore it.</p>
-        <p class="help-p help-warn">⚠️ Always take a backup before clearing your browser or switching to a new phone or computer.</p>
-      </div>
-
-      <div class="help-section">
-        <div class="help-h">6. Sharing with relatives (Smart Merge)</div>
-        <p class="help-p">If a relative also uses Lineage, they can send you their backup file. Click <b>Import &amp; Merge</b> and select their file. The Smart Merge Wizard finds people who appear in both trees and lets you choose which version to keep, or combine both — so no one is duplicated and no data is lost.</p>
-      </div>
-
-      <div class="help-section">
-        <div class="help-h">Tips</div>
-        <ul class="help-ul">
-          <li>Approximate dates like "c. 1905" are perfectly fine.</li>
-          <li>Separate hobbies with commas — each becomes a tag.</li>
-          <li>Compress large photos before uploading to save space.</li>
-          <li>Write detailed stories — future generations will treasure them.</li>
-        </ul>
-      </div>
-
-      <div class="help-section" style="border:none;text-align:center;padding-top:8px">
-        <p class="help-p" style="font-style:italic;color:var(--muted)">Every name remembered. Every story preserved.<br/>Every generation connected. ⚘</p>
-      </div>
+// ── PAYMENT METHOD CHOOSER (shown when both UPI and Razorpay are available) ──
+function buildMethodChooser(plan, amount) {
+  return `
+    <div class="modal-hdr">
+      <span class="modal-title">Choose Payment Method</span>
+      <button class="modal-close" onclick="closePayModal()">×</button>
     </div>
-    <div class="m-footer">
-      <button class="btn btn-primary" style="background:var(--gold2);color:#fff;border-color:var(--gold2)" onclick="closeHelp()">Got it — Close</button>
+    <div class="modal-body">
+      <div class="order-summary" style="margin-bottom:18px">
+        <div class="os-row"><span class="os-label">Product</span><span class="os-value">Lineage — ${plan.name}</span></div>
+        <div class="os-row total"><span class="os-label">Amount</span><span class="os-value" style="color:var(--gold);font-size:18px">₹${amount}</span></div>
+      </div>
+
+      <div style="font-size:13px;font-weight:700;color:var(--ink);text-align:center;margin-bottom:14px">
+        How would you like to pay?
+      </div>
+
+      <!-- Option 1: Direct UPI -->
+      <div onclick="showUpiPayment()" style="border:2px solid var(--border);border-radius:12px;
+        padding:16px;margin-bottom:12px;cursor:pointer;transition:all .2s;background:var(--paper2)"
+        onmouseover="this.style.borderColor='var(--gold2)';this.style.background='var(--gold-pale)'"
+        onmouseout="this.style.borderColor='var(--border)';this.style.background='var(--paper2)'">
+        <div style="display:flex;align-items:center;gap:12px">
+          <div style="font-size:30px">📱</div>
+          <div style="flex:1">
+            <div style="font-size:14px;font-weight:700;color:var(--ink)">Direct UPI Payment</div>
+            <div style="font-size:11px;color:var(--muted);margin-top:2px">
+              Google Pay · PhonePe · Paytm · QR code — no extra charges
+            </div>
+          </div>
+          <div style="font-size:18px;color:var(--gold2)">→</div>
+        </div>
+      </div>
+
+      <!-- Option 2: Razorpay -->
+      <div onclick="startRazorpay()" style="border:2px solid var(--border);border-radius:12px;
+        padding:16px;cursor:pointer;transition:all .2s;background:var(--paper2)"
+        onmouseover="this.style.borderColor='var(--gold2)';this.style.background='var(--gold-pale)'"
+        onmouseout="this.style.borderColor='var(--border)';this.style.background='var(--paper2)'">
+        <div style="display:flex;align-items:center;gap:12px">
+          <div style="font-size:30px">💳</div>
+          <div style="flex:1">
+            <div style="font-size:14px;font-weight:700;color:var(--ink)">Card / Netbanking / Wallet</div>
+            <div style="font-size:11px;color:var(--muted);margin-top:2px">
+              Debit &amp; credit cards, netbanking, wallets — via Razorpay
+            </div>
+          </div>
+          <div style="font-size:18px;color:var(--gold2)">→</div>
+        </div>
+      </div>
+
+      <div style="font-size:11px;color:var(--muted2);text-align:center;margin-top:14px;line-height:1.5">
+        Both methods deliver your licence key instantly on screen.
+      </div>
+    </div>`;
+}
+
+function showUpiPayment() {
+  const plan = CONFIG.plans[currentPlan];
+  const upiAmount = plan.price / 100;
+  document.getElementById('modal-inner').innerHTML = buildStep2(plan, upiAmount);
+}
+
+function showMethodChooser() {
+  const plan = CONFIG.plans[currentPlan];
+  const upiAmount = plan.price / 100;
+  document.getElementById('modal-inner').innerHTML = buildMethodChooser(plan, upiAmount);
+}
+
+function startRazorpay() {
+  const plan = CONFIG.plans[currentPlan];
+  const {name, email, phone} = customerData;
+
+  // Load Razorpay SDK dynamically
+  const script = document.createElement('script');
+  script.src = 'https://checkout.razorpay.com/v1/checkout.js';
+  script.onload = () => {
+    const options = {
+      key:         CONFIG.razorpay_key_id,
+      amount:      plan.price,
+      currency:    'INR',
+      name:        CONFIG.business_name,
+      description: plan.name,
+      prefill:     { name: name, email: email||'', contact: phone },
+      theme:       { color: '#c89830' },
+      handler:     function(response) { onPaymentSuccess(response, plan); },
+    };
+    const rzp = new Razorpay(options);
+    rzp.on('payment.failed', function(response) {
+      alert('Payment failed: ' + response.error.description + '\nPlease try again or use Direct UPI.');
+    });
+    rzp.open();
+  };
+  script.onerror = () => {
+    alert('Could not load card payment. Please use Direct UPI instead.');
+    showUpiPayment();
+  };
+  document.head.appendChild(script);
+}
+
+// Detect if page is open inside an in-app browser (WhatsApp, Instagram, FB)
+function isInAppBrowser() {
+  const ua = navigator.userAgent || navigator.vendor || window.opera || '';
+  return /WhatsApp|FBAN|FBAV|Instagram|Line|Messenger/i.test(ua);
+}
+
+function buildStep2(plan, amount) {
+  const link = upiLink(amount);
+  const qr   = qrUrl(amount);
+
+  // Warning banner if inside WhatsApp/Instagram/FB browser
+  const inAppWarning = isInAppBrowser()
+    ? `<div style="background:#fff3cd;border:2px solid #e0a800;border-radius:10px;
+        padding:13px 15px;margin-bottom:16px">
+        <div style="font-size:13px;font-weight:700;color:#7a5000;margin-bottom:6px">
+          ⚠️ Please open in Chrome to pay
+        </div>
+        <div style="font-size:12px;color:#8a6000;line-height:1.6">
+          UPI apps don't open inside WhatsApp. Tap the <strong>three dots (⋮)</strong> at the
+          top-right of this screen, then choose <strong>"Open in Chrome"</strong> or
+          <strong>"Open in browser"</strong>. Then come back and pay. Your UPI apps will work there.
+        </div>
+      </div>`
+    : '';
+
+  const backBtn = (CONFIG.razorpay_ready && CONFIG.razorpay_key_id)
+    ? `<button onclick="showMethodChooser()" style="background:none;border:none;color:var(--muted);
+        cursor:pointer;font-size:13px;font-family:var(--sans);padding:4px 8px">← Back</button>`
+    : '';
+  return `
+    <div class="modal-hdr">
+      <div style="display:flex;align-items:center;gap:8px">
+        ${backBtn}
+        <span class="modal-title">Pay ₹${amount} via UPI</span>
+      </div>
+      <button class="modal-close" onclick="closePayModal()">×</button>
     </div>
-  </div>
+    <div class="modal-body">
+
+      <!-- Step indicator -->
+      <div style="display:flex;align-items:center;gap:0;margin-bottom:20px">
+        <div style="flex:1;text-align:center;padding:8px;background:var(--paper3);border-radius:6px 0 0 6px;
+          font-size:11px;font-weight:700;color:var(--muted)">✓ 1. Your Details</div>
+        <div style="flex:1;text-align:center;padding:8px;background:var(--gold2);
+          font-size:11px;font-weight:700;color:var(--ink)">2. Pay Now</div>
+        <div style="flex:1;text-align:center;padding:8px;background:var(--paper3);border-radius:0 6px 6px 0;
+          font-size:11px;font-weight:700;color:var(--muted)">3. Get Key</div>
+      </div>
+
+      ${inAppWarning}
+
+      <!-- UPI Options -->
+      <div style="text-align:center;margin-bottom:16px">
+        <div style="font-size:13px;font-weight:700;color:var(--ink);margin-bottom:4px">
+          Pay ₹${amount} to complete your purchase
+        </div>
+        <div style="font-size:12px;color:var(--muted)">Choose any method below</div>
+      </div>
+
+      <!-- Method 1: Click to Pay (mobile) -->
+      <a href="${link}" style="display:block;text-decoration:none;margin-bottom:10px">
+        <div style="background:var(--ink);border-radius:10px;padding:14px 16px;
+          display:flex;align-items:center;gap:12px;transition:opacity .2s"
+          onmouseover="this.style.opacity='.85'" onmouseout="this.style.opacity='1'">
+          <div style="font-size:28px">📱</div>
+          <div>
+            <div style="font-size:14px;font-weight:700;color:#faf0d8">Tap to Pay — Open UPI App</div>
+            <div style="font-size:11px;color:rgba(250,240,216,.6);margin-top:2px">
+              On your phone: opens GPay / PhonePe / Paytm
+            </div>
+          </div>
+          <div style="margin-left:auto;font-size:20px;color:var(--gold3)">→</div>
+        </div>
+      </a>
+
+      <!-- Method 2: QR Code (desktop) -->
+      <div style="border:1.5px solid var(--border);border-radius:10px;padding:14px;
+        display:flex;align-items:center;gap:14px;margin-bottom:10px;background:var(--paper2)">
+        <img src="${qr}" alt="UPI QR Code" width="80" height="80"
+          style="border-radius:6px;border:2px solid var(--border);flex-shrink:0"
+          onerror="this.style.display='none';document.getElementById('qr-fallback').style.display='block'"/>
+        <div id="qr-fallback" style="display:none;width:80px;height:80px;background:var(--paper3);
+          border-radius:6px;border:2px dashed var(--border);display:none;align-items:center;
+          justify-content:center;font-size:10px;color:var(--muted);text-align:center;padding:4px">
+          QR code
+        </div>
+        <div>
+          <div style="font-size:13px;font-weight:700;color:var(--ink);margin-bottom:4px">Scan QR Code</div>
+          <div style="font-size:11px;color:var(--muted);line-height:1.5">
+            Open any UPI app → Scan QR → Pay ₹${amount}
+          </div>
+          <div style="font-size:10px;color:var(--muted2);margin-top:4px">Scan with your phone's UPI app</div>
+        </div>
+      </div>
+
+      <!-- Method 3: Manual UPI ID -->
+      <div style="border:1.5px solid var(--border);border-radius:10px;padding:12px 14px;
+        margin-bottom:16px;background:var(--paper2)">
+        <div style="font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase;
+          letter-spacing:1.5px;margin-bottom:6px">Or pay manually to UPI ID</div>
+        <div style="display:flex;align-items:center;gap:8px">
+          <div id="upi-id-display" style="font-family:'Courier New',monospace;font-size:15px;
+            font-weight:700;color:var(--gold2);background:var(--paper);
+            border:1.5px solid var(--border);border-radius:6px;padding:8px 12px;flex:1">
+            ${CONFIG.upi_id}
+          </div>
+          <button onclick="copyUpiId()" style="padding:8px 12px;background:var(--gold2);
+            color:var(--ink);border:none;border-radius:6px;font-size:12px;font-weight:700;
+            cursor:pointer;font-family:var(--sans);transition:all .18s;white-space:nowrap"
+            onmouseover="this.style.background='var(--gold3)'"
+            onmouseout="this.style.background='var(--gold2)'"
+            id="copy-upi-btn">Copy ID</button>
+        </div>
+        <div style="font-size:11px;color:var(--muted);margin-top:6px">
+          Amount: <strong style="color:var(--ink)">₹${amount}</strong> &nbsp;·&nbsp;
+          Name: <strong style="color:var(--ink)">${CONFIG.upi_name}</strong>
+        </div>
+      </div>
+
+      <!-- Confirm payment button -->
+      <div style="background:rgba(26,96,32,.08);border:1.5px solid rgba(26,96,32,.2);
+        border-radius:10px;padding:14px;margin-bottom:14px">
+        <div style="font-size:12px;font-weight:700;color:var(--green);margin-bottom:8px">
+          ✅ After paying, click below to get your licence key instantly
+        </div>
+        <div style="font-size:11px;color:var(--muted);margin-bottom:10px;line-height:1.5">
+          Your key will appear on screen immediately. No waiting, no email needed.
+        </div>
+        <button class="proceed-btn" onclick="confirmPayment()" style="background:var(--green);padding:12px">
+          ✓ I Have Paid — Get My Licence Key
+        </button>
+      </div>
+
+      <div style="font-size:11px;color:var(--muted2);text-align:center;line-height:1.6">
+        Paid but key not working? Contact us on WhatsApp:<br/>
+        <strong style="color:var(--ink)">${CONFIG.business_phone}</strong>
+      </div>
+    </div>`;
+}
+
+function copyUpiId() {
+  navigator.clipboard.writeText(CONFIG.upi_id).then(() => {
+    const btn = document.getElementById('copy-upi-btn');
+    if (btn) { btn.textContent = '✓ Copied!'; setTimeout(() => btn.textContent='Copy ID', 2000); }
+  }).catch(() => { alert('UPI ID: ' + CONFIG.upi_id); });
+}
+
+// STEP 3 — Payment confirmation + key delivery
+function confirmPayment() {
+  const plan   = CONFIG.plans[currentPlan];
+  const {name, email, phone} = customerData;
+
+  // Show brief loading state
+  document.getElementById('modal-inner').innerHTML = buildStep3Loading();
+  setTimeout(() => {
+    const keys        = generateKeys(name, email||phone, currentPlan, plan.keys);
+    const expiryLabel = plan.months === 'lifetime' ? 'Lifetime — never expires'
+      : 'Valid for ' + plan.months + ' month(s) from today';
+    const order = {
+      ts: new Date().toISOString(),
+      paymentId: 'UPI-' + Date.now(),
+      name, phone, email, plan: plan.name, amount: plan.display, keys
+    };
+    logOrder(order);
+    document.getElementById('modal-inner').innerHTML = buildSuccessScreen(keys, plan, expiryLabel, null);
+  }, 1200);
+}
+
+function buildStep3Loading() {
+  return `
+    <div class="modal-hdr">
+      <span class="modal-title">Confirming Payment…</span>
+      <button class="modal-close" onclick="closePayModal()">×</button>
+    </div>
+    <div class="modal-body" style="text-align:center;padding:48px 24px">
+      <div style="font-size:48px;margin-bottom:16px;animation:spin 1s linear infinite;display:inline-block">⚘</div>
+      <div style="font-size:16px;font-weight:700;color:var(--ink);margin-bottom:8px">Generating your licence key…</div>
+      <div style="font-size:13px;color:var(--muted)">This will take just a moment</div>
+    </div>
+    <style>@keyframes spin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}</style>`;
+}
+
+function closePayModal() {
+  document.getElementById('pay-modal').classList.remove('open');
+}
+function modalBgClick(e) {
+  if (e.target === document.getElementById('pay-modal')) closePayModal();
+}
+
+// Legacy — kept for when Razorpay is activated later
+function onPaymentSuccess(response, plan) {
+  const {name, email, phone} = customerData;
+  const keys = generateKeys(name, email||phone, currentPlan, plan.keys);
+  const expiryLabel = plan.months === 'lifetime' ? 'Lifetime — never expires'
+    : 'Valid for ' + plan.months + ' months from today';
+  const order = {
+    ts: new Date().toISOString(),
+    paymentId: response.razorpay_payment_id || 'TEST-' + Date.now(),
+    name, email, plan: plan.name, amount: plan.display, keys
+  };
+  logOrder(order);
+  document.getElementById('modal-inner').innerHTML = buildSuccessScreen(keys, plan, expiryLabel, response.razorpay_payment_id);
+}
+
+function buildSuccessScreen(keys, plan, expiryLabel, paymentId) {
+  const keysHtml = keys.map((k, i) => `
+    <div class="key-box" onclick="copyToClipboard('${k}', this)">
+      <div class="key-box-label">${keys.length > 1 ? 'Licence Key ' + (i+1) + ' of ' + keys.length : 'Your Licence Key'} — click to copy</div>
+      <div class="key-value">${k}</div>
+      <div class="key-copy-hint">Click anywhere on this box to copy</div>
+    </div>`).join('');
+
+  return `
+    <div class="modal-hdr">
+      <span class="modal-title">Payment Successful</span>
+      <button class="modal-close" onclick="closePayModal()">×</button>
+    </div>
+    <div class="modal-body">
+      <div class="success-screen">
+        <div class="success-icon">🎉</div>
+        <div class="success-title">Thank you, ${customerData.name.split(' ')[0]}!</div>
+        <div class="success-sub">Your payment is confirmed. Here is your licence key — copy it now and keep it safe. You will need it to activate the app.</div>
+      </div>
+      ${keysHtml}
+
+      <!-- STEP-BY-STEP NEXT ACTIONS -->
+      <div style="background:rgba(26,96,32,.07);border:1.5px solid rgba(26,96,32,.25);
+        border-radius:12px;padding:16px;margin:16px 0">
+        <div style="font-size:13px;font-weight:700;color:var(--green);margin-bottom:12px">
+          📦 Your next steps:
+        </div>
+
+        <!-- Step 1: Go to secure download page -->
+        <a href="${CONFIG.download_url}" target="_blank" rel="noopener"
+          style="display:block;text-decoration:none;margin-bottom:10px">
+          <div style="background:var(--green);border-radius:10px;padding:14px 16px;
+            display:flex;align-items:center;gap:12px;transition:opacity .2s"
+            onmouseover="this.style.opacity='.88'" onmouseout="this.style.opacity='1'">
+            <div style="font-size:26px">⬇️</div>
+            <div style="flex:1">
+              <div style="font-size:14px;font-weight:700;color:#fff">1. Go to the Download Page</div>
+              <div style="font-size:11px;color:rgba(255,255,255,.75);margin-top:2px">
+                Enter your download code there to get the app
+              </div>
+            </div>
+            <div style="font-size:18px;color:#fff">→</div>
+          </div>
+        </a>
+
+        <!-- Steps 2-4 instructions -->
+        <div style="font-size:12px;color:var(--ink2);line-height:1.8;padding:4px 6px">
+          <b>2.</b> On the download page, enter the <b>download code</b> we send you<br/>
+          <b>3.</b> Unzip the file and open <b>Lineage-App.html</b> in your browser<br/>
+          <b>4.</b> Enter your licence key (above) when asked — done! ⚘
+        </div>
+      </div>
+
+      <div class="key-meta">
+        <div class="km"><div class="km-l">Plan</div><div class="km-v">${plan.name}</div></div>
+        <div class="km"><div class="km-l">Validity</div><div class="km-v">${expiryLabel}</div></div>
+        ${paymentId ? `<div class="km"><div class="km-l">Payment ID</div><div class="km-v" style="font-size:10px">${paymentId}</div></div>` : ''}
+        <div class="km"><div class="km-l">Support</div><div class="km-v" style="font-size:11px">${CONFIG.business_email}</div></div>
+      </div>
+      <button class="download-btn" onclick="downloadActivationCard('${keys[0]}', '${plan.name}', '${expiryLabel}')">
+        ↓ Save Activation Card (your key record)
+      </button>
+      <div style="font-size:12px;color:var(--muted);text-align:center;margin-top:12px;line-height:1.5">
+        Copy your key before closing this window.<br/>
+        ${keys.length > 1 ? 'Distribute one key to each family member.' : ''}
+      </div>
+    </div>`;
+}
+
+function copyToClipboard(text, el) {
+  navigator.clipboard.writeText(text).then(() => {
+    const hint = el.querySelector('.key-copy-hint');
+    const orig = hint.textContent;
+    hint.textContent = '✓ Copied to clipboard!';
+    hint.style.color = '#80e060';
+    el.style.background = '#142010';
+    setTimeout(() => { hint.textContent = orig; hint.style.color = ''; el.style.background = ''; }, 2000);
+  }).catch(() => { alert('Your key: ' + text + '\n\nCopy it manually.'); });
+}
+
+function downloadActivationCard(key, planName, expiry) {
+  const html = `<!DOCTYPE html><html><head><meta charset="UTF-8">
+<title>Lineage Activation Card</title>
+<style>
+body{font-family:Georgia,serif;background:#1a1006;color:#f0e6cc;display:flex;align-items:center;justify-content:center;min-height:100vh;margin:0}
+.card{background:#231e14;border:2px solid #c9a84c;border-radius:16px;padding:40px;max-width:460px;text-align:center;box-shadow:0 8px 48px rgba(0,0,0,.5)}
+.logo{font-size:48px;margin-bottom:8px}
+h1{font-size:28px;color:#e2c06a;margin-bottom:4px}
+.sub{font-size:13px;color:#a08860;letter-spacing:2px;text-transform:uppercase;margin-bottom:28px}
+.key-label{font-size:10px;text-transform:uppercase;letter-spacing:2px;color:#7a6040;margin-bottom:8px}
+.key{font-family:'Courier New',monospace;font-size:18px;letter-spacing:3px;color:#a0e060;
+  background:#0f1a08;padding:14px;border-radius:8px;margin-bottom:20px;border:1px solid rgba(100,180,60,.3)}
+.meta{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:20px}
+.m{background:#1a1610;border-radius:8px;padding:10px;text-align:left}
+.ml{font-size:9px;text-transform:uppercase;letter-spacing:1.5px;color:#7a6040;margin-bottom:2px}
+.mv{font-size:12px;color:#e2c06a;font-weight:700}
+.note{font-size:11px;color:#5a5040;line-height:1.6}
+</style></head><body>
+<div class="card">
+<div class="logo">⚘</div>
+<h1>Lineage</h1>
+<div class="sub">Family Heritage App — Activation Card</div>
+<div class="key-label">Your Licence Key</div>
+<div class="key">${key}</div>
+<div class="meta">
+<div class="m"><div class="ml">Plan</div><div class="mv">${planName}</div></div>
+<div class="m"><div class="ml">Validity</div><div class="mv">${expiry}</div></div>
+<div class="m"><div class="ml">Name</div><div class="mv">${customerData.name}</div></div>
+<div class="m"><div class="ml">Support</div><div class="mv" style="font-size:10px">${CONFIG.business_email}</div></div>
 </div>
+<div class="note">Keep this card safe. Enter the key above when you first open Lineage to activate the app. This key is personal to you — do not share it.</div>
+</div></body></html>`;
+  const blob = new Blob([html], {type:'text/html'});
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = 'lineage-activation-card.html';
+  a.click();
+}
 
-<script>
-function openHelp(){document.getElementById('help-overlay').classList.add('open');}
-function closeHelp(){document.getElementById('help-overlay').classList.remove('open');}
-function helpOverlayClick(e){if(e.target===document.getElementById('help-overlay'))closeHelp();}
-</script>
+// ── ORDER LOG ─────────────────────────────────────────────────────
+function logOrder(order) {
+  try {
+    const log = JSON.parse(localStorage.getItem('_lng_orders') || '[]');
+    log.unshift(order);
+    localStorage.setItem('_lng_orders', JSON.stringify(log));
+  } catch(e) {}
+}
 
+// ── FAQ ───────────────────────────────────────────────────────────
+const FAQS = [
+  ['Is this a subscription? Do I pay every year?',
+   'Start with the 1-Month Trial for just ₹51 to explore all the features risk-free. If you love it, upgrade to the Annual Plan (₹199/year) or the Lifetime Licence (₹499, pay once, own forever). Each licence works on up to 3 devices, so your whole family can share it.'],
+  ['What happens to my family data if I lose the file?',
+   'Use the Backup button inside the app to export your data as a portable file. Store it in Google Drive, WhatsApp Saved Messages, or email it to yourself. Restore it with one click whenever needed.'],
+  ['Can I use this on my phone?',
+   'Yes. Save the file to your phone and open it in Chrome or Safari. The app works fully on mobile — including adding members and uploading photos.'],
+  ['My nephew also wants to use it. Can we share our data?',
+   'Yes — this is one of the best features. Each person buys their own copy. When you want to combine your records, use the Smart Merge Wizard (included in the Lifetime plan). It detects common ancestors automatically and merges the two trees without duplicates.'],
+  ['Is my family data private?',
+   'Completely. All data is stored on your own device only — nothing is sent to any server, cloud, or database. The app works without internet. Your family\'s history belongs to you alone.'],
+  ['What if I change my computer or phone?',
+   'Export a backup from your old device, then import it on the new one. Your entire family tree transfers in seconds.'],
+  ['I paid but did not copy my key — what do I do?',
+   'Contact us at the email below with your payment ID (from your bank SMS or Razorpay email receipt). We will re-issue your key within 24 hours.'],
+  ['Can I get a refund?',
+   'As this is a digital product and the licence key is delivered immediately, we are unable to offer refunds once the key has been issued. Please review the features carefully before purchasing. If you have any doubts, contact us first.'],
+];
 
-<script>
-// Progressive Web App: attempt to register a service worker if the host provides one.
-// (Optional — the app works fully without it. Improves installability/offline shell.)
-if('serviceWorker' in navigator){
-  window.addEventListener('load', function(){
-    navigator.serviceWorker.register('sw.js').catch(function(){ /* no sw.js hosted — fine */ });
-  });
+const faqList = document.getElementById('faq-list');
+FAQS.forEach(([q, a]) => {
+  const item = document.createElement('div');
+  item.className = 'faq-item';
+  item.innerHTML = `
+    <button class="faq-q" onclick="toggleFaq(this)">
+      ${q} <span class="chevron">▼</span>
+    </button>
+    <div class="faq-a">
+      <div class="faq-a-inner">${a}</div>
+    </div>`;
+  faqList.appendChild(item);
+});
+
+function toggleFaq(btn) {
+  const ans = btn.nextElementSibling;
+  const isOpen = ans.classList.contains('open');
+  // Close all
+  document.querySelectorAll('.faq-a').forEach(a => a.classList.remove('open'));
+  document.querySelectorAll('.faq-q').forEach(b => b.classList.remove('open'));
+  if (!isOpen) {
+    ans.classList.add('open');
+    btn.classList.add('open');
+  }
 }
 </script>
 </body>
