@@ -501,6 +501,126 @@ input::placeholder,textarea::placeholder{color:var(--muted2);font-weight:400}
 </script>
 <!-- ============ END LICENCE GATE ============ -->
 
+<!-- ============ OPTIONAL PIN LOCK (privacy protection) ============ -->
+<script>
+(function(){
+  "use strict";
+  var PIN_HASH_KEY = "lineage_pin_hash";   // stored hashed PIN (never plain)
+  var PIN_ON_KEY   = "lineage_pin_on";     // "1" if PIN lock is enabled
+
+  // Simple hash (not military-grade, but keeps the PIN out of plain storage)
+  function hashPin(pin){
+    var s = "lineagePIN::" + pin + "::salt77F3";
+    var h = 0;
+    for(var i=0;i<s.length;i++){ h = ((h<<5)-h) + s.charCodeAt(i); h |= 0; }
+    // second pass for a bit more mixing
+    var h2 = 0;
+    for(var j=s.length-1;j>=0;j--){ h2 = ((h2<<5)-h2) + s.charCodeAt(j); h2 |= 0; }
+    return (Math.abs(h).toString(16) + Math.abs(h2).toString(16));
+  }
+
+  function pinIsOn(){ try{ return localStorage.getItem(PIN_ON_KEY)==="1"; }catch(e){ return false; } }
+  function storedHash(){ try{ return localStorage.getItem(PIN_HASH_KEY)||""; }catch(e){ return ""; } }
+
+  // ---- The lock screen shown on open ----
+  function showLockScreen(){
+    window.__LINEAGE_PIN_LOCKED__ = true;
+    var wrap = document.createElement("div");
+    wrap.id = "pin-lock";
+    wrap.style.cssText = "position:fixed;inset:0;z-index:99998;display:flex;align-items:center;justify-content:center;background:#efe9dd;font-family:Arial,sans-serif;padding:20px";
+    wrap.innerHTML =
+      '<div style="max-width:380px;width:100%;background:#fdfbf6;border:1px solid #e6dcc6;border-radius:16px;padding:34px 28px;box-shadow:0 10px 40px rgba(0,0,0,.12);text-align:center">'
+      + '<div style="font-size:40px;color:#6a4a08">\u2698</div>'
+      + '<h1 style="font-family:Georgia,serif;font-size:23px;color:#6a4a08;margin:6px 0 4px">Enter Your PIN</h1>'
+      + '<p style="font-size:13px;color:#7a6448;margin-bottom:18px">Lineage is locked for your privacy.</p>'
+      + '<input id="pin-input" type="password" inputmode="numeric" maxlength="8" placeholder="\u2022\u2022\u2022\u2022" style="width:150px;text-align:center;letter-spacing:8px;padding:13px;font-size:22px;border:1px solid #d8cba8;border-radius:9px;background:#f3eede;color:#3a2c10" />'
+      + '<div id="pin-msg" style="display:none;margin:12px 0;color:#8a2010;font-size:13px"></div>'
+      + '<button id="pin-btn" style="display:block;width:100%;margin-top:16px;padding:13px;font-size:16px;font-weight:700;color:#fff;background:#6a4a08;border:none;border-radius:9px;cursor:pointer">Unlock</button>'
+      + '<div style="margin-top:16px;font-size:11px;color:#9a8a68"><a href="#" id="pin-forgot" style="color:#9a8a68">Forgot your PIN?</a></div>'
+      + '</div>';
+    document.body.appendChild(wrap);
+
+    var input = document.getElementById("pin-input");
+    var btn = document.getElementById("pin-btn");
+    var msg = document.getElementById("pin-msg");
+    input.focus();
+
+    function tryUnlock(){
+      var val = (input.value||"").trim();
+      if(hashPin(val) === storedHash()){
+        wrap.remove();
+        window.__LINEAGE_PIN_LOCKED__ = false;
+        if(typeof window.__afterPinUnlock === "function") window.__afterPinUnlock();
+      } else {
+        msg.style.display="block";
+        msg.textContent = "Incorrect PIN. Please try again.";
+        input.value=""; input.focus();
+      }
+    }
+    btn.addEventListener("click", tryUnlock);
+    input.addEventListener("keydown", function(e){ if(e.key==="Enter") tryUnlock(); });
+
+    document.getElementById("pin-forgot").addEventListener("click", function(e){
+      e.preventDefault();
+      var ok = confirm(
+        "Forgot your PIN?\n\n"
+        + "For your privacy, the PIN cannot be recovered. The only way to reset it is to remove the PIN lock, which requires clearing the app\'s saved login.\n\n"
+        + "\u2713 Your FAMILY DATA will NOT be deleted \u2014 only the PIN lock is removed.\n\n"
+        + "After this, you can open the app and set a new PIN if you wish.\n\n"
+        + "Remove the PIN lock now?"
+      );
+      if(ok){
+        try{ localStorage.removeItem("lineage_pin_hash"); localStorage.removeItem("lineage_pin_on"); }catch(e){}
+        wrap.remove();
+        window.__LINEAGE_PIN_LOCKED__ = false;
+        if(typeof window.__afterPinUnlock === "function") window.__afterPinUnlock();
+      }
+    });
+  }
+
+  // Expose a global so the app startup can check the PIN before showing data
+  window.__checkPinLock = function(afterUnlock){
+    window.__afterPinUnlock = afterUnlock;
+    if(pinIsOn() && storedHash()){
+      showLockScreen();
+      return true;   // locked -> waiting for PIN
+    }
+    return false;    // not locked -> proceed
+  };
+
+  // ---- Functions to manage the PIN (called from the Help/settings area) ----
+  window.lineageSetPin = function(){
+    var p1 = prompt("Set a PIN (4 to 8 digits).\n\n\u26a0\ufe0f Remember it well \u2014 it cannot be recovered. Keep a Backup of your data too.");
+    if(p1===null) return;
+    p1 = (p1||"").trim();
+    if(!/^[0-9]{4,8}$/.test(p1)){ alert("PIN must be 4 to 8 digits."); return; }
+    var p2 = prompt("Confirm your PIN by entering it again:");
+    if(p2===null) return;
+    if((p2||"").trim() !== p1){ alert("The PINs did not match. Please try again."); return; }
+    try{
+      localStorage.setItem("lineage_pin_hash", hashPin(p1));
+      localStorage.setItem("lineage_pin_on", "1");
+    }catch(e){}
+    alert("\u2713 PIN lock is ON.\n\nFrom now on, you\'ll enter this PIN each time you open Lineage.\n\n\u26a0\ufe0f Important: remember your PIN, and keep a Backup of your family data.");
+    if(typeof window.updatePinButton==="function") window.updatePinButton();
+  };
+
+  window.lineageRemovePin = function(){
+    if(!pinIsOn()){ alert("PIN lock is not currently on."); return; }
+    var cur = prompt("Enter your current PIN to turn OFF the lock:");
+    if(cur===null) return;
+    if(hashPin((cur||"").trim()) !== storedHash()){ alert("Incorrect PIN."); return; }
+    try{ localStorage.removeItem("lineage_pin_hash"); localStorage.removeItem("lineage_pin_on"); }catch(e){}
+    alert("\u2713 PIN lock is now OFF. The app will open without a PIN.");
+    if(typeof window.updatePinButton==="function") window.updatePinButton();
+  };
+
+  window.lineagePinIsOn = pinIsOn;
+})();
+</script>
+<!-- ============ END PIN LOCK ============ -->
+
+
 <div id="app">
 
   <header class="hdr">
@@ -1669,6 +1789,15 @@ function startUpgrade(){
     }
   }, 800);
 }
+// Wrap startup so an optional PIN lock is checked first
+window.__realStartLineage = window.__startLineage;
+window.__startLineage = function(){
+  // If a PIN is set, show the lock screen first; run the app only after unlock
+  if(window.__checkPinLock && window.__checkPinLock(function(){ window.__realStartLineage(); })){
+    return; // locked, waiting for PIN
+  }
+  window.__realStartLineage();
+};
 // If the licence gate has NOT locked the app (already activated, or gate absent), start now.
 if(!window.__LINEAGE_LOCKED__){ window.__startLineage(); }
 </script>
@@ -1743,6 +1872,16 @@ if(!window.__LINEAGE_LOCKED__){ window.__startLineage(); }
           <button class="btn btn-primary" style="background:var(--gold2);color:#fff;border-color:var(--gold2)" onclick="closeHelp(); if(window.lineageChangeLicence) window.lineageChangeLicence();">⬆️  Enter New Licence Key (Upgrade)</button>
         </p>
         <p class="help-p help-warn" style="text-align:center">✓ Tip: take a Backup first, just for peace of mind. But your data will not be lost.</p>
+      </div>
+
+      <div class="help-section">
+        <div class="help-h">8. Privacy PIN lock (optional)</div>
+        <p class="help-p">For extra privacy, you can lock Lineage with a PIN. When on, you\u2019ll enter your PIN each time you open the app \u2014 so only you can see your family history, even if someone else uses your device.</p>
+        <p class="help-p"><b>To turn it on or off:</b></p>
+        <p class="help-p" style="text-align:center">
+          <button class="btn btn-primary" style="background:var(--gold2);color:#fff;border-color:var(--gold2)" onclick="if(window.lineagePinIsOn && window.lineagePinIsOn()){ lineageRemovePin(); } else { lineageSetPin(); }" id="pin-toggle-btn">\ud83d\udd12  Set / Remove Privacy PIN</button>
+        </p>
+        <p class="help-p help-warn"><b>\u26a0\ufe0f Important:</b> Your PIN cannot be recovered if forgotten \u2014 it is what keeps your data private. Please remember it, and always keep a Backup of your family data. If you ever forget the PIN, you can remove the lock (your data stays safe), then set a new one.</p>
       </div>
 
       <div class="help-section">
