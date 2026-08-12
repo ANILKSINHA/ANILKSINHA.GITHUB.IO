@@ -901,6 +901,11 @@ function save(){
   if(_saveTimer) clearTimeout(_saveTimer);
   _saveTimer=setTimeout(_doSave, 300);
 }
+// Save immediately (for important actions like delete, add, edit) — no debounce delay
+function saveNow(){
+  if(_saveTimer){ clearTimeout(_saveTimer); _saveTimer=null; }
+  return _doSave();
+}
 async function _doSave(){
   try{
     const db=await openDB();
@@ -1217,7 +1222,7 @@ function applyMerge(){
     // 'keep' = do nothing, keep mine
   });
 
-  save();closeMergeWizard();renderAll();
+  saveNow();closeMergeWizard();renderAll();
   const parts=[];
   if(added)parts.push(`${added} new member${added!==1?'s':''} added`);
   if(updated)parts.push(`${updated} updated from their record`);
@@ -1715,7 +1720,7 @@ function saveMember(){
     selId=data.id;
     notify(`${fn(data)} added${genVal?' to Generation '+genVal:''}`);
   }
-  save();closeModal();renderAll();renderDetail(selId);
+  saveNow();closeModal();renderAll();renderDetail(selId);
 }
 
 function deleteMember(id){
@@ -1724,7 +1729,7 @@ function deleteMember(id){
   if(!confirm(`Remove ${fn(m)} from the family tree? This cannot be undone.\n\nAll other ${members.length-1} members will remain.`))return;
   members=members.filter(m=>m.id!==id);
   if(selId===id)selId=null;
-  save();renderAll();
+  saveNow();renderAll();
   if(!selId)document.getElementById('detail').innerHTML=`<div class="d-empty"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg><p>Select a family member to view their full profile</p></div>`;
   notify('Member removed — all other generations intact');
   closeMobileDetail();
