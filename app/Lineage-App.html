@@ -907,6 +907,7 @@ function saveNow(){
   return _doSave();
 }
 async function _doSave(){
+  try{ localStorage.setItem('lineage_has_data','1'); }catch(e){}
   try{
     const db=await openDB();
     const meta={count:members.length,updated:new Date().toISOString(),
@@ -928,6 +929,11 @@ async function _doSave(){
 
 // Load members. Tries IndexedDB first, then migrates any old localStorage data.
 async function load(){
+  // A flag that records the user has saved at least once (even an empty tree).
+  // This lets us tell "deleted everything on purpose" apart from "first ever run".
+  let hasSavedBefore=false;
+  try{ hasSavedBefore = localStorage.getItem('lineage_has_data')==='1'; }catch(e){}
+
   try{
     const db=await openDB();
     const data=await new Promise((resolve,reject)=>{
@@ -936,7 +942,8 @@ async function load(){
       req.onsuccess=()=>resolve(req.result);
       req.onerror=()=>reject(req.error);
     });
-    if(data && Array.isArray(data) && data.length){ members=data; return; }
+    // If we have a saved array (even an EMPTY one), respect it — do NOT reload the sample.
+    if(Array.isArray(data)){ members=data; return; }
   }catch(e){ /* fall through to migration/sample */ }
 
   // Migration: if the user has old data in localStorage, bring it into IndexedDB
@@ -944,16 +951,18 @@ async function load(){
     const old=localStorage.getItem(SK);
     if(old){
       const parsed=JSON.parse(old);
-      if(Array.isArray(parsed) && parsed.length){
+      if(Array.isArray(parsed)){
         members=parsed;
-        _doSave();               // copy into IndexedDB
-        // keep localStorage copy as backup; don't delete
+        _doSave();
         return;
       }
     }
   }catch(e){}
 
-  // First run: load the sample family
+  // If the user has saved before but we found nothing, respect an empty tree (don't reload sample).
+  if(hasSavedBefore){ members=[]; return; }
+
+  // Genuine first run: load the sample family so new users see an example.
   members=JSON.parse(JSON.stringify(SAMPLE));
   _doSave();
 }

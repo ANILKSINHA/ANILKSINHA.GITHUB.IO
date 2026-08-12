@@ -1,15 +1,9 @@
-// Lineage service worker — caches the app shell so it works offline and is installable.
-const CACHE = 'lineage-v9';
-const APP_FILES = [
-  '.',
-  'index.html'
-];
+// Lineage service worker — network-first so the app is always up to date when online,
+// with offline fallback to cache.
+const CACHE = 'lineage-v10';
 
 self.addEventListener('install', event => {
-  self.skipWaiting();
-  event.waitUntil(
-    caches.open(CACHE).then(cache => cache.addAll(APP_FILES).catch(()=>{}))
-  );
+  self.skipWaiting();  // activate the new worker immediately
 });
 
 self.addEventListener('activate', event => {
@@ -22,19 +16,25 @@ self.addEventListener('activate', event => {
 
 self.addEventListener('fetch', event => {
   const req = event.request;
-  // Never cache the activation server calls — those must go to the network.
+
+  // Never intercept the activation server calls — always network.
   if (req.url.includes('/activate') || req.url.includes('workers.dev')) {
-    return; // let it hit the network normally
+    return;
   }
-  // For the app itself: cache-first, falling back to network.
+
+  // NETWORK-FIRST: try to get the freshest version from the network.
+  // If online, use and cache the latest. If offline, fall back to the cached copy.
   event.respondWith(
-    caches.match(req).then(cached => cached || fetch(req).then(res => {
-      // Cache same-origin GET responses for offline use
+    fetch(req).then(res => {
+      // Save a fresh copy for offline use
       if (req.method === 'GET' && res.status === 200 && res.type === 'basic') {
         const copy = res.clone();
         caches.open(CACHE).then(c => c.put(req, copy));
       }
       return res;
-    }).catch(() => cached))
+    }).catch(() => {
+      // Offline: serve from cache if we have it
+      return caches.match(req);
+    })
   );
 });
